@@ -1,0 +1,25 @@
+.header__nav {
+    width: 293px;
+    height: 19px;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 806px; }
+    @media screen and (max-width: 767px) {
+      .header__nav {
+        display: none; } }
+    .header__nav-item {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 19px;
+      text-decoration: none;
+      color: inherit;
+      transition: color 400ms ease; }
+      .header__nav-item:hover {
+        color: #000;
+        border-bottom: 2px solid #f38a00; }
+.is-active {
+    color: #000;
+    border-bottom: 2px solid #f38a00;
+}

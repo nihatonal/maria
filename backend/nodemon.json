@@ -1,0 +1,8 @@
+{
+    "env" : {
+        "DB_USER":"chuck",
+        "DB_PASSWORD":"nht2575",
+        "DB_NAME":"cars",
+        "JWT_KEY":"supersecret"
+    }
+}

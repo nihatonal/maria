@@ -1,0 +1,110 @@
+/*section team*/
+.section-team {
+  height: 895px;
+  display: flex;
+  justify-content: center;
+  padding-top: 80px; }
+
+@media screen and (max-width: 767px) {
+  .section-team {
+    height: 634px;
+    padding: 0; } }
+
+.section-team__container {
+  width: 980px;
+  height: 695px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; }
+
+@media screen and (max-width: 767px) {
+  .section-team__container {
+    height: 534px;
+    margin-top: 40px;
+    padding: 0; } }
+
+.section-team__content {
+  width: 980px;
+  height: 582px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center; }
+
+@media screen and (max-width: 767px) {
+  .section-team__content {
+    width: 334px;
+    height: 474px;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0; } }
+
+.section-team__content-item {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  width: 196px;
+  height: 261px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  cursor: pointer; }
+
+@media screen and (max-width: 767px) {
+  .section-team__content-item {
+    width: 167px;
+    height: 138px;
+    margin-bottom: 30px; } }
+
+@media screen and (max-width: 767px) {
+  .section-team__content-item img {
+    width: 80px;
+    height: 80px; } }
+
+.section-team__content-item:hover {
+  box-shadow: 2px 2px 2px 2px #4F4F4F; }
+
+.section-team__content-item:nth-last-child(2) {
+  margin-left: 261px; }
+
+@media screen and (max-width: 767px) {
+  .section-team__content-item:nth-last-child(2) {
+    margin-left: 0;
+    margin-bottom: 0; } }
+
+.section-team__content-item:nth-last-child(1) {
+  margin-right: 261px; }
+
+@media screen and (max-width: 767px) {
+  .section-team__content-item:nth-last-child(1) {
+    margin-right: 0;
+    margin-bottom: 0; } }
+
+.section-team__content-item .person_name {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 147.3%;
+  color: #000;
+  margin-top: 23px;
+  margin-bottom: 8px; }
+
+@media screen and (max-width: 767px) {
+  .section-team__content-item .person_name {
+    width: 167px;
+    font-size: 16px;
+    margin-top: 15px;
+    margin-bottom: 1px; } }
+
+.section-team__content-item .person_profession {
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 147.3%;
+  color: #828282; }
+
+@media screen and (max-width: 767px) {
+  .section-team__content-item .person_profession {
+    font-size: 12px; } }

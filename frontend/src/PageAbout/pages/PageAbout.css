@@ -1,0 +1,7 @@
+.section-about__container {
+    padding-top: 170px;
+}
+@media screen and (max-width: 767px) {
+    .section-about__container {
+        padding-top: 52px;
+     } }

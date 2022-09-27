@@ -1,0 +1,82 @@
+.button {
+  width: 176px;
+  height: 51px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #b4b5bd;
+  background: #e6e6e6;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 767px) {
+  .button {
+    width: 335px;
+  }
+}
+.button:focus {
+  outline: none !important;
+}
+
+.button:hover,
+.button:active,
+.button--isvalid {
+  background: #61a199;
+  color: #fff;
+}
+
+.button--inverse {
+  background: #61a199;
+  color: #fff;
+}
+
+.button--inverse:hover,
+.button--inverse:active {
+  background: rgba(97, 161, 153, 0.8);
+  color: #fff;
+}
+
+.button--danger {
+  background: #830000;
+  border-color: #830000;
+}
+
+.button--danger:hover,
+.button--danger:active {
+  background: #f34343;
+  border-color: #f34343;
+}
+
+.button:disabled,
+.button:hover:disabled,
+.button:active:disabled {
+  background: #ccc;
+  color: #979797;
+  border-color: #ccc;
+}
+
+.button--small {
+  font-size: 0.8rem;
+}
+
+.button--big {
+  width: 234px;
+  height: 51px;
+  background: #61a199;
+  padding: 16px 40px;
+  color: #fff;
+  text-decoration: none;
+}
+.button--big:hover {
+  background: rgba(97, 161, 153, 0.8);
+  color: #fff;
+}
+.fa-circle-o-notch {
+  font-size: 24px;
+  color: #fff;
+}

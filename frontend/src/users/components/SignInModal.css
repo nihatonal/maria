@@ -1,0 +1,176 @@
+  /**/
+.header-wrapper {
+    height: 300px;
+    margin-bottom: 30px;
+  }
+  .modal_wrapper{
+    width: 504px;
+    height: 566px;
+    position: relative;
+  }
+  .modal_signin{
+    margin-top: 15px;
+  }
+  .tosignup{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #508E87;
+    text-decoration: none;
+    transition: all ease-in-out .2s;
+  }
+  .tosignup:hover{
+    color: #306b64;
+  }
+  .hide{
+    display: none;
+  }
+  .header__btn-auth {
+    width: 126px;
+    height: 51px;
+    background: #61A199;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+    border: none;
+    transition: all ease .2s;
+    margin-top: 30px;
+  }
+  .header__btn-auth:hover{
+    background: #86b3ad;
+  }
+  .header__btn-auth:disabled{
+    background: #E5E7F0;
+    color:  #B4B5BD;
+  }
+  
+  .errortext {
+    display: none;
+  }
+  .labelclass {
+    position: relative;
+    background: transparent;
+    z-index: 10;
+  }
+  .input-auth {
+    width: 350px;
+    padding-top: 8px;
+    z-index: 99;
+    background: transparent;
+    margin-top: 0;
+  }
+  
+  .form__container_wrapper-form-item{
+    padding: 0;
+    /* height: 40px; */
+    margin-bottom: 20px;
+  }
+  .placeholderclass{
+    font-family: 'Roboto',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #A3A0B1;
+    position: absolute;
+    left: 12px;
+    /* transition: all 0.2s ease-in-out; */
+    text-align: center;
+  }
+  input:focus ~ .placeholderclass, .isvalid {
+    top:8px;
+    font-size: 9px;
+    line-height: 11px;
+    color: #8D8B99;
+  }
+  
+  .isvalid {
+    top:8px;
+    font-size: 9px;
+    line-height: 11px;
+    color: #8D8B99;
+  }
+  
+  .password_wrapper {
+    position: relative;
+    width: 350px;
+  }
+  .forget_password {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: right;
+    color: #508E87;
+    width: 0;
+    position: absolute;
+    top:0;
+    right: 66px;
+    z-index: 99;
+    cursor: pointer;
+  }
+  .forget_password:hover {
+    color:#307069;;
+  }
+  
+  .header__btn-send-email {
+    width: 161px;
+    height: 51px;
+    background: #61A199;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  .header__btn-send-email:disabled {
+    background: #E6E6E6;
+    color: #B4B5BD;
+   }
+  .back_arrow {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 9;
+    cursor: pointer;
+  }
+  .auth_password {
+    height: 44px;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .placeholderclass{
+      font-family: 'Roboto', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 16px;
+      color: #A3A0B1;
+      position: absolute;
+      left: 12px;
+      top: 14px;
+      transition: all 0.3s ease;
+    }
+    .isvalid {
+      top:8px;
+      font-size: 9px;
+      line-height: 11px;
+      color: #8D8B99;
+    } 
+    .forget_password {
+      top: -4px;
+    }
+    .modal_wrapper{
+      width: 375px;
+      height: 667px;
+      position: relative;
+    }
+    .header__btn-send-email {
+      width: 335px;
+      height: 51px;
+      background: #61A199;
+      cursor: pointer;
+      margin-top: 136px; /* has to be 166px */
+    }
+  }

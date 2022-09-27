@@ -1,0 +1,235 @@
+.dropzone-container {
+  width: 679px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 50px;
+  margin-bottom: 75px;
+}
+.dropzone-wrapper {
+  width: 679px;
+  height: 321px;
+  border: 1px dashed #bdbdbd;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  order: 2;
+}
+
+.small {
+  width: 329px;
+  height: 321px;
+}
+.input-desc {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 147.3%;
+  color: #1b1b1b;
+  margin: 15px 0 5px 0;
+}
+.input-sub-desc {
+  font-size: 14px;
+  line-height: 147.3%;
+  color: #828282;
+  text-align: center;
+}
+span {
+  color: #61a199;
+}
+.input-desc-mobile {
+  font-size: 16px;
+  line-height: 19px;
+  color: #61a199;
+}
+.dropzone-content img {
+  width: 48px;
+  height: 48px;
+}
+
+.preview-wrapper {
+  width: 329px;
+  height: 321px;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-bottom: 31px;
+}
+.preview-wrapper img {
+  width: 327px;
+  height: 249px;
+  border-radius: 10px;
+}
+.preview-info {
+  height: 71px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px 0 20px;
+}
+.preview-info-name {
+  font-size: 16px;
+  line-height: 19px;
+  color: #1b1b1b;
+  margin-bottom: 6px;
+}
+.preview-info-desc {
+  font-size: 12px;
+  line-height: 14px;
+  color: #828282;
+  text-align: left;
+}
+.preview-info .trash_bank {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  position: relative;
+  z-index: 99;
+}
+.preview-img-wrapper {
+  position: relative;
+}
+.loading-filter {
+  border-radius: 10px;
+  width: 327px;
+  height: 249px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.filter-dropzone {
+  border-radius: 10px;
+  width: 327px;
+  height: 249px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.filter-dropzone-renew {
+  border-radius: 10px;
+  width: 327px;
+  height: 249px;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.6)
+  );
+  position: absolute;
+  top: 0;
+  z-index: 99;
+}
+.img_icon-wrapper-drop {
+  width: 48px;
+  height: 48px;
+  background-color: black;
+  opacity: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  top: 100px;
+  left: 139px;
+  position: absolute;
+  cursor: pointer;
+  z-index: 99;
+}
+.img_icon-wrapper-drop img {
+  width: 24px;
+}
+.photo-circle-text {
+  position: absolute;
+  color: white;
+}
+
+.input-hidden {
+  display: none;
+  position: absolute;
+  top: 136px;
+  left: 191px;
+}
+
+.dropzone-mob {
+  width: 375px;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  cursor: pointer;
+  display: none;
+}
+
+.dropzone-mob-content {
+  width: 200px;
+  height: 39px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-left: 12px;
+}
+@media screen and (max-width: 767px) {
+  .dropzone-content {
+    display: none;
+  }
+
+  .dropzone-mob {
+    display: flex;
+  }
+
+  .preview-wrapper {
+    border: none;
+    width: 375px;
+    height: 78px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    margin-bottom: 0;
+  }
+  .dropzone-container {
+    width: 375px;
+    margin: 30px 0 210px 0;
+  }
+  .dropzone-wrapper {
+    width: 365px;
+    height: 78px;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    order: 2;
+  }
+
+  .mobile-img-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+  }
+  .mobile-img-wrapper img {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+  }
+
+  .preview-info {
+    width: 320px;
+    height: 39px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px 0 12px;
+  }
+
+  .loading-filter {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+  }
+}

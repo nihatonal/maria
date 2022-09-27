@@ -1,0 +1,38 @@
+@media screen and (max-width: 767px) {
+  .photo-wrapper-dropzone {
+    justify-content: flex-start;
+  }
+}
+
+.form__container-dropzone {
+  width: 1440px;
+  height: 900px;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 150px;
+  position: relative;
+}
+
+@media screen and (max-width: 767px) {
+  .form__container-dropzone {
+    width: 375px;
+    height: 667px;
+    margin-top: 122px;
+  }
+}
+
+.button:disabled,
+.button:hover:disabled,
+.button:active:disabled {
+  background: #e6e6e6;
+  color: #b4b5bd;
+  border-color: none;
+}
+
+.button-docs {
+  width: 237px;
+  height: 51px;
+}

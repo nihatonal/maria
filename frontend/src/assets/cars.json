@@ -1,0 +1,12 @@
+[
+    { "carname": "Легкие мотоциклы", "category": "Категория А1"},
+    { "carname": "Мотоциклы", "category": "Категория А"},
+    { "carname": "Легковые", "category": "Категория B, BE"},
+    { "carname": "Грузовые", "category": "Категория C, CE"},
+    { "carname": "Легкие Грузовые", "category": "Категория C1, C1E"},
+    { "carname": "Автобусы", "category": "Категория D, DE"},
+    { "carname": "Малые Автобусы", "category": "Категория D1, D1E"}
+    
+]
+  
+  

@@ -1,0 +1,73 @@
+.form-card-container {
+  width: 679px;
+  height: 319px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+@media screen and (max-width: 767px) {
+  .form-card-container {
+    width: 335px;
+    height: 425px;
+  }
+}
+
+.form-card-container-title {
+  font-size: 36px;
+  line-height: 147.3%;
+  text-align: left;
+  margin-bottom: 30px;
+}
+@media screen and (max-width: 767px) {
+  .form-card-container-title {
+    font-size: 24px;
+    line-height: 120%;
+    margin-bottom: 30px;
+  }
+}
+
+.form-card-container-items {
+  height: 236px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: space-between;
+}
+@media screen and (max-width: 767px) {
+  .form-card-container-items {
+    height: 366px;
+    justify-content: space-between;
+  }
+}
+
+/* .calender_wrapper::after {
+        z-index: -1;
+        content: '';
+        display: block;
+        background: url("../../../assets/icons/calender.svg") no-repeat;
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 11px;
+        right: 13px; }
+        @media screen and (max-width: 767px) {
+          .calender_wrapper::after{
+            top: 39px;
+            right: 13px; } } */
+
+/* ::-webkit-datetime-edit {
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        color: #1B1B1B; } */
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  width: 20px;
+  height: 20px;
+  background: url("../../../assets/icons/calender.svg") no-repeat;
+}

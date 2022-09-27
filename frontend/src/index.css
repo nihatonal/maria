@@ -1,0 +1,29 @@
+/* generic*/
+.is-animated {
+  transition: all 400ms ease; }
+
+/* normalize */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+ }
+
+/*common*/
+.content_wrapper, .content_container {
+  width: 1440px;
+  text-align: center; }
+  @media screen and (max-width: 767px) {
+    .content_wrapper {
+      width: 375px; } }
+
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 120%;
+  text-align: center;
+  color: #1B1B1B; }
+  @media screen and (max-width: 767px) {
+    h2 {
+      font-size: 24px; } }

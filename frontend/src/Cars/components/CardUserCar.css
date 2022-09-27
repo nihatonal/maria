@@ -1,0 +1,154 @@
+.carCard-container {
+  width: 700px;
+  height: 176px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+.carCard-container:last-child {
+  margin-bottom: 0;
+}
+.car-image_wrapper {
+  width: 242px;
+  height: 176px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.carCard-container .car-image {
+  width: 242px;
+  height: 176px;
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+.car-image:hover {
+  border: 1px solid red;
+ transform: scale(1.2);
+}
+.carCard_content {
+  margin-left: 19px;
+  pointer-events: none;
+}
+.carCard-title {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.carName {
+  font-size: 24px;
+  line-height: 28px;
+  color: #1b1b1b;
+  pointer-events: none;
+}
+.carCard-star {
+  width: 70px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  pointer-events: none;
+}
+.star {
+  font-size: 14px;
+  line-height: 16px;
+}
+.carCard-star img {
+  width: 16px;
+  height: 16px;
+}
+.carCard-engine-info {
+  display: flex;
+  align-items: center;
+  margin: 14px 0 29px 0;
+  pointer-events: none;
+}
+.carCard-engine-info_item {
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+.carCard-engine-info_item:first-child {
+  margin-right: 29px;
+}
+
+.carCard-engine-info img {
+  width: 24px;
+  height: 24px;
+  margin-right: 11px;
+}
+.carCard-engine-info_item p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #8d8b99;
+}
+
+.carCard-price {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21px;
+  color: #1b1b1b;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 767px) {
+  .carCard-container {
+    width: 335px;
+    height: 395px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  .carCard_content {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+  .carCard-title {
+    width: 335px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .carName {
+    font-size: 20px;
+    line-height: 23px;
+    order: -1;
+  }
+  .carCard-container .car-image {
+    width: 335px;
+    height: 245px;
+  }
+  .car-image_wrapper {
+    width: 335px;
+    height: 245px;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+  .carCard-star {
+    margin-bottom: 0;
+  }
+  /* 
+  .carCard-star img {
+    width: 16px;
+    height: 16px;
+  } */
+  .carCard-engine-info {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 15px 0;
+  }
+  .carCard-engine-info_item:first-child {
+    margin-right: 0;
+    margin-bottom: 12px;
+  }
+}

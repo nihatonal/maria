@@ -1,0 +1,201 @@
+.form__container-options {
+  width: 1440px;
+  height: 1930px;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 150px;
+  position: relative;
+}
+.options-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.options-wrapper {
+  width: 681px;
+  height: 1090px;
+  margin: 52px 0 60px 0;
+}
+
+.extra {
+  width: 681px;
+  height: 444px;
+  margin-bottom: 80px;
+}
+.option-item {
+  width: 679px;
+  height: 58px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: relative;
+}
+
+.extra .extra-service-mobile {
+  height: 79px;
+  margin-bottom:15px;
+}
+.option-item .checkbox {
+  width: 48px;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  z-index: 99;
+  cursor: pointer;
+}
+.option-item label {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 147.3%;
+  color: #000000;
+  pointer-events: none;
+}
+.extra-options {
+  width: 573px;
+}
+.extra label div {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.extra label p:first-child {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 147.3%;
+  color: #000000;
+}
+.extra label p:last-child {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 147.3%;
+  color: #828282;
+}
+.price-option {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #bdbdbd;
+  width: 72px;
+  height: 44px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.option-item label img {
+  margin-right: 15px;
+}
+.checkbox-ref {
+  width: 36px;
+  height: 20px;
+  background: #ede9e9;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  padding: 0 2px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.checkbox-ref-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  background: #ffffff;
+  transition: all ease-in-out;
+}
+
+.checkbox:checked ~ .checkbox-ref {
+  background: #61a199;
+  justify-content: flex-end;
+}
+.checkbox:checked ~ .extra-options .price-option {
+  color: #1b1b1b;
+}
+
+@media screen and (max-width: 767px) {
+  .form__container-options {
+    width: 375px;
+    height: 2042px;
+    margin-top: 122px;
+  }
+  .options-container {
+    width: 375px;
+    height: 1750px;
+  }
+  .options-wrapper {
+    width: 344px;
+    height: 870px;
+    margin: 40px 0;
+  }
+  .extra {
+    width: 344px;
+    height: 444px;
+    margin-bottom: 80px;
+  }
+  .option-item {
+    width: 335px;
+    height: 44px;
+    padding: 0 12px 0 22px;
+  }
+  .option-item label {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 14px;
+  }
+  .extra .extra-service-mobile {
+    width: 335px;
+    height: 163px;
+    
+    
+  }
+  .extra-service-mobile .extra-options {
+    width:230px;
+    min-height: 165px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .extra label div {
+    margin-bottom: 15px;
+    margin-top: 20px;;
+  }
+  .extra label p:first-child {
+    width: 165px;
+    text-align: left;
+    margin-bottom: 3px;
+  }
+  .extra label div p:last-child {
+   text-align: left;
+  }
+  .price-option {
+    margin-bottom:22px;
+  }
+  .form__container-backArrow-wrapper {
+    position: absolute;
+    top: -44px;
+    left: 0;
+    z-index: 99;
+  }
+  
+}

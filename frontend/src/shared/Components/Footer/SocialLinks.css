@@ -1,0 +1,22 @@
+.footer__social-icons {
+    width: 124px;
+    height: 32px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 40px; }
+  
+  @media screen and (max-width: 767px) {
+    .footer__social-icons {
+      width: 124px;
+      height: 32px;
+      display: flex;
+      padding-right: 0; } }
+  
+  .footer__social-icons .icon {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out; }
+  
+  .footer__social-icons .icon:hover {
+    box-shadow: 0 1px 4px 1px white; }

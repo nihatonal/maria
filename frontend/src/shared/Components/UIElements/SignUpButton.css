@@ -1,0 +1,18 @@
+.btn-signup {
+    width: 237px;
+    height: 51px;
+    background: #61A199;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    color: #fff;
+    cursor: pointer;
+    transition: opacity .3s; }
+    @media screen and (max-width: 767px) {
+      .btn-signup {
+        width: 335px; } }
+    .btn-signup:hover {
+      opacity: 0.8; }

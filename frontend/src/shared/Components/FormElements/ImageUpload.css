@@ -1,0 +1,64 @@
+.image-upload__wrapper {
+  position: relative;
+}
+
+.image-upload__wrapper .image-upload-preview {
+  width: 431px;
+  height: 321px;
+  border-radius: 10px;
+}
+
+.photo-display-bg-light {
+  border-radius: 10px;
+  width: 431px;
+  height: 321px;
+  opacity: 0.6;
+  position: absolute;
+}
+.filter {
+  border-radius: 10px;
+  width: 431px;
+  height: 321px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.filter-renew {
+  border-radius: 10px;
+  width: 431px;
+  height: 321px;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.6)
+  );
+  position: absolute;
+  top: 0;
+  z-index: 99;
+}
+.img_icon-wrapper {
+  width: 48px;
+  height: 48px;
+  background-color: black;
+  opacity: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  top: 136px;
+  left: 191px;
+  position: absolute;
+  cursor: pointer;
+  z-index: 99;
+}
+.photo-circle-text {
+  position: absolute;
+  color: white;
+}
+.input-hidden {
+    display: none;
+    position: absolute;
+    top: 136px;
+    left: 191px;
+  }
