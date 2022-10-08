@@ -1,122 +1,141 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import CircularStaticSingle from '../../services/CircularStaticSingle';
-import { useHttpClient } from '../../shared/hooks/http-hook';
-import trash from '../../../assets/icons/trash.svg';
-import renew from '../../../assets/icons/renew.svg';
-import X from '../../../assets/icons/x.svg';
+import { SignUpContext } from "../../context/signup-context";
+import { useHttpClient } from "../../hooks/http-hook";
+import { useForm } from "../../hooks/SignUpFrom-hook";
+import ImageUpload from "../../Components/FormElements/ImagesUpload";
 
-import './ImageUpload.css';
 
-const ImageUpload = props => {
+import { FaArrowLeft } from "react-icons/fa";
+import camera from "../../../assets/icons/camera.svg";
+// import "./SignUpPhoto.css";
+
+const SingleUpload = () => {
+  const SignUp = useContext(SignUpContext);
+  const navigate = useNavigate();
   const { isLoading, sendRequest } = useHttpClient();
-  const [file, setFile] = useState();
-  const [previewUrl, setPreviewUrl] = useState();
-  const [isValid, setIsValid] = useState(false);
-
-  const filePickerRef = useRef();
+  const [loading, setLoading] = useState(false);
+  const [imageFile, setimageFile] = useState(null);
+  const [showDelete, setDelete] = useState(false);
+  const [showRenew, setShowRenew] = useState(false);
+  const [errorUpload, setErrorUpload] = useState(false);
+  const [errorSend, setErrorSend] = useState(false);
+  const [formState, inputHandler, setFormData] = useForm({
+    image: {
+      value: null,
+      isValid: false,
+    },
+  });
 
   useEffect(() => {
-    if (!file) {
-      return;
-    }
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      setPreviewUrl(fileReader.result);
+    const uploadPhoto = async () => {
+      try {
+        const formData = new FormData();
+        formData.append("image", formState.inputs.image.value);
+        const responseData = await sendRequest(
+          process.env.REACT_APP_BACKEND_URL + "/users/userphoto",
+          "POST",
+          formData
+        );
+        setimageFile(responseData.data.path);
+        setDelete(true);
+      } catch (err) {
+        if (formState.inputs.image.value !== null) {
+          SignUp.error = err.message;
+          setShowRenew(true);
+          setErrorUpload(true);
+        }
+      }
     };
-    fileReader.readAsDataURL(file);
 
-  }, [file]);
+    uploadPhoto();
+  }, [formState.inputs.image.value, sendRequest, SignUp.error]);
 
-  useEffect(() => {
-    async function upload() {
-      const url = await uploadFile(file, setProgress);
-      onUpload(file, url);
+  const sendPhoto = async (e) => {
+    e.preventDefault();
+    if (formState.inputs.image.value === null) return;
+
+    const userId = SignUp.userId;
+    setLoading(true);
+    try {
+      await sendRequest(
+        process.env.REACT_APP_BACKEND_URL + `/users/userphoto/${userId}`,
+        "PATCH",
+        JSON.stringify({
+          image: imageFile,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+
+      navigate("/signup/success");
+    } catch (err) {
+      setErrorSend(true);
+      SignUp.error = true;
+      console.log(SignUp.error);
+      if (formState.inputs.image.value !== null) {
+        SignUp.error = true;
+        setLoading(false);
+      }
     }
+  };
 
-    upload();
-  }, []);
+  const deleteHandler = async (e) => {
+    e.preventDefault();
+    setLoading(false);
+    try {
+      await sendRequest(
+        process.env.REACT_APP_BACKEND_URL + `/users/userphoto`,
+        "DELETE",
+        JSON.stringify({
+          image: imageFile,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+    } catch (err) {}
+    setDelete(false);
+  };
 
-  const onUpload = (file, progress) => {
-    const formData = new FormData();
-    formData.append(props.id, file);
-    formData.append('image', formState.inputs.image.value);
-    const responseData = await sendRequest(
-      process.env.REACT_APP_BACKEND_URL +'/users/userphoto',
-      'POST',
-      formData,
-    );
-  }
+  const renewHandler = async () => {
+    setShowRenew(false);
+    setErrorUpload(false);
 
-  const pickedHandler = event => {
-   
-    let pickedFile;
-    let fileIsValid = isValid;
-    if (event.target.files && event.target.files.length === 1) {
-      pickedFile = event.target.files[0];
-      setFile(pickedFile);
-      setIsValid(true);
-      fileIsValid = true;
-    } else {
-      setIsValid(false);
-      fileIsValid = false;
+    try {
+      const formData = new FormData();
+      formData.append("image", formState.inputs.image.value);
+      const responseData = await sendRequest(
+        process.env.REACT_APP_BACKEND_URL + "/users/userphoto",
+        "POST",
+        formData
+      );
+      setimageFile(responseData.data.path);
+      setDelete(true);
+    } catch (err) {
+      if (formState.inputs.image.value !== null) setShowRenew(true);
     }
-    props.onInput(props.id, pickedFile, fileIsValid);
-    
-  };  
-
-  const pickImageHandler = () => {
-    filePickerRef.current.click();
   };
 
-  const deleteHandler = () => {
-    setPreviewUrl(null);
-
-  };
-
-  const cancelHandler = () => {
-    setPreviewUrl(null);
-  };
- 
   return (
-    <div className="photo-input_wrapper">
-      <input
-        id={props.id}
-        ref={filePickerRef}
-        style={{ display: 'none' }}
-        type="file"
-        accept=".jpg,.png,.jpeg"
-        onChange={pickedHandler}
+    <React.Fragment>
+      <ImageUpload
+        center
+        id="image"
+        onInput={inputHandler}
+        picker={<img src={camera} alt="camera" />}
+        deleteHandler={deleteHandler}
+        Cancel={deleteHandler}
+        isLoading={isLoading && loading}
+        showDelete={showDelete}
+        showRenew={showRenew}
+        renewHandler={renewHandler}
       />
-     
-        <div className="image-upload__wrapper">
-          {previewUrl && <img className='image-upload-preview' src={previewUrl} alt="Preview" />}
-          {!previewUrl && 
-          <div className={props.pickerClassname} onClick={pickImageHandler}>
-            {props.picker}
-          </div>
-          }
-          {previewUrl && !props.isLoading && <div className='filter'>
-              <div className={ !props.isLoading  ? "input-hidden" : "img_icon-wrapper" } onClick={cancelHandler}>
-                    <CircularStaticSingle  />
-                  <img src={X} className="photo-circle-text" alt="x icon" onClick={props.Cancel}/>
-              </div>
-              <div className={!props.showDelete ? "input-hidden" : "img_icon-wrapper" } onClick={props.deleteHandler}>
-                <img src={trash} alt="trash"  className={!props.showDelete? "input-hidden" : ""} onClick={deleteHandler}/>
-              </div>
-          </div>}
-
-          <div className={!props.showRenew ? "input-hidden" : 'filter-renew'}>
-            <div className={!props.showRenew ? "input-hidden" : "img_icon-wrapper" }>
-                <img src={renew} alt="renew" onClick={props.renewHandler}/>
-            </div>
-          </div>    
-        
-        </div>
-
-      {!isValid && <p>{props.errorText}</p>}
-    </div>
+    </React.Fragment>
   );
 };
 
-export default ImageUpload;
+export default SingleUpload;

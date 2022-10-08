@@ -1,0 +1,203 @@
+.quiz-container {
+  background-color: var(--bg_primary);
+  width: 95%;
+  min-height: 100px;
+  height: min-content;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  justify-content: space-evenly;
+  font-family: var(--font_family_primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.quiz-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.score-section {
+  display: flex;
+  width: 90%;
+  justify-content: space-evenly;
+  font-size: 20px;
+  align-items: center;
+  color: var(--color_white);
+}
+
+.quiz-renew-icon {
+  color: rgb(141, 253, 225);
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.quiz-renew-icon:hover {
+  transform: scale(1.2) rotateZ(180deg);
+}
+/* QUESTION/TIMER/LEFT SECTION */
+.question-section {
+  width: 100%;
+  position: relative;
+  color: var(--color_white);
+}
+
+.question-count {
+  margin-bottom: 20px;
+}
+
+.question-count span {
+  font-size: 20px;
+}
+
+.question-text {
+  margin-bottom: 12px;
+}
+.question-text p span {
+  color: rgb(141, 253, 225);
+}
+
+/* ANSWERS/RIGHT SECTION */
+.answer-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.quiz-container button {
+  width: 100%;
+  font-size: 16px;
+  color: var(--color_white);
+  background-color: var(--bg_primary);
+  border-radius: 15px;
+  display: flex;
+  padding: 5px;
+  justify-content: flex-start;
+  align-items: center;
+  border: 5px solid #234668;
+  cursor: pointer;
+  margin-bottom: 8px;
+  padding-left: 20px;
+}
+
+.quiz-container .correct {
+  background-color: var(--color_green);
+  color: var(--bg_primary);
+}
+
+.quiz-container .incorrect {
+  background-color: var(--color_danger);
+}
+
+.quiz-container .btn-answer:hover {
+  background-color: var(--color_lightblue);
+  color: var(--bg_primary);
+}
+
+button:focus {
+  outline: none;
+}
+
+button svg {
+  margin-right: 5px;
+}
+
+.btn-quiz-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.btn-quiz-home {
+  color: rgb(35, 216, 171);
+  font-size: 32px;
+  transition: all ease-in-out 0.2s;
+  cursor: pointer;
+  border-radius: 100%;
+}
+.btn-quiz-home:hover {
+  color: rgb(141, 253, 225);
+  box-shadow: 0 0 10px rgb(141, 253, 225);
+}
+.quiz-container .btn-quiz-next {
+  background-color: rgb(35, 216, 171);
+  color: var(--bg_primary);
+  border: none;
+  width: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  transition: all ease-in-out 0.2s;
+  padding-left: 0;
+}
+.quiz-container .btn-quiz-next:hover {
+  background-color: rgb(141, 253, 225);
+  box-shadow: 0 0 10px rgb(141, 253, 225);
+}
+
+.quiz-number-selection {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.quiz-number-selection p {
+  color: var(--bg_secondary);
+  font-family: var(--font_family_primary);
+  font-size: 16px;
+  text-align: center;
+}
+.quiz-number-selection div {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 15px;
+}
+.quiz-number-selection button {
+  font-family: var(--font_family_primary);
+  width: 24%;
+  padding: 5px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: var(--bg_secondary);
+  color: #0b019e;
+  transition: all 0.2s;
+  margin: 0;
+}
+.quiz-number-selection button:hover {
+  background-color: #fc7a00;
+}
+.quiz-number-selection .disabled {
+  background-color: #cecece7c;
+  color: #cecece6b;
+}
+.quiz-number-selection .disabled:hover {
+  background-color: #cecece7c;
+  color: #cecece6b;
+}
+.quiz-number-selection input {
+  width: 24%;
+  margin: 0;
+  height: 29px;
+  border-radius: 15px;
+  background-color: var(--bg_secondary);
+  color: #0b019e;
+  font-family: var(--font_family_primary);
+  text-align: center;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.quiz-number-selection input:hover {
+  background-color: #fc7a00;
+}
+.quiz-number-selection input:focus {
+  background-color: #ffcd71;
+  outline: none;
+  border: none;
+}

@@ -1,0 +1,193 @@
+.flashcards-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.btn-add-car-wrapper {
+  width: 100%;
+  height: 84px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-add-car {
+  width: 250px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-wrapper {
+  width: 1440px;
+  height: 816px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loading-wrapper .fa-circle-o-notch {
+  color: #61a199;
+  font-size: 54px;
+}
+
+@keyframes flashToback {
+  from {
+    transform: rotateY(0);
+  }
+
+  to {
+    transform: rotateY(90deg);
+  }
+}
+@keyframes flashTofront {
+  from {
+    transform: rotateY(90deg);
+  }
+
+  to {
+    transform: rotateY(0);
+  }
+}
+
+.flashcard-container {
+  width: 250px;
+  height: 250px;
+  background-color: var(--bg_primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+}
+
+.flashcard {
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  border-radius: 10px;
+}
+
+.flash-to-back {
+  animation-name: flashToback;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+.flash-to-front {
+  animation-name: flashTofront;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+}
+.flashcard-front {
+  background-color: #01b48d;
+}
+.flashcard-back {
+  background-color: #f19d00;
+}
+
+.flashcard-text {
+  font-family: var(--font_family_primary);
+  font-size: 24px;
+  color: #fff;
+}
+.flashcards-btn-container {
+  padding: 20px;
+  margin: 50px 0;
+  width: 335px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.flascards-btn {
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: var(--bg_secondary);
+  box-shadow: var(--box-shadow);
+  font-family: var(--font_family_primary);
+  font-size: 16px;
+  color: var(--bg_primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.flascards-btn-left,
+.flascards-btn-right {
+  transform: rotate(135deg);
+  font-size: 24px;
+  transition: all 0.3s;
+}
+.flascards-btn-right {
+  transform: rotate(-45deg);
+}
+.flascards-btn:hover {
+  box-shadow: var(--box-shadow);
+  background-color: var(--bg_primary);
+}
+.flascards-btn:hover > .flascards-btn-left,
+.flascards-btn:hover > .flascards-btn-right {
+  color: var(--bg_secondary);
+}
+.random-btn {
+  color: var(--bg_primary);
+  font-size: 34px;
+  cursor: pointer;
+  transition: all ease-in-out 0.3s;
+}
+.random-btn:hover {
+  transform: scale(1.2);
+}
+
+@media screen and (max-width: 767px) {
+  .usercars-container {
+    width: 100%;
+    height: 100vh;
+    margin-top: 40px;
+    justify-content: flex-start;
+  }
+  .usercars-content {
+    width: 335px;
+    height: 383px;
+    margin-bottom: 70px;
+  }
+  .usercars-content img {
+    width: 263px;
+    height: 202px;
+  }
+  .usercars-content-title {
+    display: none;
+  }
+  .usercars-content-title-mobile {
+    display: block;
+    font-weight: 500;
+    line-height: 120%;
+    font-size: 32px;
+    margin: 42px 0 15px 0;
+  }
+  .usercars-content-subtitle {
+    font-size: 16px;
+  }
+  .btn-add-car-wrapper {
+    width: 375px;
+  }
+  .loading-wrapper {
+    width: 375px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .loading-wrapper .fa-circle-o-notch {
+    font-size: 34px;
+    color: #61a199;
+  }
+}

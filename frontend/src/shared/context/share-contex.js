@@ -10,5 +10,6 @@ export const ShareContext = createContext({
     services:[],
     error: false,
     selectedCar: {},
+    friendImage:null,
     notFound:false
 });

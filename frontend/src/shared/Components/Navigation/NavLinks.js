@@ -21,7 +21,7 @@ const NavLinks = (props) => {
     <>
       {/*  */}
 
-      {auth.isLoggedIn ? (
+      {/* {auth.isLoggedIn ? (
         <NavLink
           className={({ isActive }) =>
             isActive ? "header__nav-item is-active" : "header__nav-item"
@@ -40,16 +40,16 @@ const NavLinks = (props) => {
         >
           О нас
         </NavLink>
-      )}
-      {auth.isLoggedIn ? (
+      )} */}
+      {/* {auth.isLoggedIn ? (
         <NavLink
           className={({ isActive }) =>
             isActive ? "header__nav-item is-active" : "header__nav-item"
           }
-          to={`/${auth.userId}/cars`}
+          to={`/${auth.userId}/cards`}
           onClick={cleanLocalStorage}
         >
-          Мои автомобили
+          Мои Карточки
         </NavLink>
       ) : (
         <NavLink
@@ -60,15 +60,45 @@ const NavLinks = (props) => {
         >
           Условия
         </NavLink>
-      )}
-      {auth.isLoggedIn ? (
+      )} */}
+      {/* {auth.isLoggedIn && (
         <NavLink
           className={({ isActive }) =>
             isActive ? "header__nav-item is-active" : "header__nav-item"
           }
-          to="/messages"
+          to={`/${auth.userId}/mywords`}
         >
-          Сообщения
+          Мои слова
+        </NavLink>
+      )} */}
+      {auth.isLoggedIn && (
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "header__nav-item is-active" : "header__nav-item"
+          }
+          to={`/${auth.userId}/friends`}
+        >
+          Мои друзья
+        </NavLink>
+      )}
+      {auth.isLoggedIn && (
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "header__nav-item is-active" : "header__nav-item"
+          }
+          to="/english"
+        >
+          Английский
+        </NavLink>
+      )}
+      {/* {auth.isLoggedIn ? (
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "header__nav-item is-active" : "header__nav-item"
+          }
+          to="/english"
+        >
+          Английский
         </NavLink>
       ) : (
         <NavLink
@@ -79,7 +109,7 @@ const NavLinks = (props) => {
         >
           Частые вопросы
         </NavLink>
-      )}
+      )} */}
     </>
   );
 };

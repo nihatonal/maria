@@ -22,7 +22,14 @@ const MainFooter = (props) => {
     pathname === `/${auth.userId}/cars` ||
     pathname === `/${auth.userId}/${carId}` ||
     pathname === `/${auth.userId}/success` ||
-    pathname === `/${auth.userId}/addcar` ||
+    pathname === `/${auth.userId}/addcard` ||
+    pathname === `/${auth.userId}/addword` ||
+    pathname === `/${auth.userId}/hangman` ||
+    pathname === `/${auth.userId}/cards` ||
+    pathname === `/${auth.userId}/mywords` ||
+    pathname === `/english` ||
+    pathname === `/${auth.userId}/friends` ||
+    pathname === `/${auth.userId}/addfriend` ||
     pathname === `/rentacar/${carId}` ||
     pathname === `/cars/${carId}` ||
     pathname === "/signup" ||

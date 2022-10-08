@@ -1,0 +1,92 @@
+.Hangman {
+  width: 100%;
+  color: var(--bg_primary);
+  text-align: center;
+  font-family: var(--font_family_primary);
+}
+.Hangman .content-wrapper {
+  margin: 0;
+}
+.Hangman .content-wrapper .back-btn {
+  left: 8%;
+}
+.Hangman img {
+  border: 10px solid white;
+  box-shadow: var(--box-shadow);
+}
+
+.Hangman h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  margin-top: 0;
+}
+.Hangman p {
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+.Hangman_win {
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 2px var(--bg_primary), 0 0 1em var(--bg_secondary),
+    0 0 0.2em var(--bg_secondary);
+}
+.Hangman_lose {
+  margin-bottom: 1rem;
+}
+.Hangman_lose p:first-child {
+  text-shadow: 1px 1px 2px var(--color_danger), 0 0 1em var(--color_green),
+    0 0 0.2em var(--color_danger);
+}
+.Hangman_lose span {
+  color: var(--bg_primary);
+  background-color: var(--color_green);
+  padding: 0 10px;
+}
+.Hangman-word {
+  letter-spacing: 1em;
+  margin: 0.4em -1em 0.2em 0;
+  font-size: 2rem;
+}
+
+.Hangman-btns {
+  text-align: center;
+  display: inline-block;
+  width: 250px;
+  margin: 1rem 0;
+}
+
+.Hangman button {
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 30px;
+  margin: 5px 2px 2px 2px;
+  letter-spacing: 1px;
+  outline: none;
+  background: var(--bg_secondary);
+  color: var(--color_white);
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  padding: 2px;
+}
+
+#reset {
+  width: 50%;
+  padding: 10px 0;
+  border-radius: 15px;
+  background-color: var(--bg_primary);
+}
+#reset:hover {
+  background-color: var(--bg_secondary);
+  color: var(--bg_primary);
+}
+.Hangman button:hover {
+  background-color: var(--bg_primary);
+  color: var(--bg_secondary);
+}
+
+.Hangman button:disabled {
+  background: var(--bg_disabled);
+  color: var(--color_disabled);
+}

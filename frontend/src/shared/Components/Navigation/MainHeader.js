@@ -44,8 +44,8 @@ const MainHeader = (props) => {
     <header
       className={
         scrolled === false
-          ? "header content_wrapper"
-          : "header content_wrapper sticky"
+          ? "header"
+          : "header sticky"
       }
     >
       {props.children}

@@ -5,8 +5,8 @@
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
-  color: #b4b5bd;
-  background: #e6e6e6;
+  color: var(--bg_secondary);
+  background: var(--bg_primary);
   border-radius: 6px;
   border: none;
   outline: none;
@@ -26,8 +26,8 @@
 .button:hover,
 .button:active,
 .button--isvalid {
-  background: #61a199;
-  color: #fff;
+  background: var(--bg_secondary);
+  color: var(--bg_primary);
 }
 
 .button--inverse {
@@ -55,9 +55,8 @@
 .button:disabled,
 .button:hover:disabled,
 .button:active:disabled {
-  background: #ccc;
-  color: #979797;
-  border-color: #ccc;
+  background: var(--bg_disabled);
+  color: var(--color_disabled);
 }
 
 .button--small {

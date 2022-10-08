@@ -1,6 +1,5 @@
 .form-card-container {
   width: 679px;
-  height: 319px;
   font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -11,7 +10,6 @@
 @media screen and (max-width: 767px) {
   .form-card-container {
     width: 335px;
-    height: 425px;
   }
 }
 
@@ -30,7 +28,6 @@
 }
 
 .form-card-container-items {
-  height: 236px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -38,8 +35,7 @@
 }
 @media screen and (max-width: 767px) {
   .form-card-container-items {
-    height: 366px;
-    justify-content: space-between;
+    align-items: center;
   }
 }
 

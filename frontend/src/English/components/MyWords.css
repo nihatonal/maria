@@ -1,0 +1,109 @@
+.words-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.word-list-container {
+  width: 98%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.word-list-container table {
+  width: 90%;
+  background: var(--bg_primary);
+  box-shadow: var(--box-shadow);
+}
+th {
+  padding: 5px 0;
+  color: var(--color_green);
+}
+th,
+td {
+  height: 25px;
+  text-align: center;
+  font-family: var(--font_family_primary);
+  border: 1px solid var(--color_pink);
+}
+tr > td:nth-last-child(2) {
+  color: var(--bg_secondary);
+  width: 135px;
+}
+tr > td:nth-last-child(3) {
+  color: var(--bg_secondary);
+  width: 135px;
+}
+tr > td:nth-last-child(4) {
+  width: 35px;
+  color: var(--color_white);
+}
+tr > td:nth-last-child(1) {
+  color: var(--color_danger);
+  cursor: pointer;
+  width: 35px;
+}
+tr > td:nth-last-child(1):hover {
+  background-color: var(--color_danger);
+  color: var(--color_white);
+}
+/*Pagination*/
+.word-list-container ul {
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  min-width: 75%;
+  margin-top: 20px;
+}
+.word-list-container ul li {
+  font-size: 16px;
+  font-family: var(--font_family_primary);
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  padding-top: 3px;
+  background-color: var(--bg_primary);
+  color: var(--bg_secondary);
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+}
+.word-list-container ul li a {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+.word-list-container ul li:hover {
+  background-color: var(--bg_secondary);
+  color: var(--bg_primary);
+}
+.word-list-container .active_page {
+  background-color: var(--bg_secondary);
+  color: var(--bg_primary);
+}
+
+.btn-add_word {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.btn-add_word a {
+  background-color: var(--bg_primary);
+  color: var(--bg_secondary);
+  padding: 10px 35px;
+  border: none;
+  border-radius: var(--border-radius_15);
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--font_family_primary);
+  transition: all ease-in-out 0.2s;
+  box-shadow: var(--box-shadow);
+}
+.btn-add_word a:hover {
+  background-color: var(--bg_secondary);
+  color: var(--bg_primary);
+}

@@ -84,11 +84,11 @@ const ImageUpload = props => {
               </div>
           </div>}
 
-          <div className={!props.showRenew ? "input-hidden" : 'filter-renew'}>
+          {/* <div className={!props.showRenew ? "input-hidden" : 'filter-renew'}>
             <div className={!props.showRenew ? "input-hidden" : "img_icon-wrapper" }>
                 <img src={renew} alt="renew" onClick={props.renewHandler}/>
             </div>
-          </div>    
+          </div>     */}
         
         </div>
 

@@ -11,12 +11,12 @@ import MainNavigation from "./shared/Components/Navigation/MainNavigation";
 import MainFooter from "./shared/Components/Footer/MainFooter";
 import SignUpPage from "./SignUpPage/pages/SignUpPage";
 import SignUpPhoto from "./SignUpPage/pages/SignUpPhoto";
-import UserDocs from "./SignUpPage/pages/UserDocs";
+// import UserDocs from "./SignUpPage/pages/UserDocs";
 import SignUpSuccess from "./SignUpPage/pages/SignUpSuccess";
 
-import FiveHundredTwo from "./shared/Components/NotFound/FiveHundredTwo";
+// import FiveHundredTwo from "./shared/Components/NotFound/FiveHundredTwo";
 import FourHunderFour from "./shared/Components/NotFound/FourHunderFour";
-
+import English from './English/page/English';
 //import RentACar from "./Cars/pages/RentACar";
 //import RentUserCar from "./Cars/pages/RentUserCar";
 // import UserCars from "./Cars/pages/UserCars";
@@ -31,14 +31,19 @@ import { useAuth } from "./shared/hooks/auth-hook";
 import "./App.css";
 
 const RentACar = React.lazy(() => import("./Cars/pages/RentACar"));
-const RentUserCar = React.lazy(() => import("./Cars/pages/RentUserCar"));
-const UserCars = React.lazy(() => import("./Cars/pages/UserCars"));
-const AddCar = React.lazy(() => import("./Cars/components/AddCar"));
+// const RentUserCar = React.lazy(() => import("./Cars/pages/RentUserCar"));
+const FlashCards = React.lazy(() => import("./English/components/FlashCards"));
+const MyWords = React.lazy(() => import("./English/components/MyWords"));
+const Hangman = React.lazy(() => import("./English/components/Hangman"));
+// const AddCard = React.lazy(() => import("./English/components/AddCard"));
+const AddFriend = React.lazy(() => import("./Friends/components/AddFriend"));
+const UserFriends = React.lazy(() => import("./Friends/page/Friends.js"));
+const AddWord = React.lazy(() => import("./English/components/AddWord"));
 const AddCarSuccess = React.lazy(() =>
   import("./Cars/components/AddCarSuccess")
 );
 const UserCar = React.lazy(() => import("./Cars/pages/UserCar"));
-const UpdateCar = React.lazy(() => import("./Cars/pages/UpdateCar"));
+// const UpdateCar = React.lazy(() => import("./Cars/pages/UpdateCar"));
 
 function App() {
   const { token, login, logout, userId } = useAuth();
@@ -58,12 +63,18 @@ function App() {
     routes = (
       <React.Fragment>
         <Route exact path="/rentacar" element={<RentACar />} />
-        <Route exact path="/rentacar/:cid" element={<RentUserCar />} />
-        <Route exact path="/:userId/cars" element={<UserCars />} />
+        <Route exact path="/english" element={<English />} />
+        {/* <Route exact path="/rentacar/:cid" element={<RentUserCar />} /> */}
+        <Route exact path="/:userId/cards" element={<FlashCards />} />
+        <Route exact path="/:userId/friends" element={<UserFriends />} />
+        <Route exact path="/:userId/mywords" element={<MyWords />} />
+        <Route exact path="/:userId/hangman" element={<Hangman />} />
         <Route exact path="/:userId/:cid" element={<UserCar />} />
-        <Route exact path="/:userId/addcar" element={<AddCar />} />
-        <Route exact path="/cars/:cid" element={<UpdateCar />} />
+        {/* <Route exact path="/:userId/addcard" element={<AddCard />} /> */}
+        <Route exact path="/:userId/addword" element={<AddWord />} />
+        {/* <Route exact path="/cars/:cid" element={<UpdateCar />} /> */}
         <Route exact path="/:userId/success" element={<AddCarSuccess />} />
+        <Route exact path="/:userId/addfriend" element={<AddFriend />} />
         <Route exact path="*" element={<FourHunderFour />} />
       </React.Fragment>
     );
@@ -71,11 +82,12 @@ function App() {
     routes = (
       <React.Fragment>
         <Route exact path="/" element={<MainPage />} />
+        <Route exact path="/english" element={<English />} />
         <Route exact path="/about" element={<PageAbout />} />
         <Route exact path="/faq" element={<PageFaq />} />
         <Route exact path="/signup" element={<SignUpPage />} />
         <Route exact path="/userphoto" element={<SignUpPhoto />} />
-        <Route exact path="/userdocs" element={<UserDocs />} />
+        {/* <Route exact path="/userdocs" element={<UserDocs />} /> */}
         <Route exact path="/signup/success" element={<SignUpSuccess />} />
         <Route path="*" element={<FourHunderFour />} />
       </React.Fragment>

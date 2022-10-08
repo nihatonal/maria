@@ -1,5 +1,4 @@
 import React, {useContext} from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 import Input from "../../shared/Components/FormElements/Input";
@@ -50,7 +49,7 @@ const SignInModal = (props) => {
           "Content-Type": "application/json",
         }
       );
-      //console.log('logged in', auth.userId )
+      //console.log('logged in', responseData )
       auth.login(responseData.userId, responseData.token);
       //setClose(true);
       localStorage.removeItem('carData');
@@ -68,11 +67,11 @@ const SignInModal = (props) => {
       title="Авторизация"
       errorSignIn={error ? "Не верная почта или пароль" : ""}
       image={auth_image}
-      signupbtn={
-        <Link className="tosignup" to="/signup">
-          Зарегистрироваться
-        </Link>
-      }
+      // signupbtn={
+      //   <Link className="tosignup" to="/signup">
+      //     Зарегистрироваться
+      //   </Link>
+      // }
       footeronClick={props.footer}
     >
       <Input

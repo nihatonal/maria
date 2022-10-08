@@ -8,6 +8,7 @@ import Backdrop from "../UIElements/Backdrop";
 import ButtonSignIn from "../../../shared/Components/UIElements/ButtonSignIn";
 import close from "../../../assets/icons/close.svg";
 import Avatar from "../UIElements/Avatar";
+import Hamburger from "./Hamburger";
 import SignInModal from "../../../users/components/SignInModal";
 import RenewPassword from "../../../users/components/RenewPassword";
 import { AuthContext } from "../../context/auth-context";
@@ -24,6 +25,7 @@ const MainNavigation = () => {
   const [setShowAuth, setShowAuthModal] = useState(false);
   const [drawerIsOpen, setDrawerIsOpen] = useState(false);
   const [setBackAuth, setBackAuthModal] = useState(false);
+  const [userName, setUserName] = useState("");
 
   const userId = auth.userId;
 
@@ -35,6 +37,7 @@ const MainNavigation = () => {
             process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
           );
           setLoadedUser(responseData.user.image);
+          setUserName(responseData.user.name);
           setShowAuthModal(false);
         } catch (err) {}
       };
@@ -53,7 +56,7 @@ const MainNavigation = () => {
   };
 
   const openDrawerHandler = () => {
-    setDrawerIsOpen(true);
+    setDrawerIsOpen(!drawerIsOpen);
   };
 
   const closeDrawerHandler = () => {
@@ -73,29 +76,14 @@ const MainNavigation = () => {
     navigate("/");
     auth.logout();
   };
-
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
   return (
     <React.Fragment>
       {drawerIsOpen && <Backdrop onClick={closeDrawerHandler} />}
 
       <SideDrawer show={drawerIsOpen} onClick={closeDrawerHandler}>
-        <div className="side-drawer_head">
-          <div className={"side-drawer__logo"}>
-            <Link className={"side-drawer__logo-name"} to="/">
-              <p>SkillDrive</p>
-            </Link>
-            <div className={"side-drawer-line first"}></div>
-            <div className={"side-drawer-line second"}></div>
-          </div>
-          <div
-            className="side-drawer_head-close"
-            show={drawerIsOpen}
-            onClick={closeDrawerHandler}
-          >
-            <img src={close} alt="X" />
-          </div>
-        </div>
-
         <nav
           className="main-navigation__drawer-nav"
           style={auth.isLoggedIn ? { order: "3" } : null}
@@ -105,17 +93,19 @@ const MainNavigation = () => {
 
         {!auth.isLoggedIn ? (
           <div className={"side-drawer__btn"}>
-            <button
-              className={"side-drawer__btn-signin"}
-              onClick={showAuthHandler}
-            >
+            <button className="btn btn-sign_in" onClick={showAuthHandler}>
               Войти
             </button>
+            <Link to="/signup" className="btn btn-sign_up">
+              Регистрация
+            </Link>
           </div>
         ) : (
           <Avatar
             className={"mobile-avatar"}
-            image={loadedUser && process.env.REACT_APP_ASSETS_URL + `${loadedUser}`}
+            image={
+              loadedUser && process.env.REACT_APP_ASSETS_URL + `${loadedUser}`
+            }
             alt={"avatar"}
             onClick={logOutHandler}
           />
@@ -136,16 +126,18 @@ const MainNavigation = () => {
       />
 
       <MainHeader>
-        <div className="header__wrapper content-container">
+        <div className="header__wrapper">
           <div className={"header__logo"}>
             <Link
               className={"header__logo-name"}
               to={auth.isLoggedIn ? `/rentacar` : "/"}
             >
-              <p>SkillDrive</p>
+              {auth.isLoggedIn ? (
+                <p>Hi! {capitalizeFirstLetter(userName)}</p>
+              ) : (
+                <p>Ready to experience?</p>
+              )}
             </Link>
-            <div className={"header__logo-line first"}></div>
-            <div className={"header__logo-line second"}></div>
           </div>
 
           <nav
@@ -156,25 +148,41 @@ const MainNavigation = () => {
           </nav>
 
           {!auth.isLoggedIn ? (
-            <ButtonSignIn
-              btn="Войти"
-              className="header__btn"
-              btnclassName="header__btn-signin"
-              btnonClick={showAuthHandler}
-            />
+            <div className="header-button-wrapper">
+              <button className="btn btn-sign_in" onClick={showAuthHandler}>
+                Войти
+              </button>
+              <Link to="/signup" className="btn btn-sign_up">
+                Регистрация
+              </Link>
+              {/* <ButtonSignIn
+                btn="Войти"
+                className="header__btn"
+                btnclassName="header__btn-signin"
+                btnonClick={showAuthHandler}
+              />
+              <ButtonSignIn
+                btn="Регистрация"
+                className="header__btn"
+                btnclassName="header__btn-signin"
+                btnonClick={showAuthHandler}
+              /> */}
+            </div>
           ) : (
             <Avatar
-              image={loadedUser && process.env.REACT_APP_ASSETS_URL + `${loadedUser}`}
+              image={
+                loadedUser && process.env.REACT_APP_ASSETS_URL + `${loadedUser}`
+              }
               alt={"avatar"}
               onClick={logOutHandler}
             />
           )}
-
-          <div className="header__menu-icon" onClick={openDrawerHandler}>
+          <Hamburger show={drawerIsOpen} onClick={openDrawerHandler} />
+          {/* <div className="header__menu-icon" onClick={openDrawerHandler}>
             <div className={"header__menu-icon-item"} />
             <div className={"header__menu-icon-item"} />
             <div className={"header__menu-icon-item"} />
-          </div>
+          </div> */}
         </div>
       </MainHeader>
     </React.Fragment>

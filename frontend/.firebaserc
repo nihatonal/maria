@@ -1,7 +1,5 @@
 {
   "projects": {
-    "default": "nht-sf-drive",
-    "masha": "maria-ebaf9"
-  },
-  "targets": {}
+    "default": "nht-sf-drive"
+  }
 }

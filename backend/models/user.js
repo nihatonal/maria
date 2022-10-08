@@ -7,16 +7,11 @@ const userSchema = new Schema({
     birthdate: {type: String, required: true},
     email: {type: String, required: true, unique: true}, 
     phone: {type: Number, required: true},
-    passport: {type: String, required: true},
-    passport_date: {type: String, required: true},
-    passport_issued: {type: String, required: true},
-    passport_code: {type: String, required: true},
-    license: {type: String, required: true},
-    license_date: {type: String, required: true},
     password: {type: String, required: true, minlenght:8},
     image: {type: String, required: true},
     docs:[{type: String, required: true}],
-    cars: [{type: mongoose.Types.ObjectId, required: true, ref:'Car'}]  // cars and users relation
+    cars: [{type: mongoose.Types.ObjectId, required: true, ref:'Car'}],  // cars and users relation
+    friends: [{type: mongoose.Types.ObjectId, required: true, ref:'Friend'}]  // cars and users relation
 });
 
 userSchema.plugin(uniqueValidator);

@@ -2,22 +2,16 @@
   position: relative;
 }
 
-.image-upload__wrapper .image-upload-preview {
-  width: 431px;
-  height: 321px;
-  border-radius: 10px;
-}
-
 .photo-display-bg-light {
   border-radius: 10px;
-  width: 431px;
+  width: 335px;
   height: 321px;
   opacity: 0.6;
   position: absolute;
 }
 .filter {
   border-radius: 10px;
-  width: 431px;
+  width: 335px;
   height: 321px;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
   position: absolute;
@@ -26,7 +20,7 @@
 }
 .filter-renew {
   border-radius: 10px;
-  width: 431px;
+  width: 335px;
   height: 321px;
   background: linear-gradient(
     0deg,

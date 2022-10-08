@@ -20,7 +20,7 @@ const getCars = async (req, res, next) => {
     );
     return next(error);
   }
-  
+
   res.json({ cars: cars.map((car) => car.toObject({ getters: true })) });
 };
 
@@ -99,53 +99,11 @@ const createCar = async (req, res, next) => {
     );
   }
 
-  const {
-    brand,
-    model,
-    year,
-    plate_number,
-    vin_number,
-    color,
-    car_body,
-    engine_type,
-    engine_volume,
-    engine_power,
-    engine_transmission,
-    engine_run,
-    pts,
-    sts,
-    price,
-    price_for3,
-    price_more5,
-    policy,
-    insurance,
-    options,
-    services,
-    images,
-    carDocs,
-    owner,
-  } = req.body;
+  const { ru, en, options, services, images, carDocs, owner } = req.body;
 
   const createdCar = new Car({
-    brand,
-    model,
-    year,
-    plate_number,
-    vin_number,
-    car_body,
-    color,
-    engine_type,
-    engine_volume,
-    engine_power,
-    engine_transmission,
-    engine_run,
-    pts,
-    sts,
-    price,
-    price_for3,
-    price_more5,
-    policy,
-    insurance,
+    ru,
+    en,
     options,
     services,
     images,
@@ -201,20 +159,7 @@ const updateCar = async (req, res, next) => {
     );
   }
 
-  const {
-    plate_number,
-    engine_run,
-    sts,
-    price,
-    price_for3,
-    price_more5,
-    policy,
-    insurance,
-    options,
-    services,
-    images,
-    carDocs
-  } = req.body;
+  const { ru, en, options, services, images, carDocs } = req.body;
 
   const carId = req.params.cid;
 
@@ -234,18 +179,13 @@ const updateCar = async (req, res, next) => {
     return next(error);
   }
 
-  car.plate_number = plate_number,
-    car.engine_run = engine_run,
-    car.sts = sts,
-    car.price = price,
-    car.price_for3 = price_for3,
-    car.price_more5 = price_more5,
-    car.policy = policy,
-    car.insurance = insurance,
-    car.options = options,
-    car.services = services,
-    car.images = images,
-    car.carDocs= carDocs
+  (car.plate_number = plate_number),
+    (car.ru = ru),
+    (car.en = en),
+    (car.options = options),
+    (car.services = services),
+    (car.images = images),
+    (car.carDocs = carDocs);
 
   try {
     await car.save();

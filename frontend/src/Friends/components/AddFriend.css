@@ -1,0 +1,220 @@
+.form__container-addcar {
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  position: relative;
+}
+@media screen and (max-width: 767px) {
+  .form__container-addcar {
+    margin-top: 15px;
+  }
+}
+.form__container-head {
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+@media screen and (max-width: 767px) {
+  .form__container-head {
+    height: 66px;
+  }
+}
+
+.form__container-head-subtitle {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 147.3%;
+  text-align: center;
+  color: #828282;
+}
+@media screen and (max-width: 767px) {
+  .form__container-head-subtitle {
+    font-size: 12px;
+  }
+}
+
+/*form-content*/
+.form-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.form-content h2 {
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 147.3%;
+  text-align: left;
+  margin-bottom: 30px;
+}
+@media screen and (max-width: 767px) {
+  .form-content h2 {
+    font-size: 24px;
+    line-height: 120%;
+    width: 335px;
+  }
+  .inputWrapper {
+    width: 335px;
+    height: 72px;
+  }
+}
+.br-grey {
+  border: 1px solid #e0e0e0;
+}
+
+.info-car {
+  width: 679px;
+
+  margin: 40px 0 60px;
+}
+
+.engine_power {
+  display: flex;
+  height: 44px;
+  margin-bottom: 20px;
+}
+.engine_power span {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #1b1b1b;
+  margin-right: 198px;
+  align-self: center;
+}
+.engine_power label {
+  margin-right: 10px;
+}
+.engine_power_kw {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  color: #bdbdbd;
+  width: 155px;
+  height: 44px;
+  border: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  border-radius: 6px;
+  text-align: left;
+  padding: 14px 0 0 12px;
+}
+.input-power {
+  width: 155px;
+}
+.info-car .inputWrapper:nth-last-child(8),
+.info-car .inputWrapper:nth-last-child(4) {
+  margin-bottom: 60px;
+}
+@media screen and (max-width: 767px) {
+  .info-car .inputWrapper:nth-last-child(8),
+  .info-car .inputWrapper:nth-last-child(4) {
+    margin-bottom: 50px;
+  }
+}
+.button-container {
+  width: 100%;
+  height: 84px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.info-rent {
+  width: 679px;
+  height: 255px;
+}
+.info-insurance {
+  width: 676px;
+  height: 191px;
+  margin: 60px 0 80px 0;
+}
+.container-insurance {
+  position: relative;
+  height: 44px;
+}
+.buy_kasko {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: right;
+  color: #61a199;
+  text-decoration: none;
+  background: none;
+  position: absolute;
+  top: 14px;
+  right: 13px;
+  width: 100px;
+  height: 24px;
+}
+.buy_kasko:hover {
+  background: none;
+  color: #36726b;
+}
+@media screen and (max-width: 767px) {
+  .button-container {
+    width: 375px;
+    height: 84px;
+  }
+}
+
+.position-up {
+  position: relative;
+  top: -1000px;
+}
+
+.signup-form-error-fix {
+  padding-top: 8px;
+  margin-left: 264px;
+}
+
+@media screen and (max-width: 767px) {
+  .info-car {
+    width: 336px;
+    margin: 0;
+  }
+  .info-rent {
+    width: 336px;
+    height: 327px;
+  }
+  .info-insurance {
+    width: 336px;
+    height: 229px;
+  }
+  .engine_power {
+    display: flex;
+    flex-wrap: wrap;
+    height: 72px;
+  }
+  .input-small {
+    width: 157px;
+  }
+  .engine_power span {
+    margin-right: 198px;
+    align-self: center;
+  }
+
+  .engine_power_kw {
+    padding: 14px 0 0 12px;
+    margin-top: 12px;
+    margin-left: 20px;
+  }
+  .input-power {
+    width: 155px;
+  }
+  .buy_kasko {
+    top: 42px;
+    right: 13px;
+  }
+}

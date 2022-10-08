@@ -1,0 +1,40 @@
+.image-upload-wrapper {
+  width: 100%;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.image-upload-wrapper .photo-input_wrapper {
+  width: 200px;
+  height: 200px;
+  margin: 0;
+  border-radius: 100%;
+  
+}
+.image-upload-wrapper .img_icon-wrapper {
+  top: 80px;
+  left:80px;
+  cursor: pointer;
+}
+.image-upload__wrapper {
+  cursor: pointer;
+}
+
+.image-upload__wrapper .image-upload-preview {
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+}
+
+.image-upload__wrapper .filter {
+  border-radius: 100%;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
