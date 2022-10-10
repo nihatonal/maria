@@ -16,16 +16,16 @@ app.use(bodyParser.json());
 
 const cors = require("cors");
 
-// const corsOptions = {
-//   "Access-Control-Allow-Origin": "*",
-//   "Access-Control-Allow-Methods": "DELETE, GET, OPTIONS, PATCH, POST, PUT",
-//   "Access-Control-Allow-Headers":
-//     "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-//   origin: "*",
-//   credentials: true, 
-//   optionSuccessStatus: 200,
-// };
-// app.use(cors(corsOptions));
+const corsOptions = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "DELETE, GET, OPTIONS, PATCH, POST, PUT",
+  "Access-Control-Allow-Headers":
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 app.use("/uploads/images", express.static(path.join("uploads", "images")));
 
 app.use((req, res, next) => {
