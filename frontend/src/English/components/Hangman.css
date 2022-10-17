@@ -2,6 +2,9 @@
   width: 100%;
   color: var(--bg_primary);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-family: var(--font_family_primary);
 }
 .Hangman .content-wrapper {
@@ -29,6 +32,11 @@
   margin-bottom: 1rem;
   text-shadow: 1px 1px 2px var(--bg_primary), 0 0 1em var(--bg_secondary),
     0 0 0.2em var(--bg_secondary);
+}
+.Hangman_win span {
+  background-color: var(--color_green);
+  margin-left: 10px;
+  padding: 0 4px;
 }
 .Hangman_lose {
   margin-bottom: 1rem;
@@ -90,3 +98,38 @@
   background: var(--bg_disabled);
   color: var(--color_disabled);
 }
+.img-wrapper {
+  position: relative;
+  width: 200px;
+}
+.hint-bulb {
+  font-size: 3rem;
+  position: absolute;
+  right: 0;
+  bottom: 20px;
+  color: rgb(236, 236, 204);
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--box-shadow);
+  border-radius: 100%;
+}
+.hint-bulb:hover {
+  color: var(--bg_secondary);
+  box-shadow: 0 0 30px var(--bg_secondary);
+}
+.user-select {
+  font-size: 3rem;
+  position: absolute;
+  left: 0;
+  bottom: 20px;
+  color: rgb(236, 236, 204);
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--box-shadow);
+  border-radius: 100%;
+}
+/* .hint-wrapper p {
+  font-family: var(--font_family_primary);
+  color: var(--color_primary);
+  background-color: var(--bg_secondary);
+} */

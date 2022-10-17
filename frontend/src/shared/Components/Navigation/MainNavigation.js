@@ -31,14 +31,15 @@ const MainNavigation = () => {
 
   useEffect(() => {
     if (auth.isLoggedIn && auth.userId) {
+      setShowAuthModal(false);
       const fetchPlaces = async () => {
         try {
           const responseData = await sendRequest(
             process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
           );
+
           setLoadedUser(responseData.user.image);
           setUserName(responseData.user.name);
-          setShowAuthModal(false);
         } catch (err) {}
       };
 
@@ -77,8 +78,13 @@ const MainNavigation = () => {
     auth.logout();
   };
   function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+    return string
+      .toLowerCase()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
   }
+
   return (
     <React.Fragment>
       {drawerIsOpen && <Backdrop onClick={closeDrawerHandler} />}
@@ -130,10 +136,13 @@ const MainNavigation = () => {
           <div className={"header__logo"}>
             <Link
               className={"header__logo-name"}
-              to={auth.isLoggedIn ? `/rentacar` : "/"}
+              to={auth.isLoggedIn ? `/usermain` : "/"}
             >
               {auth.isLoggedIn ? (
-                <p>Hi! {capitalizeFirstLetter(userName)}</p>
+                <p onClick={()=> setDrawerIsOpen(false)}>
+                  <span style={{ color: "var(--bg_secondary)" }}>Hi!</span>{" "}
+                  {capitalizeFirstLetter(userName)}
+                </p>
               ) : (
                 <p>Ready to experience?</p>
               )}
@@ -152,7 +161,7 @@ const MainNavigation = () => {
               <button className="btn btn-sign_in" onClick={showAuthHandler}>
                 Войти
               </button>
-              <Link to="/signup" className="btn btn-sign_up">
+              <Link to="/signup" className="btn-sign_up">
                 Регистрация
               </Link>
               {/* <ButtonSignIn

@@ -8,6 +8,7 @@
   --color_lightblue: #00d3d3;
   --bg_disabled: #bdbdbd;
   --color_disabled: #eeeeee;
+  --color_dark_white:#efefef;
   --font_family_primary: "Roboto", sans-serif;
 
   --border-radius_15: 15px;
@@ -34,6 +35,7 @@ body {
   text-align: center;
 }
 
+
 h2 {
   font-family: var(--font_family_primary);
   font-weight: 500;
@@ -48,7 +50,7 @@ h2 {
   }
 }
 
-.page-title {
+/* .page-title {
   font-family: var(--font_family_primary);
   font-weight: 500;
   font-size: 24px;
@@ -56,4 +58,50 @@ h2 {
   text-align: center;
   color: var(--bg_primary);
   margin-bottom: 20px;
+} */
+
+.page-title {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  display: flex;
+  gap: 10px;
+  font-family: var(--font_family_primary);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 120%;
+}
+
+/* <!-- Using the custom property `--i` to calculate the animation duration. --> */
+.page-title li {
+  animation-name: gradient;
+  animation-duration: 10s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes gradient {
+  0% {
+    color: var(--color_pink);
+    text-shadow: 5px 5px 5px var(--color_pink);
+  }
+  20% {
+    color: var(--color_lightblue);
+    text-shadow: 5px 5px 5px var(--color_lightblue);
+  }
+  40% {
+    color: var(--color_green);
+    text-shadow: 5px 5px 5px var(--color_green);
+  }
+  60% {
+    color: var(--bg_secondary);
+    text-shadow: 5px 5px 5px var(--bg_secondary);
+  }
+  80% {
+    color: var(--color_danger);
+    text-shadow: 5px 5px 5px var(--color_danger);
+  }
+  100% {
+    color: var(--bg_primary);
+    text-shadow: 5px 5px 5px var(--bg_primary);
+  }
 }

@@ -49,34 +49,7 @@ const FriendPhoto = (path) => {
     uploadPhoto();
   }, [formState.inputs.image.value, sendRequest, SignUp.error]);
 
-  // const sendPhoto = async (e) => {
-  //   e.preventDefault();
-  //   if (formState.inputs.image.value === null) return;
 
-  //   const userId = SignUp.userId;
-  //   setLoading(true);
-  //   try {
-  //     await sendRequest(
-  //       process.env.REACT_APP_BACKEND_URL + `/users/userphoto/${userId}`,
-  //       "PATCH",
-  //       JSON.stringify({
-  //         image: imageFile,
-  //       }),
-  //       {
-  //         "Content-Type": "application/json",
-  //       }
-  //     );
-
-  //     navigate("/signup/success");
-  //   } catch (err) {
-  //     SignUp.error = true;
-  //     console.log(SignUp.error);
-  //     if (formState.inputs.image.value !== null) {
-  //       SignUp.error = true;
-  //       setLoading(false);
-  //     }
-  //   }
-  // };
 
   const deleteHandler = async (e) => {
     e.preventDefault();

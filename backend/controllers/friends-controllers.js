@@ -246,7 +246,7 @@ const deleteFriend = async (req, res, next) => {
   fs.unlink(imagesPath, err => {
     console.log(err);
   });
-  res.status(200).json({ message: "Deleted car." });
+  res.status(200).json({ message: "Deleted friend." });
 };
 
 exports.getFriends = getFriends;

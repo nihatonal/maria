@@ -9,7 +9,7 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 
 import { GiReturnArrow } from "react-icons/gi";
 import Pagination from "../../shared/Components/UIElements/Pagination";
-
+import AddWord from "./AddWord";
 import "./MyWords.css";
 import "./FlashCards.css";
 
@@ -32,7 +32,7 @@ const MyWords = (props) => {
           },
         })
         .then((res) => {
-          setLoadedCars(res.data.cars);
+          setLoadedCars(res.data.cars.reverse());
           setLoading(false);
         })
         .catch((error) => {
@@ -40,7 +40,7 @@ const MyWords = (props) => {
         });
     };
     fetchWords();
-  }, [userId]);
+  }, [userId, loadedCars]);
 
   const confirmDeleteHandler = async (e) => {
     try {
@@ -64,10 +64,21 @@ const MyWords = (props) => {
             <GiReturnArrow />
           </NavLink>
 
-          <h2 className={"page-title"}>Мои слова</h2>
+          {/* <h2 className={"page-title"}>Мои слова</h2> */}
+          <ul className="page-title">
+            <li>М</li>
+            <li>о</li>
+            <li>и</li>
+            <li> </li>
+            <li>с</li>
+            <li>л</li>
+            <li>о</li>
+            <li>в</li>
+            <li>а</li>
+          </ul>
         </div>
 
-        {loading && (
+        {loading && !loadedCars && (
           <div className="loading-wrapper">
             <i className="fa fa-circle-o-notch fa-spin"></i>
           </div>
@@ -81,11 +92,10 @@ const MyWords = (props) => {
             />
           )}
         </div>
-        <div className="btn-add_word">
-          <NavLink to={`/${auth.userId}/addword`}>
-            Добавить Cловo
-          </NavLink>
-        </div>
+        {/* <div className="btn-add_word">
+          <NavLink to={`/${auth.userId}/addword`}>Добавить Cловo</NavLink>
+        </div> */}
+        {loadedCars && <AddWord />}
       </div>
     </React.Fragment>
   );

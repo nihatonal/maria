@@ -25,21 +25,26 @@ const Quiz = () => {
   const [start, setStart] = useState(false);
   const [arrLength, setArrLength] = useState(20);
   const [change, setChange] = useState(false);
+  const userId = auth.userId;
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(process.env.REACT_APP_BACKEND_URL + `/cars/user/${auth.userId}`, {
-        headers: {
-          Authorization: "Bearer " + auth.token,
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        setQuestionDB(res.data.cars);
-        setFilteredDB(res.data.cars);
-        setLoading(false);
-      });
+    const fetchWords = async () => {
+      return auth.userId && axios
+        .get(process.env.REACT_APP_BACKEND_URL + `/cars/user/${userId}`, {
+          headers: {
+            Authorization: "Bearer " + auth.token,
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          setQuestionDB(res.data.cars);
+          setFilteredDB(res.data.cars);
+          setLoading(false);
+        })
+        .catch((err) => {});
+    };
+    fetchWords();
   }, [auth.token]);
 
   // Create selections answers.
@@ -100,7 +105,7 @@ const Quiz = () => {
 
   const nextHandler = () => {
     setAnswer("");
-    console.log(question);
+
     setChange(!change);
     setArrLength(options.length);
 
@@ -212,10 +217,16 @@ const Quiz = () => {
             </div>
             <div className="answer-section">
               {question[currentQuestion].answerOptions
-                .sort((a, b) => a.answerText.localeCompare(b.answerText))
-                .map((answerOption) => (
+                .sort((a, b) => {
+                  var sorted = true;
+                  if (sorted && a.answerText != null)
+                    return a.answerText.localeCompare(b.answerText);
+                  else if (b.answerText != null)
+                    return b.answerText.localeCompare(a.answerText);
+                })
+                .map((answerOption, index) => (
                   <button
-                    key={answerOption.answerText}
+                    key={index}
                     style={
                       answerOption.isCorrect === true ? { order: 0 } : null
                     }

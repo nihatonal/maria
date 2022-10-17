@@ -64,7 +64,8 @@
 }
 
 .btn {
-  padding: 12px 30px;
+  width: 100%;
+  /* padding: 12px 30px; */
   height: 43px;
   border: 1px solid rgba(27, 27, 27, 0.4);
   background-color: transparent;
@@ -79,17 +80,20 @@
   outline: none;
   text-decoration: none;
   color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .btn-sign_in {
   margin-right: 20px;
 }
 .btn-sign_in:hover {
-  background-color: #f38a00;
-  color: #fff;
-  border-color: #f38a00;
+  background-color: var(--bg_secondary);
+  color: var(--bg_primary);
+  border: none;
 }
 .btn-sign_up:hover {
-  background-color: #27a795;
-  color: #fff;
-  border-color: #27a795;
+  background-color: var(--bg_primary);
+  color: var(--bg_secondary);
+  border: none;
 }

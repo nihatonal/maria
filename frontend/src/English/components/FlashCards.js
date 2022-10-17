@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../shared/context/auth-context";
-import { ShareContext } from "../../shared/context/share-contex";
-import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
@@ -12,8 +11,7 @@ import "./FlashCards.css";
 
 const FlashCards = (props) => {
   const auth = useContext(AuthContext);
-  const shared = useContext(ShareContext);
-  const navigate = useNavigate();
+
   const [loadedCars, setLoadedCars] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -95,39 +93,49 @@ const FlashCards = (props) => {
             <GiReturnArrow />
           </NavLink>
 
-          <h2 className={"page-title"}>Мои Карточки</h2>
+          {/* <h2 className={"page-title"}>Мои Карточки</h2> */}
+          <ul className="page-title">
+            <li>К</li>
+            <li>а</li>
+            <li>р</li>
+            <li>т</li>
+            <li>о</li>
+            <li>ч</li>
+            <li>к</li>
+            <li>и</li>
+          </ul>
         </div>
-
-        {loading && (
+        {loading ? (
           <div className="loading-wrapper">
             <i className="fa fa-circle-o-notch fa-spin"></i>
           </div>
+        ) : (
+          <div className={"flashcard-container"} onClick={flashcardHandler}>
+            <div
+              className={
+                !sideBack
+                  ? `flashcard flashcard-back`
+                  : `flashcard flashcard-back`
+              }
+            >
+              <p className="flashcard-text">
+                {loadedCars && loadedCars[selectedCard].en}
+              </p>
+            </div>
+            <div
+              className={
+                !sideFront
+                  ? `flashcard flashcard-front flash-to-back`
+                  : `flashcard flashcard-front flash-to-front`
+              }
+            >
+              <p className="flashcard-text">
+                {loadedCars && loadedCars[selectedCard].ru}
+              </p>
+            </div>
+          </div>
         )}
 
-        <div className={"flashcard-container"} onClick={flashcardHandler}>
-          <div
-            className={
-              !sideBack
-                ? `flashcard flashcard-back`
-                : `flashcard flashcard-back`
-            }
-          >
-            <p className="flashcard-text">
-              {loadedCars && loadedCars[selectedCard].en}
-            </p>
-          </div>
-          <div
-            className={
-              !sideFront
-                ? `flashcard flashcard-front flash-to-back`
-                : `flashcard flashcard-front flash-to-front`
-            }
-          >
-            <p className="flashcard-text">
-              {loadedCars && loadedCars[selectedCard].ru}
-            </p>
-          </div>
-        </div>
         <div className="flashcards-btn-container">
           <button className="flascards-btn" onClick={previousHandler}>
             <GiPaperArrow className="flascards-btn-left" />

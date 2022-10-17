@@ -12,6 +12,7 @@ import img4 from "../../assets/images/hangman/4.jpg";
 import img5 from "../../assets/images/hangman/5.jpg";
 import img6 from "../../assets/images/hangman/6.jpg";
 import { GiReturnArrow } from "react-icons/gi";
+import { HiOutlineLightBulb } from "react-icons/hi";
 import "./Hangman.css";
 
 const Hangman = () => {
@@ -23,7 +24,9 @@ const Hangman = () => {
   const [wordsDB, setWordsDB] = useState([]);
   const [loading, setLoading] = useState(false);
   const [reset, setReset] = useState(false);
-
+  const [count, setCount] = useState(0);
+  const [numbers, setNumbers] = useState([]);
+  const [change, setChange] = useState(false);
   const maxWrong = 6;
   const images = [img0, img1, img2, img3, img4, img5, img6];
 
@@ -50,17 +53,34 @@ const Hangman = () => {
 
   useEffect(() => {
     const words = [
-      ...new Set([].concat(wordsDB.map((item) => item.en)).flat()),
+      ...new Set(
+        [].concat(wordsDB.map((item) => item.en.toLowerCase())).flat()
+      ),
     ];
     setAnswer(
       wordsDB.length > 0 && words[Math.floor(Math.random() * words.length)]
     );
   }, [wordsDB, reset]);
 
+  useEffect(() => {
+    const arr = [];
+    if (answer) {
+      const hint = answer.split("");
+      while (arr.length < hint.length) {
+        let r = Math.floor(Math.random() * hint.length);
+        if (arr.indexOf(r) === -1) arr.push(r);
+      }
+      setNumbers(arr);
+    }
+  }, [answer]);
+
   const resetGame = () => {
     setnWrong(0);
     setGuessed(new Set());
     setReset(!reset);
+    setCount(0);
+    setChange(!change);
+    setNumbers([]);
   };
 
   const guessedWord = () => {
@@ -87,6 +107,21 @@ const Hangman = () => {
       </button>
     ));
   };
+  const hintHandler = (e) => {
+    e.preventDefault();
+
+    const hint = answer.split("");
+
+    if (count === hint.length) {
+      return;
+    } else {
+      setCount(count + 1);
+    }
+    setGuessed(
+      (previousState) => new Set([...previousState, hint[numbers[count]]])
+    );
+  };
+
   let alternateText = `${nWrong} wrong guesses`;
   return (
     <div className="Hangman">
@@ -95,7 +130,11 @@ const Hangman = () => {
           <GiReturnArrow />
         </NavLink>
       </div>
-      <img src={images[nWrong]} alt={alternateText} />
+      <div className="img-wrapper">
+        <img src={images[nWrong]} alt={alternateText} />
+        <HiOutlineLightBulb onClick={hintHandler} className="hint-bulb" />
+      </div>
+
       <p className="Hangman_wrong">Number Wrong: {nWrong}</p>
 
       {loading ? (
@@ -103,7 +142,9 @@ const Hangman = () => {
           <i className="fa fa-circle-o-notch fa-spin"></i>
         </div>
       ) : answer && answer === guessedWord().join("") ? (
-        <p className="Hangman_win">You WIN!</p>
+        <p className="Hangman_win">
+          You WIN!<span> The word is {answer}</span>
+        </p>
       ) : nWrong === maxWrong ? (
         <div className="Hangman_lose">
           <p>YOU LOSE </p>
@@ -112,7 +153,7 @@ const Hangman = () => {
           </p>
         </div>
       ) : (
-        <div>
+        <div className="Hangman_content">
           <p className="Hangman-word">{guessedWord()}</p>
           <p className="Hangman-btns">{generateButtons()}</p>
         </div>

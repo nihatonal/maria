@@ -13,10 +13,11 @@ import SignUpPage from "./SignUpPage/pages/SignUpPage";
 import SignUpPhoto from "./SignUpPage/pages/SignUpPhoto";
 // import UserDocs from "./SignUpPage/pages/UserDocs";
 import SignUpSuccess from "./SignUpPage/pages/SignUpSuccess";
+import Reset from "./users/components/Reset";
 
 // import FiveHundredTwo from "./shared/Components/NotFound/FiveHundredTwo";
 import FourHunderFour from "./shared/Components/NotFound/FourHunderFour";
-import English from './English/page/English';
+import English from "./English/page/English";
 //import RentACar from "./Cars/pages/RentACar";
 //import RentUserCar from "./Cars/pages/RentUserCar";
 // import UserCars from "./Cars/pages/UserCars";
@@ -31,6 +32,7 @@ import { useAuth } from "./shared/hooks/auth-hook";
 import "./App.css";
 
 const RentACar = React.lazy(() => import("./Cars/pages/RentACar"));
+const UserMain = React.lazy(() => import("./users/page/UserMain.js"));
 // const RentUserCar = React.lazy(() => import("./Cars/pages/RentUserCar"));
 const FlashCards = React.lazy(() => import("./English/components/FlashCards"));
 const MyWords = React.lazy(() => import("./English/components/MyWords"));
@@ -44,7 +46,7 @@ const AddCarSuccess = React.lazy(() =>
 );
 const UserCar = React.lazy(() => import("./Cars/pages/UserCar"));
 // const UpdateCar = React.lazy(() => import("./Cars/pages/UpdateCar"));
-
+const UserPlace = React.lazy(() => import("./Places/page/UserPlace.js"))
 function App() {
   const { token, login, logout, userId } = useAuth();
 
@@ -62,19 +64,18 @@ function App() {
   if (token) {
     routes = (
       <React.Fragment>
-        <Route exact path="/rentacar" element={<RentACar />} />
+        <Route exact path="/usermain" element={<UserMain />} />
         <Route exact path="/english" element={<English />} />
-        {/* <Route exact path="/rentacar/:cid" element={<RentUserCar />} /> */}
+       
         <Route exact path="/:userId/cards" element={<FlashCards />} />
         <Route exact path="/:userId/friends" element={<UserFriends />} />
         <Route exact path="/:userId/mywords" element={<MyWords />} />
         <Route exact path="/:userId/hangman" element={<Hangman />} />
         <Route exact path="/:userId/:cid" element={<UserCar />} />
-        {/* <Route exact path="/:userId/addcard" element={<AddCard />} /> */}
-        <Route exact path="/:userId/addword" element={<AddWord />} />
-        {/* <Route exact path="/cars/:cid" element={<UpdateCar />} /> */}
+        <Route exact path="/:userId/addword" element={<AddWord />} />  
         <Route exact path="/:userId/success" element={<AddCarSuccess />} />
         <Route exact path="/:userId/addfriend" element={<AddFriend />} />
+        <Route exact path="/:userId/userplace" element={<UserPlace />} />
         <Route exact path="*" element={<FourHunderFour />} />
       </React.Fragment>
     );
@@ -87,6 +88,7 @@ function App() {
         <Route exact path="/faq" element={<PageFaq />} />
         <Route exact path="/signup" element={<SignUpPage />} />
         <Route exact path="/userphoto" element={<SignUpPhoto />} />
+        <Route exact path="/reset/:token" element={<Reset />} />
         {/* <Route exact path="/userdocs" element={<UserDocs />} /> */}
         <Route exact path="/signup/success" element={<SignUpSuccess />} />
         <Route path="*" element={<FourHunderFour />} />
@@ -117,7 +119,7 @@ function App() {
             <Routes>{routes}</Routes>
           </Suspense>
         </Wrapper>
-        <MainFooter />
+        {/* <MainFooter /> */}
       </BrowserRouter>
     </AuthContext.Provider>
   );

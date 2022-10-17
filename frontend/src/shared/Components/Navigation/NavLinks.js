@@ -86,6 +86,16 @@ const NavLinks = (props) => {
           className={({ isActive }) =>
             isActive ? "header__nav-item is-active" : "header__nav-item"
           }
+          to={`/${auth.userId}/userplace`}
+        >
+          Мои места
+        </NavLink>
+      )}
+      {auth.isLoggedIn && (
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "header__nav-item is-active" : "header__nav-item"
+          }
           to="/english"
         >
           Английский

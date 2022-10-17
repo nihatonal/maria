@@ -1,0 +1,25 @@
+.btn-add-place-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0 40px;
+}
+.btn-add-place {
+  background-color: var(--bg_primary);
+  color: var(--bg_secondary);
+  padding: 10px 0;
+  width: 65%;
+  border-radius: 15px;
+  font-family: var(--font_family_primary);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  transition: all 0.2s;
+  border: none;
+}
+.btn-add-place:hover {
+  background-color: var(--bg_secondary);
+  color: var(--bg_primary);
+}

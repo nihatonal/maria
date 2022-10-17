@@ -1,0 +1,156 @@
+.placelist_container {
+  width: 100%;
+  padding-bottom: 50px;
+}
+.placelist_wrapper {
+  display: grid;
+  grid-template-columns: auto;
+  justify-items: center;
+  row-gap: 40px;
+}
+.placelist_wrapper .fa-spin {
+  color: var(--bg_primary);
+}
+.place_item-wrapper {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+}
+.place_image_wrapper {
+  width: 100%;
+}
+.place_image_wrapper .place_image {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.place_info {
+  font-family: var(--font_family_primary);
+  width: 100%;
+  font-weight: normal;
+  position: absolute;
+  font-size: 12px;
+  color: var(--color_dark_white);
+  left: 20px;
+}
+.head-content {
+  display: flex;
+  align-items: center;
+  top: 10px;
+}
+.place_info p,
+.place_info h3 {
+  text-shadow: 2px 2px 10px var(--bg_primary);
+}
+.head-content-desc {
+  margin-left: 10px;
+}
+.place_owner_image-wrapper {
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--bg_primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+.place_owner_image-wrapper:hover {
+  border: 2px solid var(--bg_secondary);
+}
+
+.place_owner_image {
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.footer-content {
+  bottom: 10px;
+}
+.footer-content h3 {
+  font-weight: normal;
+  font-size: 14px;
+}
+.footer-content p {
+  font-weight: normal;
+  font-size: 12px;
+}
+.place_item-delete-btn {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 28px;
+  height: 28px;
+  font-size: 0.8rem;
+  border-radius: 100%;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--color_disabled);
+  background-color: var(--bg_primary);
+  transition: all 0.2s;
+  opacity: 0.3;
+}
+.place_item-delete-btn:hover {
+  background-color: var(--color_danger);
+  opacity: 1;
+}
+.place_item-delete-btn svg {
+  pointer-events: none;
+}
+
+/*Delete Modal*/
+.place_delete-wrapper {
+  width: 85%;
+  margin: 0 auto;
+  margin-top: 30px;
+  box-shadow: var(--box-shadow);
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+.place_delete-wrapper h3 {
+  font-family: var(--font_family_primary);
+  color: var(--bg_primary);
+  margin-bottom: 1rem;
+}
+.place_delete-btns {
+  width: 75%;
+  display: flex;
+  justify-content: space-around;
+}
+.place_delete-wrapper button {
+  width: 35%;
+  padding: 10px 0;
+  border: none;
+  color: var(--bg_primary);
+  font-family: var(--font_family_primary);
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+.place_delete-wrapper button:first-child {
+  background-color: var(--color_green);
+}
+.place_delete-wrapper button:first-child:hover {
+  box-shadow: 0 0 20px var(--color_green);
+}
+.place_delete-wrapper button:last-child {
+  background-color: var(--color_danger);
+}
+.place_delete-wrapper button:last-child:hover {
+  box-shadow: 0 0 20px var(--color_danger);
+}

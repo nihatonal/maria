@@ -1,0 +1,71 @@
+.reset_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.success-wrapper {
+  width: 80%;
+  height: 100px;
+  background-color: var(--bg_primary);
+  border-radius: 15px;
+  color: var(--bg_secondary);
+  font-family: var(--font_family_primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--box-shadow);
+  margin-top: 25px;
+}
+.reset_wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reset_wrapper .password_wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reset_wrapper .eye {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  cursor: pointer;
+}
+.reset_wrapper .eye_confirm {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 12px;
+}
+.btn-home {
+  color: rgb(35, 216, 171);
+  font-size: 32px;
+  transition: all ease-in-out 0.2s;
+  cursor: pointer;
+  border-radius: 100%;
+  margin-top: 10px;
+}
+
+.btn-home:hover {
+  color: rgb(141, 253, 225);
+  box-shadow: 0 0 10px rgb(141, 253, 225);
+}
+
+@media screen and (max-width: 767px) {
+  .reset_wrapper .eye,
+  .reset_wrapper .eye_confirm {
+    top: 38px;
+    right: 25px;
+  }
+}

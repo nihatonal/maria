@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../shared/context/auth-context";
 
-import Hangman from "../components/Hangman";
 import Quiz from "../components/Quiz";
 import "./English.css";
 const English = () => {
@@ -14,10 +13,10 @@ const English = () => {
           className={"english-navbar-item"}
           to={`/${auth.userId}/mywords`}
         >
-          Мои слова
+          Мой словарь
         </NavLink>
         <NavLink className={"english-navbar-item"} to={`/${auth.userId}/cards`}>
-          Мои Карточки
+          Карточки
         </NavLink>
         <NavLink
           className={"english-navbar-item"}

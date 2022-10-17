@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Input from "../../shared/Components/FormElements/Input";
@@ -39,7 +39,7 @@ const SignInModal = (props) => {
     e.preventDefault();
     try {
       const responseData = await sendRequest(
-        process.env.REACT_APP_BACKEND_URL +"/users/login",
+        process.env.REACT_APP_BACKEND_URL + "/users/login",
         "POST",
         JSON.stringify({
           email: formState.inputs.email.value,
@@ -49,14 +49,9 @@ const SignInModal = (props) => {
           "Content-Type": "application/json",
         }
       );
-      //console.log('logged in', responseData )
       auth.login(responseData.userId, responseData.token);
       //setClose(true);
-      localStorage.removeItem('carData');
-      localStorage.removeItem('carOptions');
-      localStorage.removeItem('initialImages');
-      localStorage.removeItem('selectedCar');
-      navigate("/rentacar");
+      navigate("/usermain");
     } catch (err) {}
   };
 
@@ -67,11 +62,6 @@ const SignInModal = (props) => {
       title="Авторизация"
       errorSignIn={error ? "Не верная почта или пароль" : ""}
       image={auth_image}
-      // signupbtn={
-      //   <Link className="tosignup" to="/signup">
-      //     Зарегистрироваться
-      //   </Link>
-      // }
       footeronClick={props.footer}
     >
       <Input
@@ -110,24 +100,25 @@ const SignInModal = (props) => {
           onInput={inputHandler}
           labelclassName="labelclass"
         />
-        <Button onClick={props.forgetpassword} className="forget_password">
-          Забыли?
-        </Button>
       </div>
-      <Button
-        className="header__btn-auth"
-        type="submit"
-        onClick={authSubmitHandler}
-        inverse
-        disabled={!formState.inputs.password.isValid}
-      >
-        {!isLoading ? (
-          " Войти"
-        ) : (
-          <i className="fa fa-circle-o-notch fa-spin"></i>
-        )}
-       
-      </Button>
+      <div className='sign-in-btns-wrapper'>
+        <Button
+          className="header__btn-auth"
+          type="submit"
+          onClick={authSubmitHandler}
+          inverse
+          disabled={!formState.inputs.password.isValid}
+        >
+          {!isLoading ? (
+            " Войти"
+          ) : (
+            <i className="fa fa-circle-o-notch fa-spin"></i>
+          )}
+        </Button>
+        <button onClick={props.forgetpassword} className="forget_password">
+          Забыли?
+        </button>
+      </div>
     </Modal>
   );
 };

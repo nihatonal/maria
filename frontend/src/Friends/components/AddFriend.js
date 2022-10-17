@@ -1,4 +1,4 @@
-import React, {  useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import Input from "../../shared/Components/FormElements/Input";
 import Button from "../../shared/Components/FormElements/Button";
 import SendError from "../../SignUpPage/components/SendError";
@@ -43,7 +43,7 @@ const AddFriend = () => {
 
   const signupFormHandler = async (e) => {
     e.preventDefault();
-    // console.log(formState.inputs);
+    console.log(formState.inputs);
     setFormData(
       {
         name: {
@@ -79,7 +79,7 @@ const AddFriend = () => {
       );
       navigate(`/${auth.userId}/friends`);
     } catch (err) {
-      SetError(true)
+      SetError(true);
     }
   };
 
@@ -93,7 +93,7 @@ const AddFriend = () => {
           className="form__container-addcar addfriend"
           onSubmit={signupFormHandler}
         >
-          <div className="form-content info-car">
+          <div className="form-content">
             <FriendPhoto />
             <Input
               id="name"
@@ -104,7 +104,6 @@ const AddFriend = () => {
               onInput={inputHandler}
               placeholder="Имя"
               placeholderclassName="input-hidden"
-              className="input-short br-grey"
               classNameWrapper="inputWrapper"
             />
 
@@ -117,25 +116,23 @@ const AddFriend = () => {
               onInput={inputHandler}
               placeholder="Фамиля"
               placeholderclassName="input-hidden"
-              className="input-short br-grey"
               classNameWrapper="inputWrapper"
             />
             <Input
               id="birthdate"
               element="input"
-              type="text"
+              type="date"
               label="День рождения"
               validators={[VALIDATOR_REQUIRE()]}
               onInput={inputHandler}
               placeholder="День рождения"
               placeholderclassName="input-hidden"
-              className="input-short br-grey"
               classNameWrapper="inputWrapper"
             />
           </div>
 
           <div className={"button_container"}>
-            <Button type="submit" inverse disabled={!formState.isValid}>
+            <Button type="submit" disabled={!formState.isValid}>
               {!isLoading ? (
                 "Добавить"
               ) : (

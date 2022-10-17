@@ -15,10 +15,9 @@ export default function Pagination({ itemsPerPage, data, deleteHandler }) {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-  
     setCurrentItems(data.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(data.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage]);
+  }, [itemOffset, itemsPerPage, data]);
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
@@ -57,7 +56,7 @@ export default function Pagination({ itemsPerPage, data, deleteHandler }) {
         previousLabel="<"
         breakLabel="..."
         onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
+        pageRangeDisplayed={3}
         pageCount={pageCount}
         renderOnZeroPageCount={null}
         activeClassName="active_page"

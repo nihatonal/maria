@@ -5,15 +5,14 @@ import SendError from "../../SignUpPage/components/SendError";
 import { VALIDATOR_REQUIRE } from "../../shared/util/validators";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "../../shared/hooks/SignUpFrom-hook";
 
 import "./AddWord.css";
 
-const AddWord = () => {
+const AddWord = (props) => {
   const auth = useContext(AuthContext);
   const { isLoading, sendRequest } = useHttpClient();
-  const navigate = useNavigate();
+
   const [error, SetError] = useState(false);
 
   const [formState, inputHandler, setFormData] = useForm(
@@ -33,7 +32,6 @@ const AddWord = () => {
   const signupFormHandler = async (e) => {
     e.preventDefault();
 
-    // setIsLoading(true);
     setFormData(
       {
         ru: {
@@ -61,7 +59,6 @@ const AddWord = () => {
           Authorization: "Bearer " + auth.token,
         }
       );
-      navigate(`/${auth.userId}/mywords`);
     } catch (err) {
       SetError(true);
     }
@@ -79,7 +76,6 @@ const AddWord = () => {
               id="ru"
               element="input"
               type="text"
-              label="Русский"
               onInput={inputHandler}
               validators={[VALIDATOR_REQUIRE()]}
               placeholder="Русский"
@@ -89,7 +85,6 @@ const AddWord = () => {
               id="en"
               element="input"
               type="text"
-              label="Английский"
               validators={[VALIDATOR_REQUIRE()]}
               onInput={inputHandler}
               placeholder="Английский"

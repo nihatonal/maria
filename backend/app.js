@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 
 const carsRoutes = require("./routes/cars-routes");
 const friendsRoutes = require("./routes/friends-routes");
+const placesRoutes = require("./routes/places-routes")
 const usersRoutes = require("./routes/users-routes");
 const HttpError = require("./models/http-error");
 
@@ -41,6 +42,7 @@ app.use((req, res, next) => {
 
 app.use("/api/cars", carsRoutes);
 app.use("/api/friends", friendsRoutes);
+app.use("/api/places", placesRoutes);
 app.use("/api/users", usersRoutes);
 
 app.use((req, res, next) => {

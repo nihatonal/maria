@@ -56,18 +56,19 @@ const getCarById = async (req, res, next) => {
 const getCarsByUserId = async (req, res, next) => {
   const userId = req.params.uid;
 
-  // let cars;
-  // try {
-  //   cars = await Car.find({ creator: userId });
-  // } catch (err) {
-  //   const error = new HttpError(
-  //     "Fetching cars failed, please try again later.",
-  //     500
-  //   );
-  //   return next(error);
-  // }
+  let cars;
+  try {
+    cars = await Car.find({ creator: userId });
+  } catch (err) {
+    const error = new HttpError(
+      "Fetching cars failed, please try again later.",
+      500
+    );
+    return next(error);
+  }
 
   let userWithCars;
+  
   try {
     userWithCars = await User.findById(userId).populate("cars");
   } catch (err) {
@@ -127,8 +128,6 @@ const createCar = async (req, res, next) => {
     const error = new HttpError(`Could not find user for provided id.`, 404);
     return next(error);
   }
-
-  console.log(user);
 
   try {
     const sess = await mongoose.startSession();

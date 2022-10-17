@@ -9,7 +9,7 @@ const Logo = (props) => {
 
     return (
         <div className = {`logo-wrapper ${props.className}`}>
-            <Link className = {"logo-name"}  to={auth.isLoggedIn ? `/rentacar` : "/"}><p >SkillDrive</p></Link>
+            <Link className = {"logo-name"}  to={auth.isLoggedIn ? `/usermain` : "/"}><p >SkillDrive</p></Link>
             <div className = {"logo-line first-line"}></div>
             <div className = {"logo-line second-line"}></div>
         </div>
