@@ -67,6 +67,8 @@ const AddPlace = (props) => {
           description: formState.inputs.description.value,
           address: formState.inputs.address.value,
           image: share.friendImage,
+          likes: [],
+          dislikes: [],
           owner: auth.userId,
         }),
         {

@@ -21,9 +21,10 @@ const getPlaces = async (req, res, next) => {
     return next(error);
   }
 
-  res.json({ places: places.map((place) => place.toObject({ getters: true })) });
+  res.json({
+    places: places.map((place) => place.toObject({ getters: true })),
+  });
 };
-
 
 const getPlaceById = async (req, res, next) => {
   const placeId = req.params.pid;
@@ -80,12 +81,15 @@ const getPlacesByUserId = async (req, res, next) => {
 };
 
 const createPlace = async (req, res, next) => {
-  const { title, description, address, image, owner } = req.body;
+  const { title, description, address, image, likes, dislikes, owner } =
+    req.body;
   const createdPlace = new Place({
     title,
     description,
     address,
     image,
+    likes,
+    dislikes,
     owner,
   });
 
@@ -131,9 +135,8 @@ const updatePlace = async (req, res, next) => {
     );
   }
 
-  const { title, description } = req.body;
+  const { likes, dislikes } = req.body;
   const placeId = req.params.pid;
-
   let place;
   try {
     place = await Place.findById(placeId);
@@ -145,13 +148,13 @@ const updatePlace = async (req, res, next) => {
     return next(error);
   }
 
-  if (place.creator.toString() !== req.userData.userId) {
-    const error = new HttpError("You are not allowed to edit this place.", 401);
-    return next(error);
-  }
+  // if (place.creator.toString() !== req.userData.userId) {
+  //   const error = new HttpError("You are not allowed to edit this place.", 401);
+  //   return next(error);
+  // }
 
-  place.title = title;
-  place.description = description;
+  place.likes = likes;
+  place.dislikes = dislikes;
 
   try {
     await place.save();
@@ -163,7 +166,7 @@ const updatePlace = async (req, res, next) => {
     return next(error);
   }
 
-  res.status(200).json({ place: place.toObject({ getters: true }) });
+  res.status(200).json({ place: place});
 };
 
 const deletePlace = async (req, res, next) => {

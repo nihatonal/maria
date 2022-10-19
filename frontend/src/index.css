@@ -8,11 +8,13 @@
   --color_lightblue: #00d3d3;
   --bg_disabled: #bdbdbd;
   --color_disabled: #eeeeee;
-  --color_dark_white:#efefef;
+  --color_dark_white: #efefef;
   --font_family_primary: "Roboto", sans-serif;
 
   --border-radius_15: 15px;
   --box-shadow: 5px 5px 20px var(--bg_primary);
+
+  --text-shadow: 2px 2px 10px var(--bg_primary);
 }
 
 /* generic*/
@@ -34,7 +36,6 @@ body {
   width: 100%;
   text-align: center;
 }
-
 
 h2 {
   font-family: var(--font_family_primary);

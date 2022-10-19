@@ -14,7 +14,7 @@ const userSchema = new Schema({
     docs:[{type: String, required: true}],
     cars: [{type: mongoose.Types.ObjectId, required: true, ref:'Car'}],
     places: [{type: mongoose.Types.ObjectId, required: true, ref:'Place'}],  // cars and users relation
-    friends: [{type: mongoose.Types.ObjectId, required: true, ref:'Friend'}]  // cars and users relation
+    friends: [{type: mongoose.Types.ObjectId, required: true, ref:'Friend'}],  // cars and users relation
 });
 
 userSchema.plugin(uniqueValidator);

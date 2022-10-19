@@ -18,7 +18,6 @@ const UserPlace = () => {
   const [places, setPlaces] = useState([]);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [idOfDeleteItem, setIdOfDeleteItem] = useState();
-  //const userId = auth.userId;
   const userId = useParams().userId;
 
   useEffect(() => {
@@ -34,6 +33,7 @@ const UserPlace = () => {
         .then((res) => {
           if (res) {
             setPlaces(res.data.places);
+           // console.log(res.data.places)
             setLoading(false);
           } else {
             setPlaces([]);
@@ -76,11 +76,15 @@ const UserPlace = () => {
           }}
         />
       </ModalPlace>
+
       <div className="btn-add-place-wrapper">
-        <button className="btn-add-place" onClick={() => setShow(true)}>
-          Add Place
-        </button>
+        {userId === auth.userId && (
+          <button className="btn-add-place" onClick={() => setShow(true)}>
+            Add Place
+          </button>
+        )}
       </div>
+
       <PlaceList
         loading={loading}
         update={show}

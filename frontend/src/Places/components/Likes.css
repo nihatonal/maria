@@ -1,0 +1,36 @@
+/* Likes*/
+.place_item-likes {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+}
+.place_item-likes button {
+  display: flex;
+  align-items: center;
+  font-family: var(--font_family_primary);
+  font-size: 12px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: var(--color_dark_white);
+  text-shadow: var(--text-shadow);
+}
+.place_item-likes svg {
+  margin-right: 2px;
+}
+.place_item-likes button:first-child {
+  margin-right: 5px;
+}
+.place_item-likes button:first-child:hover > svg {
+  color: var(--color_green);
+}
+.place_item-likes button:last-child:hover > svg {
+  color: var(--color_danger);
+}
+.activeLike {
+  color: var(--color_green);
+}
+.activeDislike {
+  color: var(--color_danger);
+}

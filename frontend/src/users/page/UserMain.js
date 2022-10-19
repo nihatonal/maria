@@ -31,7 +31,7 @@ const UserMain = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+       // console.log(res.data);
         setPlaces(res.data.places);
         setLoading(false);
       });
@@ -43,12 +43,11 @@ const UserMain = () => {
         const responseData = await sendRequest(
           process.env.REACT_APP_BACKEND_URL + "/users/"
         );
-        console.log(responseData.users);
         setLoadedUsers(responseData.users);
       } catch (err) {}
     };
     fetchCars();
-  }, [sendRequest]);
+  }, [auth.token]);
 
   const confirmDeleteHandler = async () => {
     setLoading(true);
