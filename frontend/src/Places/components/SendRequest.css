@@ -1,0 +1,15 @@
+.request-add {
+  color: var(--color_green);
+  opacity: 0.6;
+  margin-right: 5px;
+}
+.request-remove {
+  color: var(--color_danger);
+  opacity: 0.8;
+}
+.btn-request-status {
+  font-size: 20px;
+}
+.btn-request-status:hover {
+  opacity: 1;
+}

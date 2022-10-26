@@ -3,7 +3,10 @@ import Input from "../../shared/Components/FormElements/Input";
 import Button from "../../shared/Components/FormElements/Button";
 import SendError from "../../SignUpPage/components/SendError";
 import { useHttpClient } from "../../shared/hooks/http-hook";
-import { VALIDATOR_REQUIRE } from "../../shared/util/validators";
+import {
+  VALIDATOR_REQUIRE,
+  VALIDATOR_MAXLENGTH,
+} from "../../shared/util/validators";
 import { AuthContext } from "../../shared/context/auth-context";
 import { ShareContext } from "../../shared/context/share-contex";
 import { useNavigate } from "react-router-dom";
@@ -76,7 +79,6 @@ const AddPlace = (props) => {
           Authorization: "Bearer " + auth.token,
         }
       );
-      //   navigate(`/${auth.userId}/userplaces`);
     } catch (err) {
       share.error = true;
       SetError(true);
@@ -100,7 +102,7 @@ const AddPlace = (props) => {
               element="input"
               type="text"
               label="Название"
-              validators={[VALIDATOR_REQUIRE()]}
+              validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(50)]}
               onInput={inputHandler}
               placeholder="Название"
               placeholderclassName="input-hidden"
@@ -112,7 +114,7 @@ const AddPlace = (props) => {
               element="input"
               type="text"
               label="Описание"
-              validators={[VALIDATOR_REQUIRE()]}
+              validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(150)]}
               onInput={inputHandler}
               placeholder="Описание"
               placeholderclassName="input-hidden"
@@ -123,7 +125,7 @@ const AddPlace = (props) => {
               element="input"
               type="text"
               label="Адрес"
-              validators={[VALIDATOR_REQUIRE()]}
+              validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(30)]}
               onInput={inputHandler}
               placeholder="Адрес"
               placeholderclassName="input-hidden"

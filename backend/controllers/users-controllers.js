@@ -117,9 +117,12 @@ const signup = async (req, res, next) => {
     image: " ",
     resetPasswordToken: "",
     resetPasswordExpires: "",
+    friendList: [],
+    friendSendRequest: [],
+    friendRecievedRequest: [],
     docs: [],
     cars: [],
-    places:[]
+    places: [],
   });
   console.log(createdUser);
   try {
@@ -352,6 +355,185 @@ const updateUser = async (req, res, next) => {
   res.status(200).json({ user: user.toObject({ getters: true }) });
 };
 
+// request update
+const updateFriendRequest = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError("Invalid inputs passed, please check your data.", 422)
+    );
+  }
+
+  const { userId, requestId, requestFromFriend, requestToFriend } = req.body;
+  let user;
+  try {
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update user.",
+      500
+    );
+    return next(error);
+  }
+
+  user.friendSendRequest = requestToFriend;
+
+  try {
+    await user.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update user friends.",
+      500
+    );
+    return next(error);
+  }
+  let friend;
+
+  try {
+    friend = await User.findById(requestId);
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update user.",
+      500
+    );
+    return next(error);
+  }
+
+  friend.friendRecievedRequest = requestFromFriend;
+
+  try {
+    await friend.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update user friends.",
+      500
+    );
+    return next(error);
+  }
+
+  res.status(200).json({ user: user, friend: friend });
+};
+
+//delete Request
+const updateFriendRequest2 = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError("Invalid inputs passed, please check your data.", 422)
+    );
+  }
+
+  const { userId, requestId, requestFromFriend, requestToFriend } = req.body;
+  let user;
+
+  try {
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update user.",
+      500
+    );
+    return next(error);
+  }
+
+  user.friendRecievedRequest = requestFromFriend;
+
+  try {
+    await user.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update user friends.",
+      500
+    );
+    return next(error);
+  }
+  let friend;
+
+  try {
+    friend = await User.findById(requestId);
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update user.",
+      500
+    );
+    return next(error);
+  }
+
+  friend.friendSendRequest = requestToFriend;
+
+  try {
+    await friend.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update user friends.",
+      500
+    );
+    return next(error);
+  }
+
+  res.status(200).json({ user: user, friend: friend });
+};
+
+//set friend
+const updateUserFriends = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError("Invalid inputs passed, please check your data.", 422)
+    );
+  }
+
+  const { userId, friendList, friendId, friendlist } = req.body;
+
+  let user;
+  try {
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update user.",
+      500
+    );
+    return next(error);
+  }
+
+  user.friendList = friendList;
+
+  try {
+    await user.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update user friends.",
+      500
+    );
+    return next(error);
+  }
+
+  let friend;
+  try {
+    friend = await User.findById(friendId);
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update user.",
+      500
+    );
+    return next(error);
+  }
+
+  friend.friendList = friendlist;
+
+  try {
+    await friend.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update user friends.",
+      500
+    );
+    return next(error);
+  }
+
+  res.status(200).json({ user: user, friend: friend });
+};
+
 const deleteUser = async (req, res, next) => {
   const { image } = req.body;
 
@@ -459,3 +641,6 @@ exports.login = login;
 exports.forgetPassword = forgetPassword;
 exports.getUserReset = getUserReset;
 exports.updatePassword = updatePassword;
+exports.updateUserFriends = updateUserFriends;
+exports.updateFriendRequest = updateFriendRequest;
+exports.updateFriendRequest2 = updateFriendRequest2;

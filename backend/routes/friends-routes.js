@@ -17,7 +17,7 @@ router.get("/user/:uid", friendControllers.getFriendsByUserId);
 router.post("/", friendControllers.createFriend);
 
 router.patch(
-  "/:fid",
+  "/:fids",
 
   friendControllers.updateFriend
 );

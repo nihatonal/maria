@@ -1,4 +1,16 @@
 @media screen and (max-width: 767px) {
+  .mobile_btns_wrapper {
+    display: flex;
+    align-items: center;
+  }
+  .mobile_btns_wrapper svg {
+    font-size: 26px;
+    color: var(--bg_primary);
+    cursor: pointer;
+  }
+  .mobile_btns_wrapper svg:hover{
+    color: var(--color_lightblue);
+  }
   #nav-icon {
     width: 28px;
     height: 16px;
@@ -11,6 +23,7 @@
     -o-transition: 0.5s ease-in-out;
     transition: 0.5s ease-in-out;
     cursor: pointer;
+    margin-left: 10px;
   }
 
   #nav-icon span {
@@ -54,7 +67,6 @@
   #nav-icon.open span:nth-child(2) {
     opacity: 0;
     left: -60px;
- 
   }
 
   #nav-icon.open span:nth-child(3) {
@@ -63,6 +75,5 @@
     -moz-transform: rotate(-135deg);
     -o-transform: rotate(-135deg);
     transform: rotate(-135deg);
-    
   }
 }

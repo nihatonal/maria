@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
-
+import { useParams } from "react-router-dom";
 import { useHttpClient } from "../../shared/hooks/http-hook";
-import axios from "axios";
 import { AuthContext } from "../../shared/context/auth-context";
 import { AiFillDislike } from "react-icons/ai";
 import { AiFillLike } from "react-icons/ai";
@@ -9,32 +8,51 @@ import { AiFillLike } from "react-icons/ai";
 import "./Likes.css";
 
 const Likes = (props) => {
-  const { isLoading, sendRequest } = useHttpClient();
+  const { sendRequest } = useHttpClient();
   const auth = useContext(AuthContext);
-  const [place, setPlace] = useState([]);
   const [userLikes, setUserLikes] = useState([]);
   const [userDisLikes, setUserDisLikes] = useState([]);
+  const placeId = useParams().pid;
 
   const userId = auth.userId;
 
   useEffect(() => {
-    const place = props.places.filter((place) => place.id === props.place);
-    setPlace(place);
-    setUserLikes(place[0].likes);
-    setUserDisLikes(place[0].dislikes);
-  }, [likeHandler, dislikeHandler]);
+    if (!placeId) {
+      const place = props.places.filter((place) => place.id === props.place);
+      setUserLikes(place[0].likes);
+      setUserDisLikes(place[0].dislikes);
+    } else if (placeId) {
+      const fetchCars = async () => {
+        try {
+          const responseData = await sendRequest(
+            process.env.REACT_APP_BACKEND_URL + `/places/${placeId}`
+          );
+          setUserLikes(responseData.place.likes);
+          setUserDisLikes(responseData.place.dislikes);
+        } catch (err) {}
+      };
+      fetchCars();
+    }
+  }, [placeId]);
 
   const setLikes = async () => {
-    let likeArr, dislikeArr;
-    try {
-      likeArr = [...place[0].likes, userId];
-      setUserLikes(likeArr);
-      dislikeArr = place[0].dislikes;
-    } catch {}
+    let likeArr = [],
+      dislikeArr = [];
 
+    if (!userLikes.includes(userId) && !userDisLikes.includes(userId)) {
+      likeArr = [...userLikes, userId];
+      dislikeArr = userDisLikes;
+    } else if (userLikes.includes(userId) && !userDisLikes.includes(userId)) {
+      likeArr = userLikes.filter((item) => item !== userId);
+      dislikeArr = userDisLikes;
+    } else if (!userLikes.includes(userId) && userDisLikes.includes(userId)) {
+      likeArr = [...userLikes, userId];
+      dislikeArr = userDisLikes.filter((item) => item !== userId);
+    }
+    let place = placeId ? placeId : props.place;
     try {
       const responseData = await sendRequest(
-        process.env.REACT_APP_BACKEND_URL + `/places/${props.place}`,
+        process.env.REACT_APP_BACKEND_URL + `/places/${place}`,
         "PATCH",
         JSON.stringify({
           likes: likeArr,
@@ -45,44 +63,29 @@ const Likes = (props) => {
           Authorization: "Bearer " + auth.token,
         }
       );
-    } catch (err) {}
-  };
-
-  const unsetLikes = async () => {
-    let likeArr, dislikeArr;
-    try {
-      likeArr = place[0].likes.filter((item) => item !== userId);
       setUserLikes(likeArr);
-
-      dislikeArr = place[0].dislikes;
-    } catch {}
-
-    try {
-      const responseData = await sendRequest(
-        process.env.REACT_APP_BACKEND_URL + `/places/${props.place}`,
-        "PATCH",
-        JSON.stringify({
-          likes: likeArr,
-          dislikes: dislikeArr,
-        }),
-        {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + auth.token,
-        }
-      );
+      setUserDisLikes(dislikeArr);
     } catch (err) {}
   };
+
   const setDisLikes = async () => {
-    let likeArr, dislikeArr;
-    try {
-      dislikeArr = [...place[0].dislikes, userId];
-      setUserDisLikes(dislikeArr);
-      likeArr = place[0].likes;
-    } catch {}
+    let likeArr = [],
+      dislikeArr = [];
 
+    if (!userLikes.includes(userId) && !userDisLikes.includes(userId)) {
+      likeArr = userLikes;
+      dislikeArr = [...userDisLikes, userId];
+    } else if (!userLikes.includes(userId) && userDisLikes.includes(userId)) {
+      likeArr = userLikes;
+      dislikeArr = userDisLikes.filter((item) => item !== userId);
+    } else if (userLikes.includes(userId) && !userDisLikes.includes(userId)) {
+      likeArr = userLikes.filter((item) => item !== userId);
+      dislikeArr = [...userDisLikes, userId];
+    }
+    let place = placeId ? placeId : props.place;
     try {
       const responseData = await sendRequest(
-        process.env.REACT_APP_BACKEND_URL + `/places/${props.place}`,
+        process.env.REACT_APP_BACKEND_URL + `/places/${place}`,
         "PATCH",
         JSON.stringify({
           likes: likeArr,
@@ -93,59 +96,20 @@ const Likes = (props) => {
           Authorization: "Bearer " + auth.token,
         }
       );
-    } catch (err) {}
-  };
-
-  const unsetDisLikes = async () => {
-    let likeArr, dislikeArr;
-    try {
-      dislikeArr = place[0].dislikes.filter((item) => item !== userId);
+      setUserLikes(likeArr);
       setUserDisLikes(dislikeArr);
-      likeArr = place[0].likes;
-    } catch {}
-
-    try {
-      const responseData = await sendRequest(
-        process.env.REACT_APP_BACKEND_URL + `/places/${props.place}`,
-        "PATCH",
-        JSON.stringify({
-          likes: likeArr,
-          dislikes: dislikeArr,
-        }),
-        {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + auth.token,
-        }
-      );
-    } catch (err) {}
-  };
-
-  const likeHandler = async (e) => {
-    e.preventDefault();
-
-    if (!userLikes.includes(userId) && !userDisLikes.includes(userId)) {
-      setLikes();
-    }
-    if (userLikes.includes(userId) && !userDisLikes.includes(userId)) {
-      unsetLikes();
-    }
-    if (!userLikes.includes(userId) && userDisLikes.includes(userId)) {
-      setLikes();
-      unsetDisLikes();
+    } catch (err) {
+      console.log(err);
     }
   };
-  const dislikeHandler = async (e) => {
+
+  const likeHandler = (e) => {
     e.preventDefault();
-    if (!userLikes.includes(userId) && !userDisLikes.includes(userId)) {
-      setDisLikes();
-    }
-    if (!userLikes.includes(userId) && userDisLikes.includes(userId)) {
-      unsetDisLikes();
-    }
-    if (userLikes.includes(userId) && !userDisLikes.includes(userId)) {
-      setDisLikes();
-      unsetLikes();
-    }
+    setLikes();
+  };
+  const dislikeHandler = (e) => {
+    e.preventDefault();
+    setDisLikes();
   };
 
   return (

@@ -24,7 +24,7 @@
   text-decoration: none;
   color: var(--bg_secondary);
   background-color: var(--bg_primary);
-  border-radius: 15px;
+  border-radius: 10px;
   text-align: center;
   padding: 10px 0;
   transition: all 0.3s;

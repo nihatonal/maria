@@ -9,6 +9,7 @@ const placeSchema = new Schema({
   address: { type: String, required: true },
   likes: [],
   dislikes: [],
+  comments:[],
   owner: { type: mongoose.Types.ObjectId, required: true, ref: 'User' }
 });
 

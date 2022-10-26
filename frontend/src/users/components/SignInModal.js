@@ -51,7 +51,7 @@ const SignInModal = (props) => {
       );
       auth.login(responseData.userId, responseData.token);
       //setClose(true);
-      navigate("/usermain");
+      navigate("/main");
     } catch (err) {}
   };
 

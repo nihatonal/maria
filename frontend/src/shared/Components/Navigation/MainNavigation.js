@@ -8,15 +8,18 @@ import Backdrop from "../UIElements/Backdrop";
 import ButtonSignIn from "../../../shared/Components/UIElements/ButtonSignIn";
 import close from "../../../assets/icons/close.svg";
 import Avatar from "../UIElements/Avatar";
+import FriendsModal from "../../../Places/components/FriendsModal";
 import Hamburger from "./Hamburger";
 import SignInModal from "../../../users/components/SignInModal";
 import RenewPassword from "../../../users/components/RenewPassword";
 import { AuthContext } from "../../context/auth-context";
 import { useHttpClient } from "../../hooks/http-hook";
+
 import "./MainNavigation.css";
 
 const MainNavigation = () => {
   const auth = useContext(AuthContext);
+  const userId = auth.userId;
   const navigate = useNavigate();
   const { sendRequest } = useHttpClient();
   const [loadedUser, setLoadedUser] = useState();
@@ -27,7 +30,11 @@ const MainNavigation = () => {
   const [setBackAuth, setBackAuthModal] = useState(false);
   const [userName, setUserName] = useState("");
 
-  const userId = auth.userId;
+  // Friend modal settings
+  const [showFriends, setShowFriends] = useState(false);
+  const [friends, setFriends] = useState([]);
+  const [filteredList, setFilteredList] = useState([]);
+  const [loadedUsers, setLoadedUsers] = useState([]);
 
   useEffect(() => {
     if (auth.isLoggedIn && auth.userId) {
@@ -47,6 +54,25 @@ const MainNavigation = () => {
     }
   }, [sendRequest, userId, auth.isLoggedIn]);
 
+  useEffect(() => {
+    const fetchCars = async () => {
+      try {
+        const responseData = await sendRequest(
+          process.env.REACT_APP_BACKEND_URL + `/users`
+        );
+        const filterList = responseData.users.filter(
+          (user) => user.id === userId
+        )[0].friendList;
+        const friendArr = responseData.users.filter((user) =>
+          filterList.includes(user.id)
+        );
+        setLoadedUsers(responseData.users);
+        setFilteredList(friendArr);
+      } catch (err) {}
+    };
+    fetchCars();
+  }, [sendRequest, deleteFriendHandler, auth.userId]);
+  
   const showAuthHandler = () => {
     setShowAuthModal(true);
   };
@@ -85,38 +111,63 @@ const MainNavigation = () => {
       .join(" ");
   }
 
+  // Delete friend
+
+  const deleteFriendHandler = async (x) => {
+    let friendArr = [];
+    let userFriend = [];
+    friendArr = friends.filter((item) => item !== x);
+    const filterList = loadedUsers.filter((user) =>
+      friendArr.includes(user.id)
+    );
+    setFilteredList(filterList);
+
+    try {
+      const friendArrr = loadedUsers.filter((item) => item.id === x)[0]
+        .friendList;
+      if (friendArrr.includes(auth.userId)) {
+        userFriend = friendArrr.filter((user) => user !== auth.userId);
+      }
+
+      console.log(userFriend, auth.userId);
+    } catch (err) {}
+    try {
+      const responseData = await sendRequest(
+        process.env.REACT_APP_BACKEND_URL + `/users/friendlist/${auth.userId}`,
+        "PATCH",
+        JSON.stringify({
+          friendList: friendArr,
+          userId: auth.userId,
+          friendId: x,
+          friendlist: userFriend,
+        }),
+        {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + auth.token,
+        }
+      );
+      //console.log(responseData.user)
+      setFriends(friendArr);
+      if (responseData.user.friendList.length < 1) {
+        setShowFriends(false);
+      }
+    } catch (err) {}
+  };
+
   return (
     <React.Fragment>
       {drawerIsOpen && <Backdrop onClick={closeDrawerHandler} />}
 
-      <SideDrawer show={drawerIsOpen} onClick={closeDrawerHandler}>
-        <nav
-          className="main-navigation__drawer-nav"
-          style={auth.isLoggedIn ? { order: "3" } : null}
-        >
-          <NavLinks />
-        </nav>
-
-        {!auth.isLoggedIn ? (
-          <div className={"side-drawer__btn"}>
-            <button className="btn btn-sign_in" onClick={showAuthHandler}>
-              Войти
-            </button>
-            <Link to="/signup" className="btn btn-sign_up">
-              Регистрация
-            </Link>
-          </div>
-        ) : (
-          <Avatar
-            className={"mobile-avatar"}
-            image={
-              loadedUser && process.env.REACT_APP_ASSETS_URL + `${loadedUser}`
-            }
-            alt={"avatar"}
-            onClick={logOutHandler}
-          />
-        )}
-      </SideDrawer>
+      <SideDrawer
+        show={drawerIsOpen}
+        onClick={closeDrawerHandler}
+        style={auth.isLoggedIn ? { order: "3" } : null}
+        auth={!auth.isLoggedIn}
+        showAuthHandler={showAuthHandler}
+        image={loadedUser && process.env.REACT_APP_ASSETS_URL + `${loadedUser}`}
+        logOutHandler={logOutHandler}
+        friendsBtn={() => setShowFriends(true)}
+      />
 
       <SignInModal
         show={setShowAuth && !setBackAuth}
@@ -124,7 +175,14 @@ const MainNavigation = () => {
         close={closeAuthHandler}
         footer={closeAuthHandler}
       />
-
+      <FriendsModal
+        showFriends={showFriends}
+        setShowFriends={() => setShowFriends(false)}
+        filteredList={filteredList}
+        userId={userId}
+        auth={auth.userId}
+        deleteFriendHandler={(e) => deleteFriendHandler(e.target.id)}
+      />
       <RenewPassword
         show={setBackAuth}
         close={closeAuthHandler}
@@ -136,10 +194,10 @@ const MainNavigation = () => {
           <div className={"header__logo"}>
             <Link
               className={"header__logo-name"}
-              to={auth.isLoggedIn ? `/usermain` : "/"}
+              to={auth.isLoggedIn ? `/user/${auth.userId}` : "/"}
             >
               {auth.isLoggedIn ? (
-                <p onClick={()=> setDrawerIsOpen(false)}>
+                <p onClick={() => setDrawerIsOpen(false)}>
                   <span style={{ color: "var(--bg_secondary)" }}>Hi!</span>{" "}
                   {capitalizeFirstLetter(userName)}
                 </p>
@@ -186,6 +244,7 @@ const MainNavigation = () => {
               onClick={logOutHandler}
             />
           )}
+
           <Hamburger show={drawerIsOpen} onClick={openDrawerHandler} />
           {/* <div className="header__menu-icon" onClick={openDrawerHandler}>
             <div className={"header__menu-icon-item"} />

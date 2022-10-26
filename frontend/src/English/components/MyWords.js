@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import Button from "../../shared/Components/FormElements/Button";
 import { AuthContext } from "../../shared/context/auth-context";
-
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import { useHttpClient } from "../../shared/hooks/http-hook";
@@ -18,14 +18,14 @@ const MyWords = (props) => {
   const { sendRequest } = useHttpClient();
   const [loadedCars, setLoadedCars] = useState();
   const [loading, setLoading] = useState(false);
-
+  const userID = useParams().userId;
   const userId = auth.userId;
 
   useEffect(() => {
     setLoading(true);
     const fetchWords = async () => {
       return axios
-        .get(process.env.REACT_APP_BACKEND_URL + `/cars/user/${userId}`, {
+        .get(process.env.REACT_APP_BACKEND_URL + `/cars/user/${userID}`, {
           headers: {
             Authorization: "Bearer " + auth.token,
             "Content-Type": "application/json",

@@ -1,108 +1,100 @@
-.placelist_container {
-  width: 100%;
-  padding-bottom: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.placelist_container .loading-wrapper {
-  margin-top: 35%;
-}
-.placelist_container .loading-wrapper .fa-spin {
-  color: var(--bg_primary);
-}
-.placelist_wrapper {
-  display: grid;
-  grid-template-columns: auto;
-  justify-items: center;
-  row-gap: 40px;
-}
-.placelist_wrapper .fa-spin {
-  color: var(--bg_primary);
-}
-.place_item-container {
+.photo-item {
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 50px;
 }
-.place_item-wrapper {
+.photo-item-container {
   width: 100%;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
 }
-.place_image_wrapper {
-  width: 100%;
+.photo-item-container .loading-wrapper {
+  margin-top: 35%;
 }
-.place_image_wrapper .place_image {
+.photo-item-container .loading-wrapper .fa-spin {
+  color: var(--bg_primary);
+}
+
+.photo-item-wrapper .fa-spin {
+  color: var(--bg_primary);
+}
+
+.photo-item-wrapper {
+  width: 100%;
+  margin-top: 40px;
+  position: relative;
+}
+
+.photo-item .place_item-likes {
+  top: 250px;
+  height: 40px;
+  z-index: 99;
+}
+.photo_image_wrapper {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.photo-item-wrapper .photo_image {
   width: 100%;
   height: 220px;
   object-fit: cover;
   box-shadow: var(--box-shadow);
 }
-.place_info {
-  font-family: var(--font_family_primary);
+.photo-item_head-content {
   width: 100%;
-  font-weight: normal;
-  position: absolute;
-  font-size: 12px;
-  color: var(--color_dark_white);
-  left: 20px;
+  margin-bottom: 10px;
+  padding-left: 40px;
 }
-.head-content {
+.photo_owner_image-wrapper {
   display: flex;
   align-items: center;
-  top: 10px;
+  text-decoration: none;
+  color: var(--color-primary);
 }
-.place_info p,
-.place_info h3 {
-  text-shadow: var(--text-shadow);
-}
-.head-content-desc {
-  margin-left: 10px;
-}
-.place_owner_image-wrapper {
-  border-radius: 100%;
-  width: 24px;
-  height: 24px;
-  border: 2px dotted var(--color_lightblue);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.2s;
-  overflow: hidden;
-}
-.place_owner_image-wrapper:hover {
-  border: 2px dotted var(--bg_secondary);
-}
-
-.place_owner_image {
+.photo_owner_image {
   width: 24px;
   height: 24px;
   border-radius: 100%;
   cursor: pointer;
   transition: all 0.2s;
+  margin-right: 8px;
 }
-
-.footer-content {
-  bottom: 20px;
+.photo-item_head-content:hover > a h4 {
+  color: var(--color_lightblue);
 }
-.footer-content h3 {
-  font-weight: normal;
-  font-size: 14px;
-}
-.footer-content p {
+.photo-item-container .photo_info {
+  font-family: var(--font_family_primary);
+  width: 100%;
   font-weight: normal;
   font-size: 12px;
-  width: 75%;
+  color: var(--bg_primary);
+  padding: 0 0 10px 40px;
+  border-bottom: 1px solid var(--color_disabled);
+  position: relative;
 }
-.footer-content p:last-child {
+
+.photo_info h3 {
+  font-weight: normal;
+  font-size: 14px;
+  margin-bottom: 7px;
+}
+.photo_info p {
+  font-weight: normal;
+  font-size: 12px;
+  width: 90%;
+}
+.photo_info p:last-child {
   margin-top: 5px;
 }
-.place_item-delete-btn {
+.photo_item-delete-btn {
   position: absolute;
-  bottom: 40px;
-  right: 25px;
+  bottom: 10px;
+  right: 20px;
   width: 28px;
   height: 28px;
   font-size: 0.8rem;
@@ -114,19 +106,18 @@
   cursor: pointer;
   color: var(--color_disabled);
   background-color: var(--bg_primary);
-  transition: all 0.2s;
   opacity: 0.3;
 }
-.place_item-delete-btn:hover {
+.photo_item-delete-btn:hover {
   background-color: var(--color_danger);
   opacity: 1;
 }
-.place_item-delete-btn svg {
+.photo_item-delete-btn svg {
   pointer-events: none;
 }
 
 /*Delete Modal*/
-.place_delete-wrapper {
+.photo_delete-wrapper {
   width: 85%;
   margin: 0 auto;
   margin-top: 30px;
@@ -138,17 +129,17 @@
   justify-content: center;
   border-radius: 10px;
 }
-.place_delete-wrapper h3 {
+.photo_delete-wrapper h3 {
   font-family: var(--font_family_primary);
   color: var(--bg_primary);
   margin-bottom: 1rem;
 }
-.place_delete-btns {
+.photo_delete-btns {
   width: 75%;
   display: flex;
   justify-content: space-around;
 }
-.place_delete-wrapper button {
+.photo_delete-wrapper button {
   width: 35%;
   padding: 10px 0;
   border: none;
@@ -159,15 +150,24 @@
   border-radius: 10px;
   transition: all 0.2s;
 }
-.place_delete-wrapper button:first-child {
+.photo_delete-wrapper button:first-child {
   background-color: var(--color_green);
 }
-.place_delete-wrapper button:first-child:hover {
+.photo_delete-wrapper button:first-child:hover {
   box-shadow: 0 0 20px var(--color_green);
 }
-.place_delete-wrapper button:last-child {
+.photo_delete-wrapper button:last-child {
   background-color: var(--color_danger);
 }
-.place_delete-wrapper button:last-child:hover {
+.photo_delete-wrapper button:last-child:hover {
   box-shadow: 0 0 20px var(--color_danger);
+}
+
+.photo-item .comment_container {
+  max-height: fit-content;
+  margin-top: 20px;
+}
+
+.photo-item .comment-items_wrapper {
+  overflow-y: unset;
 }

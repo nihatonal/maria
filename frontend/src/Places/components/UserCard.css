@@ -1,0 +1,102 @@
+.usercard-wrapper {
+  width: 100%;
+  padding: 0 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  font-family: var(--font_family_primary);
+  font-weight: normal;
+}
+.user-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user-header p,
+.user-header a {
+  font-size: 13px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--bg_primary);
+}
+.user-header span {
+  color: var(--bg_disabled);
+}
+.user-header p {
+  margin: 0 15px;
+  cursor: pointer;
+}
+.user-header-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* margin-right: 50px; */
+}
+.user-header-image h4 {
+  text-align: center;
+  margin-top: 5px;
+}
+.user-header img {
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+}
+
+.usercard_friends_status {
+  text-align: left;
+  margin-top: 4px;
+  font-size: 10px;
+  color: var(--color_light_grey);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.usercard_friends_status:hover > span {
+  color: var(--color_grey);
+}
+
+.usercard_friends_status-question {
+  font-size: 8px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+.usercard_friends_status svg {
+  margin-right: 2px;
+}
+
+/* .user_friendlist_item svg:hover {
+  box-shadow: 0 0 15px red;
+} */
+
+/* request buttons */
+.requests_container {
+  width: 100%;
+  margin: 0 auto;
+  font-family: var(--font_family_primary);
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.request_not_have {
+  padding-top: 50px;
+}
+.request-add {
+  color: var(--color_green);
+  opacity: 0.6;
+  margin-right: 5px;
+}
+.request-remove {
+  color: var(--color_danger);
+  opacity: 0.8;
+}
+.btn-request-status {
+  font-size: 20px;
+}
+.btn-request-status:hover {
+  opacity: 1;
+}

@@ -3,7 +3,7 @@
   width: 95%;
   min-height: 100px;
   height: min-content;
-  border-radius: 15px;
+  border-radius: 10px;
   padding: 20px;
   box-shadow: var(--box-shadow);
   display: flex;
@@ -73,7 +73,7 @@
   font-size: 16px;
   color: var(--color_white);
   background-color: var(--bg_primary);
-  border-radius: 15px;
+  border-radius: 10px;
   display: flex;
   padding: 5px;
   justify-content: flex-start;
@@ -185,7 +185,7 @@ button svg {
   width: 24%;
   margin: 0;
   height: 29px;
-  border-radius: 15px;
+  border-radius: 10px;
   background-color: var(--bg_secondary);
   color: #0b019e;
   font-family: var(--font_family_primary);

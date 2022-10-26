@@ -31,22 +31,16 @@ import { useAuth } from "./shared/hooks/auth-hook";
 
 import "./App.css";
 
-const RentACar = React.lazy(() => import("./Cars/pages/RentACar"));
 const UserMain = React.lazy(() => import("./users/page/UserMain.js"));
-// const RentUserCar = React.lazy(() => import("./Cars/pages/RentUserCar"));
 const FlashCards = React.lazy(() => import("./English/components/FlashCards"));
 const MyWords = React.lazy(() => import("./English/components/MyWords"));
 const Hangman = React.lazy(() => import("./English/components/Hangman"));
-// const AddCard = React.lazy(() => import("./English/components/AddCard"));
 const AddFriend = React.lazy(() => import("./Friends/components/AddFriend"));
 const UserFriends = React.lazy(() => import("./Friends/page/Friends.js"));
 const AddWord = React.lazy(() => import("./English/components/AddWord"));
-const AddCarSuccess = React.lazy(() =>
-  import("./Cars/components/AddCarSuccess")
-);
-const UserCar = React.lazy(() => import("./Cars/pages/UserCar"));
-// const UpdateCar = React.lazy(() => import("./Cars/pages/UpdateCar"));
-const UserPlace = React.lazy(() => import("./Places/page/UserPlace.js"))
+
+const UserPlace = React.lazy(() => import("./Places/page/UserPlace.js"));
+const PlaceItem = React.lazy(() => import("./Places/page/PlaceItem.js"));
 function App() {
   const { token, login, logout, userId } = useAuth();
 
@@ -64,18 +58,17 @@ function App() {
   if (token) {
     routes = (
       <React.Fragment>
-        <Route exact path="/usermain" element={<UserMain />} />
+        <Route exact path="/main" element={<UserMain />} />
         <Route exact path="/english" element={<English />} />
-       
+
         <Route exact path="/:userId/cards" element={<FlashCards />} />
         <Route exact path="/:userId/friends" element={<UserFriends />} />
         <Route exact path="/:userId/mywords" element={<MyWords />} />
         <Route exact path="/:userId/hangman" element={<Hangman />} />
-        <Route exact path="/:userId/:cid" element={<UserCar />} />
-        <Route exact path="/:userId/addword" element={<AddWord />} />  
-        <Route exact path="/:userId/success" element={<AddCarSuccess />} />
+        <Route exact path="/:userId/addword" element={<AddWord />} />
         <Route exact path="/:userId/addfriend" element={<AddFriend />} />
-        <Route exact path="/:userId/userplace" element={<UserPlace />} />
+        <Route exact path="/user/:userId/" element={<UserPlace />} />
+        <Route exact path="/:userId/:pid" element={<PlaceItem />} />
         <Route exact path="*" element={<FourHunderFour />} />
       </React.Fragment>
     );

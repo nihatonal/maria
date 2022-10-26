@@ -34,6 +34,9 @@ router.post("/forgetPassword", usersController.forgetPassword);
 router.put("/updatepassword", usersController.updatePassword);
 router.patch("/userphoto/:uid", usersController.updateUser);
 router.patch("/userdocs/:uid", usersController.updateUserDocs);
+router.patch("/friendlist/:uid", usersController.updateUserFriends);
+router.patch("/requestfriend/:uid", usersController.updateFriendRequest);
+router.patch("/requestfriend2/:uid", usersController.updateFriendRequest2);
 router.delete("/userphoto", usersController.deleteUser);
 
 module.exports = router;

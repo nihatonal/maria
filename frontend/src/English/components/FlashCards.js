@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../shared/context/auth-context";
-
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import { GiPerspectiveDiceSixFacesRandom } from "react-icons/gi";
@@ -11,7 +11,7 @@ import "./FlashCards.css";
 
 const FlashCards = (props) => {
   const auth = useContext(AuthContext);
-
+  const userID = useParams().userId;
   const [loadedCars, setLoadedCars] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -19,13 +19,13 @@ const FlashCards = (props) => {
   const [sideBack, setSideBack] = useState(false);
   const [selectedCard, setSelectedCard] = useState(0);
 
-  const userId = auth.userId;
+  //const userId = auth.userId;
 
   useEffect(() => {
     setLoading(true);
     const fetchPlaces = async () => {
       return axios
-        .get(process.env.REACT_APP_BACKEND_URL + `/cars/user/${userId}`, {
+        .get(process.env.REACT_APP_BACKEND_URL + `/cars/user/${userID}`, {
           headers: {
             Authorization: "Bearer " + auth.token,
             "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const FlashCards = (props) => {
         });
     };
     fetchPlaces();
-  }, [userId]);
+  }, [userID]);
 
   function getRandomInt(min, max) {
     min = Math.ceil(min);

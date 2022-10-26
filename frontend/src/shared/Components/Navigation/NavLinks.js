@@ -6,17 +6,6 @@ import "./Navlinks.css";
 
 const NavLinks = (props) => {
   const auth = useContext(AuthContext);
-  const cleanLocalStorage = () => {
-    localStorage.removeItem("carData");
-    localStorage.removeItem("carOptions");
-    localStorage.removeItem("initialImages");
-    localStorage.removeItem("selectedCar");
-    localStorage.removeItem("initialDocs");
-    localStorage.removeItem("searchCity");
-    localStorage.removeItem("searchItems");
-    localStorage.removeItem("dateRanges");
-  };
-
   return (
     <>
       {/*  */}
@@ -72,14 +61,14 @@ const NavLinks = (props) => {
         </NavLink>
       )} */}
       {auth.isLoggedIn && (
-        <NavLink
-          className={({ isActive }) =>
-            isActive ? "header__nav-item is-active" : "header__nav-item"
-          }
+        <p
+          className={"header__nav-item"}
+          style={{ cursor: "pointer" }}
           to={`/${auth.userId}/friends`}
+          onClick={props.friendsBtn}
         >
           Мои друзья
-        </NavLink>
+        </p>
       )}
       {auth.isLoggedIn && (
         <NavLink
@@ -88,7 +77,7 @@ const NavLinks = (props) => {
           }
           to={`/${auth.userId}/userplace`}
         >
-          Мои места
+          Мои Фото
         </NavLink>
       )}
       {auth.isLoggedIn && (
