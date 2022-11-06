@@ -36,7 +36,7 @@ html,
 body {
   background-color: #f6feff;
   overflow-x: hidden;
-  
+
   width: 100%;
 }
 /*common*/
@@ -113,4 +113,8 @@ h2 {
     color: var(--bg_primary);
     text-shadow: 5px 5px 5px var(--bg_primary);
   }
+}
+
+.loading-wrapper .fa-circle-o-notch {
+  color: var(--bg_primary);
 }

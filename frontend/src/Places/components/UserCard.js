@@ -148,7 +148,21 @@ const UserCard = (props) => {
     } catch (err) {}
   };
 
-  useEffect(async () => {
+  useEffect(() => {
+    const listener = (event) => {
+      if (event.code === "Enter" || event.code === "NumpadEnter") {
+        console.log("Enter key was pressed. Run your function.");
+
+        mottoHandler();
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, [motto]);
+
+  const mottoHandler = async (e) => {
     try {
       const responseData = await sendRequest(
         process.env.REACT_APP_BACKEND_URL + `/users/motto/${auth.userId}`,
@@ -164,10 +178,6 @@ const UserCard = (props) => {
       );
       console.log(responseData);
     } catch (err) {}
-  }, [motto]);
-
-  const mottoHandler = (e) => {
-    setMotto(e.target.value);
   };
 
   return (
@@ -198,7 +208,10 @@ const UserCard = (props) => {
         </div>
         <forum onSubmit={mottoHandler} className="motto_wrapper">
           <input
-            onChange={mottoHandler}
+            onChange={(e) => {
+              setMotto(e.target.value);
+            }}
+            placeholder="write your motto"
             onFocus={() => setMotto("")}
             onBlur={() => {
               if (motto === "") {
@@ -206,11 +219,12 @@ const UserCard = (props) => {
               } else {
                 setMotto(motto);
               }
+              mottoHandler();
             }}
             value={motto}
             className="motto_input"
           />
-          <p>{motto}</p>
+          <p>"{motto}"</p>
         </forum>
       </div>
       {userId !== auth.userId && (

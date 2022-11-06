@@ -29,5 +29,8 @@
   margin-right: 15px;
 }
 
+.friends_container .fa-spin {
+  color: var(--bg_primary);
+}
 @media screen and (max-width: 767px) {
 }

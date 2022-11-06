@@ -14,7 +14,9 @@ const Friends = (props) => {
   const [filteredList, setFilteredList] = useState([]);
   const [loadedUsers, setLoadedUsers] = useState([]);
   const [friends, setFriends] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     const fetchCars = async () => {
       try {
         const responseData = await sendRequest(
@@ -28,6 +30,7 @@ const Friends = (props) => {
         );
         setLoadedUsers(responseData.users);
         setFilteredList(friendArr);
+        setLoading(false);
       } catch (err) {}
     };
     fetchCars();
@@ -35,6 +38,7 @@ const Friends = (props) => {
   // Delete friend
 
   const deleteFriendHandler = async (x) => {
+    setLoading(true);
     let friendArr = [];
     let userFriend = [];
     friendArr = friends.filter((item) => item !== x);
@@ -69,11 +73,17 @@ const Friends = (props) => {
       );
       //console.log(responseData.user)
       setFriends(friendArr);
+      setLoading(false);
     } catch (err) {}
   };
   return (
     <React.Fragment>
       <div className="friends_container">
+        {loading && (
+          <div className="loading-wrapper">
+            <i className="fa fa-circle-o-notch fa-spin"></i>
+          </div>
+        )}
         {filteredList.map((user) => (
           <div className="friend-card" key={user.id} id={user.id}>
             <div className="friend-card-info">
@@ -93,7 +103,7 @@ const Friends = (props) => {
                 style={{
                   color: "var(--color_danger)",
                   pointerEvents: "none",
-                  fontSize: "24px", 
+                  fontSize: "24px",
                 }}
               />
             </div>

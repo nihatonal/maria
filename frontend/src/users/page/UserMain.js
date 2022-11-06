@@ -72,11 +72,11 @@ const UserMain = () => {
 
   return (
     <div className="usermain-container">
-      {/* {loading && (
+      {loading && (
         <div className="loading-wrapper">
           <i className="fa fa-circle-o-notch fa-spin"></i>
         </div>
-      )} */}
+      )}
       <PlaceList
         loading={loading}
         update={show}

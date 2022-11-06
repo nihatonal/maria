@@ -165,6 +165,6 @@
   background-color: transparent;
   color: transparent;
 }
-.motto_input:focus + p {
+/* .motto_input:focus + p {
   border: 1px dotted var(--bg_primary);
-}
+} */

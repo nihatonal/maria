@@ -192,7 +192,7 @@ const MainNavigation = () => {
 
       <MainHeader>
         <div className="header__wrapper">
-          <div className={"header__logo"}>
+          {/* <div className={"header__logo"}>
             <Link
               className={"header__logo-name"}
               to={auth.isLoggedIn ? `/user/${auth.userId}` : "/"}
@@ -213,7 +213,7 @@ const MainNavigation = () => {
                 <p>Ready to experience?</p>
               )}
             </Link>
-          </div>
+          </div> */}
 
           {/* <nav
             className="header__nav"

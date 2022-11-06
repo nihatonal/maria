@@ -1,9 +1,11 @@
 .usermain-container {
   width: 100%;
-  height: 100vh;
   padding-top: 20px;
 }
 .usermain-title{
     font-size: 2rem;
     color: var(--bg_primary);
+}
+.usermain-container .fa-spin {
+  color: var(--bg_primary);
 }

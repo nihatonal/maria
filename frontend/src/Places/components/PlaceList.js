@@ -35,11 +35,11 @@ const PlaceList = (props) => {
 
   return (
     <div className="placelist_container">
-      {props.loading && (
+      {/* {props.loading && (
         <div className="loading-wrapper">
           <i className="fa fa-circle-o-notch fa-spin"></i>
         </div>
-      )}
+      )} */}
       {!props.gridview ? (
         <div className="photo_grid_view">
           {props.places.length >= 1 &&
