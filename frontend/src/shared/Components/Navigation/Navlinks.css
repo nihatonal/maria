@@ -5,6 +5,7 @@
   display: flex;
   justify-content: space-between;
 }
+
 @media screen and (max-width: 767px) {
   .header__nav {
     display: none;
@@ -20,7 +21,7 @@
   transition: color 400ms ease;
   padding: 10px 0;
   margin-bottom: 10px;
-  border-radius:10px;
+  border-radius: 10px;
 }
 .header__nav-item:hover {
   color: #000;

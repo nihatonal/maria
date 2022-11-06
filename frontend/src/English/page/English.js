@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../shared/context/auth-context";
-
+import Game from "../../MemoryGame/Game";
 import Quiz from "../components/Quiz";
 import "./English.css";
 const English = () => {
@@ -25,7 +25,9 @@ const English = () => {
           Hangman
         </NavLink>
       </div>
+      <Game token={auth.token} userId={auth.userId} />
       <Quiz />
+
       {/* <Hangman /> */}
     </div>
   );

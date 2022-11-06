@@ -54,7 +54,6 @@ const Comments = (props) => {
   const setComment = async () => {
     let comment;
     let user;
-    console.log(props.placeId);
 
     try {
       user = loadedUsers.filter((user) => user.id === props.user);
@@ -161,7 +160,7 @@ const Comments = (props) => {
                 alt={"as"}
               />
               <h4 className="comment-item_author-name">
-                {comment.author[0].name}
+                {comment.author[0].username}
               </h4>
               <p className="comment-item_date">
                 {DateCalc(new Date(comment.date))}

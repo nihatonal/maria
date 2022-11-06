@@ -1,3 +1,9 @@
+.mobile_btns_wrapper svg {
+  font-size: 26px;
+  color: var(--bg_primary);
+  cursor: pointer;
+}
+
 @media screen and (max-width: 767px) {
   .mobile_btns_wrapper {
     display: flex;
@@ -8,12 +14,17 @@
     color: var(--bg_primary);
     cursor: pointer;
   }
-  .mobile_btns_wrapper svg:hover{
+  .mobile_btns_wrapper a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mobile_btns_wrapper svg:hover {
     color: var(--color_lightblue);
   }
   #nav-icon {
     width: 28px;
-    height: 16px;
+    height: 17px;
     -webkit-transform: rotate(0deg);
     -moz-transform: rotate(0deg);
     -o-transform: rotate(0deg);
@@ -25,7 +36,9 @@
     cursor: pointer;
     margin-left: 10px;
   }
-
+  #nav-icon:hover > span {
+  background-color: var(--color_lightblue);
+  }
   #nav-icon span {
     display: block;
     position: absolute;

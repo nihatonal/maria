@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import MainHeader from "./MainHeader";
 import NavLinks from "./NavLinks";
 import SideDrawer from "./SideDrawer";
+import NavBar from "./NavBar";
 import Backdrop from "../UIElements/Backdrop";
 import ButtonSignIn from "../../../shared/Components/UIElements/ButtonSignIn";
 import close from "../../../assets/icons/close.svg";
@@ -72,7 +73,7 @@ const MainNavigation = () => {
     };
     fetchCars();
   }, [sendRequest, deleteFriendHandler, auth.userId]);
-  
+
   const showAuthHandler = () => {
     setShowAuthModal(true);
   };
@@ -197,60 +198,47 @@ const MainNavigation = () => {
               to={auth.isLoggedIn ? `/user/${auth.userId}` : "/"}
             >
               {auth.isLoggedIn ? (
-                <p onClick={() => setDrawerIsOpen(false)}>
-                  <span style={{ color: "var(--bg_secondary)" }}>Hi!</span>{" "}
-                  {capitalizeFirstLetter(userName)}
-                </p>
+                <div onClick={() => setDrawerIsOpen(false)}>
+                  <Avatar
+                    image={
+                      loadedUser &&
+                      process.env.REACT_APP_ASSETS_URL + `${loadedUser}`
+                    }
+                    alt={"avatar"}
+                    d
+                    onClick={logOutHandler}
+                  />
+                </div>
               ) : (
                 <p>Ready to experience?</p>
               )}
             </Link>
           </div>
 
-          <nav
+          {/* <nav
             className="header__nav"
             style={{ width: auth.isLoggedIn && "353px" }}
           >
             <NavLinks />
-          </nav>
-
+          </nav> */}
+          <NavBar userId ={auth.userId}/>
           {!auth.isLoggedIn ? (
             <div className="header-button-wrapper">
               <button className="btn btn-sign_in" onClick={showAuthHandler}>
                 Войти
               </button>
-              <Link to="/signup" className="btn-sign_up">
+              <Link to="/signup" className="btn btn-sign_up">
                 Регистрация
               </Link>
-              {/* <ButtonSignIn
-                btn="Войти"
-                className="header__btn"
-                btnclassName="header__btn-signin"
-                btnonClick={showAuthHandler}
-              />
-              <ButtonSignIn
-                btn="Регистрация"
-                className="header__btn"
-                btnclassName="header__btn-signin"
-                btnonClick={showAuthHandler}
-              /> */}
             </div>
-          ) : (
-            <Avatar
-              image={
-                loadedUser && process.env.REACT_APP_ASSETS_URL + `${loadedUser}`
-              }
-              alt={"avatar"}
-              onClick={logOutHandler}
-            />
-          )}
+          ) : null}
 
-          <Hamburger show={drawerIsOpen} onClick={openDrawerHandler} />
-          {/* <div className="header__menu-icon" onClick={openDrawerHandler}>
-            <div className={"header__menu-icon-item"} />
-            <div className={"header__menu-icon-item"} />
-            <div className={"header__menu-icon-item"} />
-          </div> */}
+          <Hamburger
+            show={drawerIsOpen}
+            onClick={openDrawerHandler}
+            auth={auth.isLoggedIn}
+            homeicon={() => setDrawerIsOpen(false)}
+          />
         </div>
       </MainHeader>
     </React.Fragment>

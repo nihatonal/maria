@@ -37,6 +37,7 @@ router.patch("/userdocs/:uid", usersController.updateUserDocs);
 router.patch("/friendlist/:uid", usersController.updateUserFriends);
 router.patch("/requestfriend/:uid", usersController.updateFriendRequest);
 router.patch("/requestfriend2/:uid", usersController.updateFriendRequest2);
+router.patch("/motto/:uid", usersController.setMotto);
 router.delete("/userphoto", usersController.deleteUser);
 
 module.exports = router;

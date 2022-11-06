@@ -9,7 +9,8 @@ import AddPlace from "../components/AddPlace";
 import PlaceList from "../components/PlaceList";
 import ModalPlace from "../../shared/Components/UIElements/ModalPlace";
 import UserCard from "../components/UserCard";
-
+import Game from "../../MemoryGame/Game";
+import FlashCards from "../../English/components/FlashCards";
 import { AiOutlineTable } from "react-icons/ai";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import "./UserPlace.css";
@@ -51,7 +52,7 @@ const UserPlace = () => {
         });
     };
     fetchPlaces();
-  }, [sendRequest, show]);
+  }, [sendRequest, show,userId]);
 
   const confirmDeleteHandler = async () => {
     setLoading(true);
@@ -72,8 +73,9 @@ const UserPlace = () => {
       setLoading(false);
     }
   };
+
   return (
-    <div className="userplaces" style={{ paddingTop: "30px" }}>
+    <div className="userplaces">
       <ModalPlace show={show} CloseonClick={() => setShow(false)}>
         <AddPlace
           submit={() => {
@@ -83,45 +85,54 @@ const UserPlace = () => {
           }}
         />
       </ModalPlace>
-      <UserCard />
-      <div className="btns-add-place-wrapper">
-        <AiOutlinePlusCircle
-          className="btn-place add-place"
-          onClick={() => setShow(true)}
-          style={userId !== auth.userId ? { display: "none" } : null}
-        />
-        <AiOutlineTable
-          onClick={() => setGridview(!gridview)}
-          className="btn-place change-view"
-        />
-      </div>
-      {!gridview ? (
-        <div className="photo_grid_view">
-          {places.map((place, i) => (
-            <NavLink
-              to={`/${userId}/${place.id}`}
-              key={place.id}
-              className="photo_grid_view-item"
-            >
-              <img src={process.env.REACT_APP_ASSETS_URL + place.image} alt='place_image' />
-            </NavLink>
-          ))}
+      <div className="userplaces-left-side">
+        <UserCard />
+        <div className="btns-add-place-wrapper">
+          <AiOutlinePlusCircle
+            className="btn-place add-place"
+            onClick={() => setShow(true)}
+            style={userId !== auth.userId ? { display: "none" } : null}
+          />
+          <AiOutlineTable
+            onClick={() => setGridview(!gridview)}
+            className="btn-place change-view"
+          />
         </div>
-      ) : (
-        <PlaceList
-          loading={loading}
-          update={show}
-          places={places}
-          confirmDelete={confirmDelete}
-          onDelete={(e) => {
-            setIdOfDeleteItem(e.target.parentNode.id);
-            setConfirmDelete(true);
-          }}
-          close={() => setConfirmDelete(false)}
-          setConfirmDelete={() => setConfirmDelete(false)}
-          setIdOfDeleteItem={() => confirmDeleteHandler(idOfDeleteItem)}
-        />
-      )}
+        {!gridview ? (
+          <div className="photo_grid_view">
+            {places.map((place, i) => (
+              <NavLink
+                to={`/${userId}/${place.id}`}
+                key={place.id}
+                className="photo_grid_view-item"
+              >
+                <img
+                  src={process.env.REACT_APP_ASSETS_URL + place.image}
+                  alt="place_image"
+                />
+              </NavLink>
+            ))}
+          </div>
+        ) : (
+          <PlaceList
+            loading={loading}
+            update={show}
+            places={places}
+            confirmDelete={confirmDelete}
+            onDelete={(e) => {
+              setIdOfDeleteItem(e.target.parentNode.id);
+              setConfirmDelete(true);
+            }}
+            close={() => setConfirmDelete(false)}
+            setConfirmDelete={() => setConfirmDelete(false)}
+            setIdOfDeleteItem={() => confirmDeleteHandler(idOfDeleteItem)}
+            gridview={gridview}
+          />
+        )}
+      </div>
+      <div className="userplaces-right-side">
+        <Game token={auth.token} userId={userId}/>
+      </div>
     </div>
   );
 };

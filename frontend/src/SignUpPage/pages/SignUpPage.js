@@ -33,6 +33,10 @@ const SignUpPage = () => {
         value: "",
         isValid: false,
       },
+      nickname: {
+        value: "",
+        isValid: false,
+      },
       birthdate: {
         value: "",
         isValid: false,
@@ -72,13 +76,14 @@ const SignUpPage = () => {
 
   const signupFormHandler = async (e) => {
     e.preventDefault();
-
+console.log(formState.inputs)
     try {
       const responseData = await sendRequest(
         process.env.REACT_APP_BACKEND_URL + "/users/signup",
         "POST",
         JSON.stringify({
           name: formState.inputs.name.value,
+          nickname: formState.inputs.nickname.value,
           birthdate: formState.inputs.birthdate.value,
           email: formState.inputs.email.value,
           phone: formState.inputs.phone.value,
@@ -114,6 +119,30 @@ const SignUpPage = () => {
       <form className="form__container" onSubmit={signupFormHandler}>
         <h2>Регистрация</h2>
         <InputCard>
+          {/* <Input
+            id="username"
+            element="input"
+            type="text"
+            label="Имя пользователя"
+            placeholder="Имя пользователя"
+            validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(3)]}
+            errorText="Поля обязательны для заполнения."
+            onInput={inputHandler}
+            placeholderclassName="input-hidden"
+            errorTextclassName="signup-form-error-fix"
+          /> */}
+          <Input
+            id="nickname"
+            element="input"
+            type="text"
+            label="ФИО"
+            placeholder="ФИО полностью"
+            validators={[VALIDATOR_REQUIRE(), VALIDATOR_MINLENGTH(3)]}
+            errorText="Поля обязательны для заполнения."
+            onInput={inputHandler}
+            placeholderclassName="input-hidden"
+            errorTextclassName="signup-form-error-fix"
+          />
           <Input
             id="name"
             element="input"

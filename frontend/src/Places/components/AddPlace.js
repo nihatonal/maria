@@ -114,7 +114,7 @@ const AddPlace = (props) => {
               element="input"
               type="text"
               label="Описание"
-              validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(150)]}
+              validators={[VALIDATOR_REQUIRE(), VALIDATOR_MAXLENGTH(120)]}
               onInput={inputHandler}
               placeholder="Описание"
               placeholderclassName="input-hidden"

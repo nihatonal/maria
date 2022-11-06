@@ -61,3 +61,8 @@
   border-radius: 100%;
   color: var(--bg_secondary);
 }
+.english-container .game_board {
+  align-items: center;
+  width: 100%;
+  margin: 10px 0;
+}

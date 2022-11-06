@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   name: { type: String, required: true },
+  username: { type: String, required: true },
   birthdate: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   phone: { type: Number, required: true },
@@ -12,6 +13,7 @@ const userSchema = new Schema({
   resetPasswordExpires: { type: String, required: false },
   image: { type: String, required: true },
   docs: [{ type: String, required: true }],
+  motto: { type: String, required: true },
   friendList: [],
   friendSendRequest:[],
   friendRecievedRequest:[],

@@ -95,7 +95,7 @@ const MyWords = (props) => {
         {/* <div className="btn-add_word">
           <NavLink to={`/${auth.userId}/addword`}>Добавить Cловo</NavLink>
         </div> */}
-        {loadedCars && <AddWord />}
+        {<AddWord />}
       </div>
     </React.Fragment>
   );

@@ -77,7 +77,8 @@ const signup = async (req, res, next) => {
     );
   }
 
-  const { name, birthdate, email, phone, password, image, docs } = req.body;
+  const { name, birthdate, email, phone, password, nickname, image, docs } =
+    req.body;
 
   let existingUser;
   try {
@@ -110,6 +111,7 @@ const signup = async (req, res, next) => {
 
   const createdUser = new User({
     name, // name: name
+    username: nickname,
     birthdate,
     email,
     phone,
@@ -118,6 +120,7 @@ const signup = async (req, res, next) => {
     resetPasswordToken: "",
     resetPasswordExpires: "",
     friendList: [],
+    motto: "",
     friendSendRequest: [],
     friendRecievedRequest: [],
     docs: [],
@@ -414,6 +417,41 @@ const updateFriendRequest = async (req, res, next) => {
   res.status(200).json({ user: user, friend: friend });
 };
 
+//Set Motto
+const setMotto = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError("Invalid inputs passed, please check your data.", 422)
+    );
+  }
+
+  const { userId, motto } = req.body;
+  let user;
+  try {
+    user = await User.findById(userId);
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update user.",
+      500
+    );
+    return next(error);
+  }
+
+  user.motto = motto;
+
+  try {
+    await user.save();
+  } catch (err) {
+    const error = new HttpError(
+      "Something went wrong, could not update user friends.",
+      500
+    );
+    return next(error);
+  }
+
+  res.status(200).json({ user: user });
+};
 //delete Request
 const updateFriendRequest2 = async (req, res, next) => {
   const errors = validationResult(req);
@@ -644,3 +682,4 @@ exports.updatePassword = updatePassword;
 exports.updateUserFriends = updateUserFriends;
 exports.updateFriendRequest = updateFriendRequest;
 exports.updateFriendRequest2 = updateFriendRequest2;
+exports.setMotto = setMotto;

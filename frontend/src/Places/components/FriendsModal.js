@@ -14,7 +14,7 @@ const FriendsModal = (props) => {
                 src={process.env.REACT_APP_ASSETS_URL + `${user.image}`}
                 alt={user.name}
               />
-              <p>{user.name}</p>
+              <p>{user.username}</p>
             </div>
 
             {props.userId === props.auth && (

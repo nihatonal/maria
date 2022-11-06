@@ -40,71 +40,87 @@ const PlaceList = (props) => {
           <i className="fa fa-circle-o-notch fa-spin"></i>
         </div>
       )}
-      <div className="placelist_wrapper">
-        {props.places.length >= 1 &&
-          props.places.map((el, index) => (
-            <div className="place_item-container" key={el.id}>
-              <div className="place_item-wrapper" id={el.id}>
-                <div className="place_info head-content">
-                  <NavLink
-                    className={"place_owner_image-wrapper"}
-                    to={`/user/${el.owner}/`}
-                  >
-                    {loadedUsers && (
-                      <img
-                        className={"place_owner_image"}
-                        src={
-                          process.env.REACT_APP_ASSETS_URL +
-                          `${loadedUsers ? getUser(el.owner).image : " /"}`
-                        }
-                        alt={el.owner}
-                      />
-                    )}
-                  </NavLink>
+      {!props.gridview ? (
+        <div className="photo_grid_view">
+          {props.places.length >= 1 &&
+            props.places.map((place, i) => (
+              <NavLink
+                to={`/places/${place.id}`}
+                key={place.id}
+                className="photo_grid_view-item"
+                id={place.id}
+              >
+                <img src={process.env.REACT_APP_ASSETS_URL + place.image} />
+              </NavLink>
+            ))}
+        </div>
+      ) : (
+        <div className="placelist_wrapper">
+          {props.places.length >= 1 &&
+            props.places.map((el, index) => (
+              <div className="place_item-container" key={el.id}>
+                <div className="place_item-wrapper" id={el.id}>
+                  <div className="place_info head-content">
+                    <NavLink
+                      className={"place_owner_image-wrapper"}
+                      to={`/${el.owner}/userplace`}
+                    >
+                      {loadedUsers && (
+                        <img
+                          className={"place_owner_image"}
+                          src={
+                            process.env.REACT_APP_ASSETS_URL +
+                            `${loadedUsers ? getUser(el.owner).image : " /"}`
+                          }
+                          alt={el.owner}
+                        />
+                      )}
+                    </NavLink>
 
-                  <div className="head-content-desc">
-                    <p className="place_author">
-                      {/* {loadedUsers && getUser(el.owner).name} */}
-                    </p>
-                    <h3 className="place_title">{el.title}</h3>
+                    <div className="head-content-desc">
+                      <p className="place_author">
+                        {/* {loadedUsers && getUser(el.owner).name} */}
+                      </p>
+                      <p className="place_title">{el.title}</p>
+                    </div>
                   </div>
-                </div>
-                <div className="place_image_wrapper">
-                  <img
-                    className={"place_image"}
-                    src={process.env.REACT_APP_ASSETS_URL + `${el.image}`}
-                    alt={el.title}
+                  <div className="place_image_wrapper">
+                    <img
+                      className={"place_image"}
+                      src={process.env.REACT_APP_ASSETS_URL + `${el.image}`}
+                      alt={el.title}
+                    />
+                  </div>
+                  <div className="place_info footer-content">
+                    <h3>{el.address}</h3>
+                    <p>{el.description}</p>
+                  </div>
+                  {auth.userId === el.owner && (
+                    <div
+                      className="place_item-delete-btn"
+                      onClick={props.onDelete}
+                    >
+                      <FaRegTrashAlt />
+                    </div>
+                  )}
+                  <Likes
+                    disabled={auth.userId === el.owner}
+                    place={el.id}
+                    places={props.places}
+                    user={el.owner}
                   />
                 </div>
-                <div className="place_info footer-content">
-                  <p>{el.description}</p>
-                  <p>{el.address}</p>
-                </div>
-                {auth.userId === el.owner && (
-                  <div
-                    className="place_item-delete-btn"
-                    onClick={props.onDelete}
-                  >
-                    <FaRegTrashAlt />
-                  </div>
-                )}
-                <Likes
-                  disabled={auth.userId === el.owner}
-                  place={el.id}
+                <Comments
                   places={props.places}
-                  user={el.owner}
+                  user={auth.userId}
+                  token={auth.token}
+                  placeId={el.id}
+                  users={loadedUsers}
                 />
               </div>
-              <Comments
-                places={props.places}
-                user={auth.userId}
-                token={auth.token}
-                placeId={el.id}
-                users={loadedUsers}
-              />
-            </div>
-          ))}
-      </div>
+            ))}
+        </div>
+      )}
       <ModalPlace show={props.confirmDelete} CloseonClick={props.close}>
         <div className="place_delete-wrapper">
           <h3>Вы точно хотите удалить?</h3>

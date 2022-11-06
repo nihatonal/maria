@@ -11,20 +11,10 @@ import MainNavigation from "./shared/Components/Navigation/MainNavigation";
 import MainFooter from "./shared/Components/Footer/MainFooter";
 import SignUpPage from "./SignUpPage/pages/SignUpPage";
 import SignUpPhoto from "./SignUpPage/pages/SignUpPhoto";
-// import UserDocs from "./SignUpPage/pages/UserDocs";
 import SignUpSuccess from "./SignUpPage/pages/SignUpSuccess";
 import Reset from "./users/components/Reset";
-
-// import FiveHundredTwo from "./shared/Components/NotFound/FiveHundredTwo";
-import FourHunderFour from "./shared/Components/NotFound/FourHunderFour";
 import English from "./English/page/English";
-//import RentACar from "./Cars/pages/RentACar";
-//import RentUserCar from "./Cars/pages/RentUserCar";
-// import UserCars from "./Cars/pages/UserCars";
-// import AddCar from "./Cars/components/AddCar";
-// import AddCarSuccess from "./Cars/components/AddCarSuccess";
-// import UserCar from "./Cars/pages/UserCar";
-// import UpdateCar from "./Cars/pages/UpdateCar";
+
 
 import { AuthContext } from "./shared/context/auth-context";
 import { useAuth } from "./shared/hooks/auth-hook";
@@ -69,7 +59,7 @@ function App() {
         <Route exact path="/:userId/addfriend" element={<AddFriend />} />
         <Route exact path="/user/:userId/" element={<UserPlace />} />
         <Route exact path="/:userId/:pid" element={<PlaceItem />} />
-        <Route exact path="*" element={<FourHunderFour />} />
+        <Route exact path="*" element={<MainPage />} />
       </React.Fragment>
     );
   } else {
@@ -84,7 +74,7 @@ function App() {
         <Route exact path="/reset/:token" element={<Reset />} />
         {/* <Route exact path="/userdocs" element={<UserDocs />} /> */}
         <Route exact path="/signup/success" element={<SignUpSuccess />} />
-        <Route path="*" element={<FourHunderFour />} />
+        <Route path="*" element={<MainPage />} />
       </React.Fragment>
     );
   }

@@ -5,10 +5,12 @@ import "./Hamburger.css";
 
 const Hamburger = (props) => {
   return (
-    <div className={"mobile_btns_wrapper"}>
-      <NavLink to='/main'>
-        <MdOutlineHome />
-      </NavLink>
+    <div className={"mobile_btns_wrapper"} style={props.style}>
+      {props.auth && (
+        <NavLink to="/main">
+          <MdOutlineHome onClick={props.homeicon} />
+        </NavLink>
+      )}
       <div
         id="nav-icon"
         className={props.show ? "open" : ""}

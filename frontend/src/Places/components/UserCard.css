@@ -1,6 +1,6 @@
 .usercard-wrapper {
   width: 100%;
-  padding: 0 20px 20px 20px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -9,22 +9,27 @@
   font-weight: normal;
 }
 .user-header {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+}
+.user-header_info {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
 }
-.user-header p,
-.user-header a {
+.user-header_info p,
+.user-header_info a {
   font-size: 13px;
   text-align: center;
   text-decoration: none;
   color: var(--bg_primary);
 }
-.user-header span {
+.user-header_info span {
   color: var(--bg_disabled);
 }
-.user-header p {
+.user-header_info p {
   margin: 0 15px;
   cursor: pointer;
 }
@@ -33,7 +38,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* margin-right: 50px; */
+  margin-right: 50px;
+  grid-row: 1 / span 2;
 }
 .user-header-image h4 {
   text-align: center;
@@ -43,6 +49,7 @@
   width: 56px;
   height: 56px;
   border-radius: 100%;
+  border: 2px solid var(--bg_primary);
 }
 
 .usercard_friends_status {
@@ -68,35 +75,96 @@
   margin-right: 2px;
 }
 
-/* .user_friendlist_item svg:hover {
-  box-shadow: 0 0 15px red;
-} */
-
-/* request buttons */
-.requests_container {
-  width: 100%;
+.user_friendlist_container {
+  background-color: var(--color_dark_white);
+  width: 90%;
+  height: 80vh;
   margin: 0 auto;
+  overflow-y: scroll;
   font-family: var(--font_family_primary);
   font-weight: normal;
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  padding: 40px 0;
 }
-.request_not_have {
-  padding-top: 50px;
+.user_friendlist_container::-webkit-scrollbar {
+  width: 12px;
+  background-color: #f5f5f5;
 }
-.request-add {
-  color: var(--color_green);
-  opacity: 0.6;
-  margin-right: 5px;
+.user_friendlist_container::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  background-color: #3c66ff;
 }
-.request-remove {
-  color: var(--color_danger);
-  opacity: 0.8;
+.user_friendlist_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60%;
+  margin-bottom: 10px;
 }
-.btn-request-status {
-  font-size: 20px;
+.user_friendlist_item-info {
+  display: flex;
+  align-items: center;
 }
-.btn-request-status:hover {
-  opacity: 1;
+.user_friendlist_item img {
+  width: 34px;
+  height: 34px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+.user_friendlist_item-delete {
+  width: 10px;
+  height: 11px;
+  border-radius: 100%;
+  background-color: transparent;
+}
+.user_friendlist_item-delete:hover {
+  box-shadow: 0 0 20px red;
+}
+.user_friendlist_item svg {
+  cursor: pointer;
+}
+
+.motto_wrapper {
+  grid-column-start: 2;
+  font-style: italic;
+  /* padding-top: 5px; */
+  font-size: 12px;
+  text-align: center;
+  position: relative;
+  width: 200px;
+  text-align: left;
+  padding: 0 5px;
+  height: 50px;
+  margin-top: 10px;
+  border: 1px dotted transparent;
+}
+.motto_wrapper p {
+  height: 100%;
+  line-height: 16px;
+}
+
+.motto_input {
+  background-color: transparent;
+  width: 200px;
+  border: none;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-shadow: none;
+  padding: 0 5px;
+  margin: 0;
+  font-size: 12px;
+  color: transparent;
+}
+.motto_input:focus {
+  background-color: transparent;
+  color: transparent;
+}
+.motto_input:focus + p {
+  border: 1px dotted var(--bg_primary);
 }

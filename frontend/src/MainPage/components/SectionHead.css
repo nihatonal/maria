@@ -19,22 +19,28 @@
   align-items: center;
 }
 .btn-sign-up {
-  width: 80%;
-  background-color: var(--bg_primary);
-  color: var(--bg_secondary);
-  border-radius: 10px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  font-family: var(--font_family_primary);
-  font-weight: normal;
-  transition: all 0.2s;
-  line-height: 19px;
-  box-shadow: var(--box-shadow);
+  display: none;
 }
-.btn-sign-up:hover {
-  background: var(--bg_secondary);
-  color: var(--bg_primary);
+
+@media screen and (max-width: 767px) {
+  .btn-sign-up {
+    width: 80%;
+    background-color: var(--bg_primary);
+    color: var(--bg_secondary);
+    border-radius: 10px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-family: var(--font_family_primary);
+    font-weight: normal;
+    transition: all 0.2s;
+    line-height: 19px;
+    box-shadow: var(--box-shadow);
+  }
+  .btn-sign-up:hover {
+    background: var(--bg_secondary);
+    color: var(--bg_primary);
+  }
 }
