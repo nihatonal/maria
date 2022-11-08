@@ -13,3 +13,29 @@
 .btn-request-status:hover {
   opacity: 1;
 }
+
+.request_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 85%;
+  margin-bottom: 10px;
+}
+.user_friendlist_item-info {
+  display: flex;
+  align-items: center;
+}
+.request_item img {
+  width: 34px;
+  height: 34px;
+  border-radius: 100%;
+  margin-right: 10px;
+}
+
+.request_item svg {
+  cursor: pointer;
+  border-radius: 100%;
+}
+.btn-request-wrapper {
+  display: flex;
+}

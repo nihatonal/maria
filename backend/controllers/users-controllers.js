@@ -369,6 +369,7 @@ const updateFriendRequest = async (req, res, next) => {
 
   const { userId, requestId, requestFromFriend, requestToFriend } = req.body;
   let user;
+
   try {
     user = await User.findById(userId);
   } catch (err) {
@@ -378,14 +379,15 @@ const updateFriendRequest = async (req, res, next) => {
     );
     return next(error);
   }
-
+  
   user.friendSendRequest = requestToFriend;
-
+  
+  
   try {
     await user.save();
   } catch (err) {
     const error = new HttpError(
-      "Something went wrong, could not update user friends.",
+      "Something went wrong, could not update user requests.",
       500
     );
     return next(error);
@@ -524,6 +526,7 @@ const updateUserFriends = async (req, res, next) => {
   const { userId, friendList, friendId, friendlist } = req.body;
 
   let user;
+  console.log(req.body)
   try {
     user = await User.findById(userId);
   } catch (err) {
@@ -556,7 +559,7 @@ const updateUserFriends = async (req, res, next) => {
     );
     return next(error);
   }
-
+  console.log(friendlist);
   friend.friendList = friendlist;
 
   try {

@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
+import Hamburger from "./Hamburger";
 import { GiThreeFriends } from "react-icons/gi";
 import { GiPostStamp } from "react-icons/gi";
 import { GiBrickWall } from "react-icons/gi";
@@ -21,6 +21,11 @@ const NavBar = (props) => {
       <NavLink className="nav user-friends" to={`/${userId}/friends`}>
         <GiThreeFriends />
       </NavLink>
+      <Hamburger
+        show={props.drawerIsOpen}
+        onClick={props.openDrawerHandler}
+        auth={props.auth}
+      />
     </div>
   );
 };

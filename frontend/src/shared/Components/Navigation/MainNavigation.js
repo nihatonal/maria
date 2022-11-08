@@ -221,7 +221,12 @@ const MainNavigation = () => {
           >
             <NavLinks />
           </nav> */}
-          <NavBar userId ={auth.userId}/>
+          <NavBar
+            userId={auth.userId}
+            drawerIsOpen={drawerIsOpen}
+            openDrawerHandler={openDrawerHandler}
+            auth={auth.isLoggedIn}
+          />
           {!auth.isLoggedIn ? (
             <div className="header-button-wrapper">
               <button className="btn btn-sign_in" onClick={showAuthHandler}>
@@ -233,12 +238,11 @@ const MainNavigation = () => {
             </div>
           ) : null}
 
-          <Hamburger
+          {/* <Hamburger
             show={drawerIsOpen}
             onClick={openDrawerHandler}
             auth={auth.isLoggedIn}
-            homeicon={() => setDrawerIsOpen(false)}
-          />
+          /> */}
         </div>
       </MainHeader>
     </React.Fragment>

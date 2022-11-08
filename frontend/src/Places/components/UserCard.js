@@ -8,15 +8,17 @@ import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
 import { CiCircleRemove } from "react-icons/ci";
 import ModalPlace from "../../shared/Components/UIElements/ModalPlace";
+import SendRequest from "./SendRequest";
+
 import "./UserCard.css";
 const UserCard = (props) => {
   const auth = useContext(AuthContext);
   const { sendRequest } = useHttpClient();
   const [loadedUser, setLoadedUser] = useState([]);
+  const [loadedUsers, setLoadedUsers] = useState([]);
   const userId = useParams().userId;
   const [friends, setFriends] = useState([]);
   const [check, setCheck] = useState(false);
-  const [showFriends, setShowFriends] = useState(false);
   const [friendList, setFriendList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [motto, setMotto] = useState("Your Motto");
@@ -28,32 +30,32 @@ const UserCard = (props) => {
           process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
         );
         setLoadedUser(responseData.user);
-        console.log(responseData.user.motto);
         setMotto(responseData.user.motto);
       } catch (err) {}
     };
     fetchCars();
-  }, [sendRequest, friendListHandler, deleteFriendHandler, userId]);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      let list;
-      try {
-        const responseData = await sendRequest(
-          process.env.REACT_APP_BACKEND_URL + `/users/${auth.userId}`
-        );
-        console.log(responseData.user);
-        setFriends(responseData.user.friendList);
-        list = responseData.user.friendList;
-        if (list.includes(userId)) {
-          setCheck(true);
-        } else {
-          setCheck(false);
-        }
-      } catch (err) {}
-    };
-    fetchUser();
   }, [sendRequest, userId]);
+
+  // useEffect(() => {
+  //   console.log(trigger);
+  //   const fetchUser = async () => {
+  //     let list;
+  //     try {
+  //       const responseData = await sendRequest(
+  //         process.env.REACT_APP_BACKEND_URL + `/users/${auth.userId}`
+  //       );
+  //       console.log(responseData.user);
+  //       setFriends(responseData.user.friendList);
+  //       list = responseData.user.friendList;
+  //       if (list.includes(userId)) {
+  //         setCheck(true);
+  //       } else {
+  //         setCheck(false);
+  //       }
+  //     } catch (err) {}
+  //   };
+  //   fetchUser();
+  // }, [sendRequest, userId, check, trigger]);
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -67,87 +69,22 @@ const UserCard = (props) => {
         const friendArr = responseData.users.filter((user) =>
           filterList.includes(user.id)
         );
-
+        console.log(responseData.users);
+        setLoadedUsers(responseData.users);
         setFilteredList(friendArr);
         setFriendList(responseData.users);
       } catch (err) {}
     };
     fetchCars();
-  }, [
-    sendRequest,
-    friendListHandler,
-    deleteFriendHandler,
-    userId,
-    auth.userId,
-  ]);
+  }, [sendRequest, userId, auth.userId, check]);
 
-  const setFriend = async () => {
-    let friendArr = [];
+  const updateFriendList = (userId) => {
 
-    if (!friends.includes(userId)) {
-      friendArr = [...friends, userId];
-      setCheck(true);
-    } else if (friends.includes(userId)) {
-      friendArr = friends.filter((item) => item !== userId);
-      setCheck(false);
-    }
-    try {
-      const responseData = await sendRequest(
-        process.env.REACT_APP_BACKEND_URL + `/users/friendlist/${auth.userId}`,
-        "PATCH",
-        JSON.stringify({
-          friendList: friendArr,
-          userId: auth.userId,
-        }),
-        {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + auth.token,
-        }
-      );
-      setFriends(friendArr);
-    } catch (err) {}
+      // setLoadedUsers(responseData.users);
+      // setFilteredList(friendArr);
+      // setFriendList(responseData.users);
   };
-
-  const addFriendList = (e) => {
-    e.preventDefault();
-    setFriend();
-  };
-
-  const friendListHandler = () => {
-    const filterList = friendList.filter((user) => user.id === userId)[0]
-      .friendList;
-    const friendArr = friendList.filter((user) => filterList.includes(user.id));
-    console.log(friendArr);
-    setFilteredList(friendArr);
-    setShowFriends(true);
-  };
-
-  const deleteFriendHandler = async (x) => {
-    let friendArr = [];
-    friendArr = friends.filter((item) => item !== x);
-    console.log(friends);
-    const filterList = friendList.filter((user) => friendArr.includes(user.id));
-    console.log(filterList);
-    setFilteredList(filterList);
-    setCheck(false);
-
-    try {
-      const responseData = await sendRequest(
-        process.env.REACT_APP_BACKEND_URL + `/users/friendlist/${auth.userId}`,
-        "PATCH",
-        JSON.stringify({
-          friendList: friendArr,
-          userId: auth.userId,
-        }),
-        {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + auth.token,
-        }
-      );
-      setFriends(friendArr);
-    } catch (err) {}
-  };
-
+  // Motto Section start
   useEffect(() => {
     const listener = (event) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
@@ -179,7 +116,7 @@ const UserCard = (props) => {
       console.log(responseData);
     } catch (err) {}
   };
-
+  // Motto Section end
   return (
     <div className="usercard-wrapper">
       <div className="user-header">
@@ -193,11 +130,11 @@ const UserCard = (props) => {
             <br></br>
             <span>Посты</span>
           </p>
-          <p onClick={friendListHandler}>
+          <NavLink to={`/${userId}/friends`}>
             {filteredList && filteredList.length}
             <br></br>
             <span>Друзья</span>
-          </p>
+          </NavLink>
           <p>
             <NavLink to={`/${userId}/mywords`}>
               {loadedUser.cars && loadedUser.cars.length}
@@ -227,53 +164,7 @@ const UserCard = (props) => {
           <p>"{motto}"</p>
         </forum>
       </div>
-      {userId !== auth.userId && (
-        <div>
-          {!check ? (
-            <p className="usercard_friends_status" onClick={addFriendList}>
-              <CiCircleRemove style={{ color: "var(--color_danger)" }} />
-              Bы не друзья...{" "}
-              <span className="usercard_friends_status-question">
-                {" "}
-                <IoIosAddCircle style={{ color: "var(--color_green)" }} />
-                Добавить?
-              </span>
-            </p>
-          ) : (
-            <p className="usercard_friends_status" onClick={addFriendList}>
-              <FaCheckCircle style={{ color: "var(--color_green)" }} /> Bы
-              друзья.{" "}
-              <span className="usercard_friends_status-question">
-                <IoIosRemoveCircle style={{ color: "var(--color_danger)" }} />
-                Удалить?
-              </span>
-            </p>
-          )}
-        </div>
-      )}
-
-      <ModalPlace show={showFriends} CloseonClick={() => setShowFriends(false)}>
-        <div className="user_friendlist_container">
-          {filteredList.map((user) => (
-            <div className="user_friendlist_item" key={user.id}>
-              <div className="user_friendlist_item-info">
-                <img
-                  src={process.env.REACT_APP_ASSETS_URL + `${user.image}`}
-                  alt={user.name}
-                />
-                <p>{user.name}</p>
-              </div>
-
-              {userId === auth.userId && (
-                <IoIosRemoveCircle
-                  onClick={() => deleteFriendHandler(user.id)}
-                  style={{ color: "var(--color_danger)" }}
-                />
-              )}
-            </div>
-          ))}
-        </div>
-      </ModalPlace>
+      <SendRequest triggerHandler={updateFriendList} />
     </div>
   );
 };

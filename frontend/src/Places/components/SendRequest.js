@@ -13,7 +13,7 @@ import "./SendRequest.css";
 const SendRequest = (props, user) => {
   const auth = useContext(AuthContext);
   const { sendRequest } = useHttpClient();
-  const [loadedUser, setLoadedUser] = useState([]);
+  const [loadedUsers, setLoadedUsers] = useState([]);
   const userId = useParams().userId;
   const [friends, setFriends] = useState([]);
 
@@ -26,6 +26,26 @@ const SendRequest = (props, user) => {
   const [selectedUser, setSelectedUser] = useState();
 
   useEffect(() => {
+    const fetchCars = async () => {
+      try {
+        const responseData = await sendRequest(
+          process.env.REACT_APP_BACKEND_URL + `/users`
+        );
+        const filterList = responseData.users.filter(
+          (user) => user.id === userId
+        )[0].friendList;
+        const friendArr = responseData.users.filter((user) =>
+          filterList.includes(user.id)
+        );
+        console.log(filterList);
+        
+        setFriends(filterList);
+        setLoadedUsers(responseData.users);
+      } catch (err) {}
+    };
+    fetchCars();
+  }, [sendRequest, userId, auth.userId]);
+  useEffect(() => {
     const fetchUser = async () => {
       let list;
       try {
@@ -35,6 +55,7 @@ const SendRequest = (props, user) => {
         console.log(responseData.user);
         list = responseData.user.friendRecievedRequest;
         setRequestFrom(responseData.user.friendRecievedRequest);
+      
         if (list.includes(auth.userId)) {
           setCheck(true);
         } else {
@@ -137,9 +158,10 @@ const SendRequest = (props, user) => {
 
   const requestListHandler = () => {
     setShowRequest(true);
-    const friendArr = props.users.filter((user) =>
+    const friendArr = loadedUsers.filter((user) =>
       requestFrom.includes(user.id)
     );
+    console.log(loadedUsers);
     console.log(friendArr);
     setRequestList(friendArr);
   };
@@ -187,7 +209,12 @@ const SendRequest = (props, user) => {
     if (!friends.includes(user)) {
       friendArr = [...friends, user];
     }
-    console.log(friendArr);
+    const selectedFriend = loadedUsers.filter((friend) => friend.id === user);
+    const selectedFriendList = selectedFriend[0].friendList;
+    if (!selectedFriendList.includes(auth.userId)) {
+      selectedFriendList.push(auth.userId);
+    }
+    
     try {
       const responseData = await sendRequest(
         process.env.REACT_APP_BACKEND_URL + `/users/friendlist/${auth.userId}`,
@@ -195,12 +222,15 @@ const SendRequest = (props, user) => {
         JSON.stringify({
           friendList: friendArr,
           userId: auth.userId,
+          friendId: user,
+          friendlist: selectedFriendList,
         }),
         {
           "Content-Type": "application/json",
           Authorization: "Bearer " + auth.token,
         }
       );
+      setCheck(true)
       setFriends(friendArr);
       setShowRequest(false);
       deleteRequest_(user);
@@ -210,7 +240,7 @@ const SendRequest = (props, user) => {
   return (
     <div className="usercard-wrapper">
       {userId !== auth.userId ? (
-        friends.includes(userId) ? (
+        friends.includes(auth.userId) ? (
           <p
             className="usercard_friends_status"
             // onClick={() => deleteFriendHandler(userId)}
@@ -257,7 +287,7 @@ const SendRequest = (props, user) => {
       <ModalPlace show={showRequest} CloseonClick={() => setShowRequest(false)}>
         <div className="user_friendlist_container">
           {requestList.map((user) => (
-            <div className="user_friendlist_item" key={user.id}>
+            <div className="request_item" key={user.id}>
               <div className="user_friendlist_item-info">
                 <img
                   src={process.env.REACT_APP_ASSETS_URL + `${user.image}`}

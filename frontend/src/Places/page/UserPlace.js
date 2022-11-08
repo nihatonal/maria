@@ -137,11 +137,11 @@ const UserPlace = () => {
           )}
         </div>
       )}
-      {!loading && (
+      {/* {!loading && (
         <div className="userplaces-right-side">
           <Game token={auth.token} userId={userId} />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

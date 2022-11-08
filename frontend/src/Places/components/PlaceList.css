@@ -171,3 +171,16 @@
 .place_delete-wrapper button:last-child:hover {
   box-shadow: 0 0 20px var(--color_danger);
 }
+
+.photo_grid_view {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 10px;
+  padding: 0 20px;
+}
+.photo_grid_view-item img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}

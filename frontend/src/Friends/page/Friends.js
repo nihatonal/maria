@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-
+import { useParams } from "react-router-dom";
 import Button from "../../shared/Components/FormElements/Button";
 import { AuthContext } from "../../shared/context/auth-context";
 import FriendList from "../components/FriendList";
@@ -9,8 +9,9 @@ import "./Friends.css";
 
 const Friends = (props) => {
   const auth = useContext(AuthContext);
+  const userId = useParams().userId;
   const { sendRequest } = useHttpClient();
-  const userId = auth.userId;
+  // const userId = auth.userId;
   const [filteredList, setFilteredList] = useState([]);
   const [loadedUsers, setLoadedUsers] = useState([]);
   const [friends, setFriends] = useState([]);
@@ -38,7 +39,6 @@ const Friends = (props) => {
   // Delete friend
 
   const deleteFriendHandler = async (x) => {
-    setLoading(true);
     let friendArr = [];
     let userFriend = [];
     friendArr = friends.filter((item) => item !== x);
@@ -73,7 +73,6 @@ const Friends = (props) => {
       );
       //console.log(responseData.user)
       setFriends(friendArr);
-      setLoading(false);
     } catch (err) {}
   };
   return (
@@ -94,19 +93,21 @@ const Friends = (props) => {
               <p>{user.username}</p>
             </div>
 
-            <div
-              id={user.id}
-              onClick={props.deleteFriendHandler}
-              style={{ cursor: "pointer" }}
-            >
-              <IoIosRemoveCircle
-                style={{
-                  color: "var(--color_danger)",
-                  pointerEvents: "none",
-                  fontSize: "24px",
-                }}
-              />
-            </div>
+            {auth.userId === userId && (
+              <div
+                id={user.id}
+                onClick={() => deleteFriendHandler(user.id)}
+                style={{ cursor: "pointer" }}
+              >
+                <IoIosRemoveCircle
+                  style={{
+                    color: "var(--color_danger)",
+                    pointerEvents: "none",
+                    fontSize: "24px",
+                  }}
+                />
+              </div>
+            )}
           </div>
         ))}
       </div>
