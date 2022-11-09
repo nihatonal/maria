@@ -8,7 +8,7 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 import AddPlace from "../components/AddPlace";
 import PlaceList from "../components/PlaceList";
 import ModalPlace from "../../shared/Components/UIElements/ModalPlace";
-import UserCard from "../components/UserCard";
+import UserCard from "../../users/components/UserCard";
 import Game from "../../MemoryGame/Game";
 import FlashCards from "../../English/components/FlashCards";
 import { AiOutlineTable } from "react-icons/ai";
@@ -85,12 +85,11 @@ const UserPlace = () => {
           }}
         />
       </ModalPlace>
-      {loading && (
+      {loading ? (
         <div className="loading-wrapper">
           <i className="fa fa-circle-o-notch fa-spin"></i>
         </div>
-      )}
-      {!loading && (
+      ) : (
         <div className="userplaces-left-side">
           <UserCard />
           <div className="btns-add-place-wrapper">

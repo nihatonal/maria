@@ -9,7 +9,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
 import { CiCircleRemove } from "react-icons/ci";
 import ModalPlace from "../../shared/Components/UIElements/ModalPlace";
-import SendRequest from "./SendRequest";
+import SendRequest from "../../Places/components/SendRequest";
 
 import "./UserCard.css";
 const UserCard = (props) => {
@@ -23,7 +23,7 @@ const UserCard = (props) => {
   const [check, setCheck] = useState(false);
   const [friendList, setFriendList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
-  const [motto, setMotto] = useState("Your Motto");
+  const [motto, setMotto] = useState("");
 
   useEffect(() => {
     const fetchCars = async () => {

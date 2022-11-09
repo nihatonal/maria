@@ -78,38 +78,43 @@ const Friends = (props) => {
   return (
     <React.Fragment>
       <div className="friends_container">
-        {loading && (
+        {loading ? (
           <div className="loading-wrapper">
             <i className="fa fa-circle-o-notch fa-spin"></i>
           </div>
-        )}
-        {filteredList.map((user) => (
-          <div className="friend-card" key={user.id} id={user.id}>
-            <div className="friend-card-info">
-              <img
-                src={process.env.REACT_APP_ASSETS_URL + `${user.image}`}
-                alt={user.name}
-              />
-              <p>{user.username}</p>
-            </div>
-
-            {auth.userId === userId && (
-              <div
-                id={user.id}
-                onClick={() => deleteFriendHandler(user.id)}
-                style={{ cursor: "pointer" }}
-              >
-                <IoIosRemoveCircle
-                  style={{
-                    color: "var(--color_danger)",
-                    pointerEvents: "none",
-                    fontSize: "24px",
-                  }}
+        ) : filteredList.length > 0 ? (
+          filteredList.map((user) => (
+            <div className="friend-card" key={user.id} id={user.id}>
+              <div className="friend-card-info">
+                <img
+                  src={process.env.REACT_APP_ASSETS_URL + `${user.image}`}
+                  alt={user.name}
                 />
+                <p>{user.username}</p>
               </div>
-            )}
+
+              {auth.userId === userId && (
+                <div
+                  id={user.id}
+                  onClick={() => deleteFriendHandler(user.id)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <IoIosRemoveCircle
+                    style={{
+                      color: "var(--color_danger)",
+                      pointerEvents: "none",
+                      fontSize: "24px",
+                    }}
+                  />
+                </div>
+              )}
+            </div>
+          ))
+        ) : (
+          <div>
+            <p>У вас нет друзей.</p>
           </div>
-        ))}
+        )}
       </div>
     </React.Fragment>
   );

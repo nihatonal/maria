@@ -8,7 +8,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
 import { CiCircleRemove } from "react-icons/ci";
 import ModalPlace from "../../shared/Components/UIElements/ModalPlace";
-import "./UserCard.css";
+import "../../users/components/UserCard.css";
 import "./SendRequest.css";
 
 const SendRequest = (props) => {
