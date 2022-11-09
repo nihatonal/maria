@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { AuthContext } from "../../shared/context/auth-context";
+import { ShareContext } from "../../shared/context/share-contex";
 import { FaCheckCircle } from "react-icons/fa";
 import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
@@ -10,8 +11,9 @@ import ModalPlace from "../../shared/Components/UIElements/ModalPlace";
 import "./UserCard.css";
 import "./SendRequest.css";
 
-const SendRequest = (props, user) => {
+const SendRequest = (props) => {
   const auth = useContext(AuthContext);
+  const share = useContext(ShareContext);
   const { sendRequest } = useHttpClient();
   const [loadedUsers, setLoadedUsers] = useState([]);
   const userId = useParams().userId;
@@ -38,7 +40,7 @@ const SendRequest = (props, user) => {
           filterList.includes(user.id)
         );
         console.log(filterList);
-        
+
         setFriends(filterList);
         setLoadedUsers(responseData.users);
       } catch (err) {}
@@ -55,7 +57,7 @@ const SendRequest = (props, user) => {
         console.log(responseData.user);
         list = responseData.user.friendRecievedRequest;
         setRequestFrom(responseData.user.friendRecievedRequest);
-      
+
         if (list.includes(auth.userId)) {
           setCheck(true);
         } else {
@@ -64,7 +66,13 @@ const SendRequest = (props, user) => {
       } catch (err) {}
     };
     fetchUser();
-  }, [sendRequest, sendRequestHandler, deleteRequestHandler, userId]);
+  }, [
+    sendRequest,
+    setFriend,
+    sendRequestHandler,
+    deleteRequestHandler,
+    userId,
+  ]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -79,7 +87,13 @@ const SendRequest = (props, user) => {
       } catch (err) {}
     };
     fetchUser();
-  }, [sendRequest, sendRequestHandler, deleteRequestHandler, selectedUser]);
+  }, [
+    sendRequest,
+    setFriend,
+    sendRequestHandler,
+    deleteRequestHandler,
+    selectedUser,
+  ]);
 
   // Send Request
   const sendRequestHandler = async () => {
@@ -196,6 +210,9 @@ const SendRequest = (props, user) => {
           Authorization: "Bearer " + auth.token,
         }
       );
+      if (sendToFriend.length < 1) {
+        setShowRequest(false);
+      }
       console.log(responseData.user.friendRecievedRequest);
       setRequestFrom(responseData.user.friendRecievedRequest);
     } catch (err) {}
@@ -214,7 +231,8 @@ const SendRequest = (props, user) => {
     if (!selectedFriendList.includes(auth.userId)) {
       selectedFriendList.push(auth.userId);
     }
-    
+    share.addFriend = friendArr;
+
     try {
       const responseData = await sendRequest(
         process.env.REACT_APP_BACKEND_URL + `/users/friendlist/${auth.userId}`,
@@ -230,9 +248,10 @@ const SendRequest = (props, user) => {
           Authorization: "Bearer " + auth.token,
         }
       );
-      setCheck(true)
+      setCheck(true);
       setFriends(friendArr);
       setShowRequest(false);
+      deleteRequest_(user);
       deleteRequest_(user);
     } catch (err) {}
   };

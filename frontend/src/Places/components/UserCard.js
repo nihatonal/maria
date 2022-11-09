@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../shared/context/auth-context";
+import { ShareContext } from "../../shared/context/share-contex";
 import { FaCheckCircle } from "react-icons/fa";
 import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
@@ -13,6 +14,7 @@ import SendRequest from "./SendRequest";
 import "./UserCard.css";
 const UserCard = (props) => {
   const auth = useContext(AuthContext);
+  const share = useContext(ShareContext);
   const { sendRequest } = useHttpClient();
   const [loadedUser, setLoadedUser] = useState([]);
   const [loadedUsers, setLoadedUsers] = useState([]);
@@ -36,27 +38,6 @@ const UserCard = (props) => {
     fetchCars();
   }, [sendRequest, userId]);
 
-  // useEffect(() => {
-  //   console.log(trigger);
-  //   const fetchUser = async () => {
-  //     let list;
-  //     try {
-  //       const responseData = await sendRequest(
-  //         process.env.REACT_APP_BACKEND_URL + `/users/${auth.userId}`
-  //       );
-  //       console.log(responseData.user);
-  //       setFriends(responseData.user.friendList);
-  //       list = responseData.user.friendList;
-  //       if (list.includes(userId)) {
-  //         setCheck(true);
-  //       } else {
-  //         setCheck(false);
-  //       }
-  //     } catch (err) {}
-  //   };
-  //   fetchUser();
-  // }, [sendRequest, userId, check, trigger]);
-
   useEffect(() => {
     const fetchCars = async () => {
       try {
@@ -78,11 +59,9 @@ const UserCard = (props) => {
     fetchCars();
   }, [sendRequest, userId, auth.userId, check]);
 
-  const updateFriendList = (userId) => {
-
-      // setLoadedUsers(responseData.users);
-      // setFilteredList(friendArr);
-      // setFriendList(responseData.users);
+  const updateFriendList = () => {
+    console.log(share.addFriend);
+    setFilteredList(share.addFriend);
   };
   // Motto Section start
   useEffect(() => {
