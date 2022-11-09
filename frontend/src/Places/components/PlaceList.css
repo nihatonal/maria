@@ -26,10 +26,16 @@
   flex-direction: column;
   align-items: center;
 }
+
 .place_item-wrapper {
   width: 100%;
 
   position: relative;
+}
+.place_item-container .place_item-likes {
+  top: 180px;
+  height: 40px;
+  z-index: 99;
 }
 .place_image_wrapper {
   width: 100%;

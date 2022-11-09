@@ -45,7 +45,7 @@ const PlaceList = (props) => {
           {props.places.length >= 1 &&
             props.places.map((place, i) => (
               <NavLink
-                to={`/places/${place.id}`}
+                to={`/${place.owner}/${place.id}`}
                 key={place.id}
                 className="photo_grid_view-item"
                 id={place.id}
