@@ -39,7 +39,7 @@ const SendRequest = (props) => {
         const friendArr = responseData.users.filter((user) =>
           filterList.includes(user.id)
         );
-        console.log(filterList);
+        // console.log(filterList);
 
         setFriends(filterList);
         setLoadedUsers(responseData.users);
@@ -54,7 +54,7 @@ const SendRequest = (props) => {
         const responseData = await sendRequest(
           process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
         );
-        console.log(responseData.user);
+        // console.log(responseData.user);
         list = responseData.user.friendRecievedRequest;
         setRequestFrom(responseData.user.friendRecievedRequest);
 
@@ -129,7 +129,7 @@ const SendRequest = (props) => {
           Authorization: "Bearer " + auth.token,
         }
       );
-      console.log(responseData);
+     // console.log(responseData);
     } catch (err) {}
   };
 
@@ -156,7 +156,7 @@ const SendRequest = (props) => {
           Authorization: "Bearer " + auth.token,
         }
       );
-      console.log(responseData);
+     // console.log(responseData);
       setCheck(false);
     } catch (err) {}
   };
@@ -175,8 +175,8 @@ const SendRequest = (props) => {
     const friendArr = loadedUsers.filter((user) =>
       requestFrom.includes(user.id)
     );
-    console.log(loadedUsers);
-    console.log(friendArr);
+   // console.log(loadedUsers);
+    //console.log(friendArr);
     setRequestList(friendArr);
   };
 

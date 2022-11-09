@@ -1,15 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import { useHttpClient } from "../../shared/hooks/http-hook";
+import { ShareContext } from "../../shared/context/share-contex";
 import { AuthContext } from "../../shared/context/auth-context";
 import "./UsersList.css";
 
 const UsersList = () => {
   const auth = useContext(AuthContext);
+  const share = useContext(ShareContext);
   const { sendRequest } = useHttpClient();
   const [loading, setLoading] = useState(false);
 
   const [loadedUsers, setLoadedUsers] = useState();
+
+  useEffect(() => {
+    console.log(share.searchUser);
+  }, []);
 
   useEffect(() => {
     const fetchCars = async () => {

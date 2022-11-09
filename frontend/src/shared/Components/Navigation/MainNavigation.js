@@ -16,6 +16,8 @@ import RenewPassword from "../../../users/components/RenewPassword";
 import { AuthContext } from "../../context/auth-context";
 import { useHttpClient } from "../../hooks/http-hook";
 
+import SearchUser from "../../../users/components/SearchUser";
+
 import "./MainNavigation.css";
 
 const MainNavigation = () => {
@@ -221,6 +223,7 @@ const MainNavigation = () => {
           >
             <NavLinks />
           </nav> */}
+          <SearchUser />
           <NavBar
             userId={auth.userId}
             drawerIsOpen={drawerIsOpen}
