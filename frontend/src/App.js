@@ -29,6 +29,7 @@ const UserFriends = React.lazy(() => import("./Friends/page/Friends.js"));
 const AddWord = React.lazy(() => import("./English/components/AddWord"));
 const UserPlace = React.lazy(() => import("./Places/page/UserPlace.js"));
 const PlaceItem = React.lazy(() => import("./Places/page/PlaceItem.js"));
+const UserList = React.lazy(() => import("./users/page/UsersList.js"));
 
 function App() {
   const { token, login, logout, userId } = useAuth();
@@ -58,6 +59,7 @@ function App() {
         <Route exact path="/:userId/addfriend" element={<AddFriend />} />
         <Route exact path="/user/:userId/" element={<UserPlace />} />
         <Route exact path="/:userId/:pid" element={<PlaceItem />} />
+        <Route exact path="/users" element={<UserList />} />
 
         <Route exact path="*" element={<MainPage />} />
       </React.Fragment>
@@ -65,16 +67,19 @@ function App() {
   } else {
     routes = (
       <React.Fragment>
-        <Route exact path="/" element={<MainPage />} />
+        {/* <Route exact path="/" element={<MainPage />} /> */}
+        <Route exact path="/" element={<UserMain />} />
         <Route exact path="/english" element={<English />} />
         <Route exact path="/about" element={<PageAbout />} />
         <Route exact path="/faq" element={<PageFaq />} />
         <Route exact path="/signup" element={<SignUpPage />} />
         <Route exact path="/userphoto" element={<SignUpPhoto />} />
         <Route exact path="/reset/:token" element={<Reset />} />
+        <Route exact path="/user/:userId/" element={<UserPlace />} />
         {/* <Route exact path="/userdocs" element={<UserDocs />} /> */}
         <Route exact path="/signup/success" element={<SignUpSuccess />} />
-        <Route path="*" element={<MainPage />} />
+        <Route exact path="/users" element={<UserList />} />
+        <Route path="*" element={<UserMain />} />
       </React.Fragment>
     );
   }

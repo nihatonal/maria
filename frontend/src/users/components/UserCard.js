@@ -123,27 +123,29 @@ const UserCard = (props) => {
           </p>
         </div>
         <forum onSubmit={mottoHandler} className="motto_wrapper">
-          <input
-            onChange={(e) => {
-              setMotto(e.target.value);
-            }}
-            placeholder="write your motto"
-            onFocus={() => setMotto("")}
-            onBlur={() => {
-              if (motto === "") {
-                setMotto("Your Motto");
-              } else {
-                setMotto(motto);
-              }
-              mottoHandler();
-            }}
-            value={motto}
-            className="motto_input"
-          />
+          {auth.isLoggedIn && (
+            <input
+              onChange={(e) => {
+                setMotto(e.target.value);
+              }}
+              placeholder="write your motto"
+              onFocus={() => setMotto("")}
+              onBlur={() => {
+                if (motto === "") {
+                  setMotto("Your Motto");
+                } else {
+                  setMotto(motto);
+                }
+                mottoHandler();
+              }}
+              value={motto}
+              className="motto_input"
+            />
+          )}
           <p>"{motto}"</p>
         </forum>
       </div>
-      <SendRequest triggerHandler={updateFriendList} />
+      {auth.isLoggedIn && <SendRequest triggerHandler={updateFriendList} />}
     </div>
   );
 };

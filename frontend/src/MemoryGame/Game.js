@@ -87,6 +87,8 @@ export default function Game(props) {
         })
         .then((res) => {
           const arrLength = res.data.cars.length;
+
+          if (res.data.cars.length < 12) return;
           const arr = [];
 
           while (arr.length < 6) {
@@ -96,6 +98,7 @@ export default function Game(props) {
           const gameDB = [];
           arr.map((word) => gameDB.push(res.data.cars[word]));
           console.log(gameDB);
+
           const newList = gameDB.map((item) => {
             return {
               id: item.id,

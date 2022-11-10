@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import Button from "../../shared/Components/FormElements/Button";
 import { AuthContext } from "../../shared/context/auth-context";
 import FriendList from "../components/FriendList";
@@ -86,11 +86,13 @@ const Friends = (props) => {
           filteredList.map((user) => (
             <div className="friend-card" key={user.id} id={user.id}>
               <div className="friend-card-info">
-                <img
-                  src={process.env.REACT_APP_ASSETS_URL + `${user.image}`}
-                  alt={user.name}
-                />
-                <p>{user.username}</p>
+                <NavLink to={`/user/${user.id}`}>
+                  <img
+                    src={process.env.REACT_APP_ASSETS_URL + `${user.image}`}
+                    alt={user.name}
+                  />
+                  <p>{user.username}</p>
+                </NavLink>
               </div>
 
               {auth.userId === userId && (

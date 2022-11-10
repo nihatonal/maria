@@ -16,6 +16,7 @@ const PlaceList = (props) => {
   const { sendRequest } = useHttpClient();
   const [loadedUsers, setLoadedUsers] = useState();
   const userId = useParams().userId;
+
   useEffect(() => {
     const fetchCars = async () => {
       try {
@@ -27,6 +28,7 @@ const PlaceList = (props) => {
     };
     fetchCars();
   }, [sendRequest]);
+
   const getUser = (x) => {
     if (loadedUsers) {
       return loadedUsers.find((user) => user.id === x);

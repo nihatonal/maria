@@ -35,7 +35,7 @@ const UserCard = (props) => {
       } catch (err) {}
     };
     fetchCars();
-  }, [sendRequest, friendListHandler, deleteFriendHandler, userId]);
+  }, [friendListHandler, deleteFriendHandler, userId]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -44,7 +44,7 @@ const UserCard = (props) => {
         const responseData = await sendRequest(
           process.env.REACT_APP_BACKEND_URL + `/users/${auth.userId}`
         );
-       // console.log(responseData.user);
+        // console.log(responseData.user);
         setFriends(responseData.user.friendList);
         list = responseData.user.friendList;
         if (list.includes(userId)) {
@@ -63,10 +63,10 @@ const UserCard = (props) => {
         const responseData = await sendRequest(
           process.env.REACT_APP_BACKEND_URL + `/users`
         );
-        const filterList = responseData.users.filter(
+        const filterList = await responseData.users.filter(
           (user) => user.id === userId
         )[0].friendList;
-        const friendArr = responseData.users.filter((user) =>
+        const friendArr = await responseData.users.filter((user) =>
           filterList.includes(user.id)
         );
 
@@ -119,7 +119,7 @@ const UserCard = (props) => {
     const filterList = friendList.filter((user) => user.id === userId)[0]
       .friendList;
     const friendArr = friendList.filter((user) => filterList.includes(user.id));
-   // console.log(friendArr);
+    // console.log(friendArr);
     setFilteredList(friendArr);
     setShowFriends(true);
   };
@@ -129,7 +129,7 @@ const UserCard = (props) => {
     friendArr = friends.filter((item) => item !== x);
     //console.log(friends);
     const filterList = friendList.filter((user) => friendArr.includes(user.id));
-   // console.log(filterList);
+    // console.log(filterList);
     setFilteredList(filterList);
     setCheck(false);
 
@@ -153,7 +153,7 @@ const UserCard = (props) => {
   useEffect(() => {
     const listener = (event) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
-      //  console.log("Enter key was pressed. Run your function.");
+        //  console.log("Enter key was pressed. Run your function.");
 
         mottoHandler();
       }
@@ -178,7 +178,7 @@ const UserCard = (props) => {
           Authorization: "Bearer " + auth.token,
         }
       );
-     // console.log(responseData);
+      // console.log(responseData);
     } catch (err) {}
   };
 

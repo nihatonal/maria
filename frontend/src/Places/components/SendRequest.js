@@ -47,6 +47,7 @@ const SendRequest = (props) => {
     };
     fetchCars();
   }, [sendRequest, userId, auth.userId]);
+
   useEffect(() => {
     const fetchUser = async () => {
       let list;
@@ -129,7 +130,7 @@ const SendRequest = (props) => {
           Authorization: "Bearer " + auth.token,
         }
       );
-     // console.log(responseData);
+      // console.log(responseData);
     } catch (err) {}
   };
 
@@ -156,7 +157,7 @@ const SendRequest = (props) => {
           Authorization: "Bearer " + auth.token,
         }
       );
-     // console.log(responseData);
+      // console.log(responseData);
       setCheck(false);
     } catch (err) {}
   };
@@ -175,7 +176,7 @@ const SendRequest = (props) => {
     const friendArr = loadedUsers.filter((user) =>
       requestFrom.includes(user.id)
     );
-   // console.log(loadedUsers);
+    // console.log(loadedUsers);
     //console.log(friendArr);
     setRequestList(friendArr);
   };

@@ -16,7 +16,6 @@ import RenewPassword from "../../../users/components/RenewPassword";
 import { AuthContext } from "../../context/auth-context";
 import { useHttpClient } from "../../hooks/http-hook";
 
-import SearchUser from "../../../users/components/SearchUser";
 
 import "./MainNavigation.css";
 
@@ -194,36 +193,7 @@ const MainNavigation = () => {
 
       <MainHeader>
         <div className="header__wrapper">
-          {/* <div className={"header__logo"}>
-            <Link
-              className={"header__logo-name"}
-              to={auth.isLoggedIn ? `/user/${auth.userId}` : "/"}
-            >
-              {auth.isLoggedIn ? (
-                <div onClick={() => setDrawerIsOpen(false)}>
-                  <Avatar
-                    image={
-                      loadedUser &&
-                      process.env.REACT_APP_ASSETS_URL + `${loadedUser}`
-                    }
-                    alt={"avatar"}
-                    d
-                    onClick={logOutHandler}
-                  />
-                </div>
-              ) : (
-                <p>Ready to experience?</p>
-              )}
-            </Link>
-          </div> */}
-
-          {/* <nav
-            className="header__nav"
-            style={{ width: auth.isLoggedIn && "353px" }}
-          >
-            <NavLinks />
-          </nav> */}
-          <SearchUser />
+   
           <NavBar
             userId={auth.userId}
             drawerIsOpen={drawerIsOpen}

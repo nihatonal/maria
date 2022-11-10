@@ -1,3 +1,159 @@
+.placelist_container {
+  width: 100%;
+  padding-bottom: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.placelist_container .loading-wrapper {
+  margin-top: 35%;
+}
+.placelist_container .loading-wrapper .fa-spin {
+  color: var(--bg_primary);
+}
+.placelist_wrapper {
+  display: grid;
+  grid-template-columns: auto;
+  justify-items: center;
+  row-gap: 40px;
+}
+.placelist_wrapper .fa-spin {
+  color: var(--bg_primary);
+}
+.place_item-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.place_item-wrapper {
+  width: 100%;
+
+  position: relative;
+}
+.place_item-container .place_item-likes {
+  top: 180px;
+  height: 40px;
+  z-index: 99;
+}
+.place_image_wrapper {
+  width: 100%;
+}
+.place_image_wrapper .place_image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  box-shadow: var(--box-shadow);
+}
+.place_info {
+  font-family: var(--font_family_primary);
+  width: 100%;
+  font-weight: normal;
+  position: absolute;
+  font-size: 12px;
+  color: var(--color_dark_white);
+  left: 20px;
+}
+.head-content {
+  display: flex;
+  align-items: center;
+  top: 10px;
+}
+.place_info p,
+.place_info h3 {
+  text-shadow: var(--text-shadow);
+}
+.head-content-desc {
+  margin-left: 10px;
+}
+.place_owner_image-wrapper {
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+  border: 2px dotted var(--color_lightblue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+.place_owner_image-wrapper:hover {
+  border: 2px dotted var(--bg_secondary);
+}
+
+.place_owner_image {
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.footer-content {
+  bottom: 20px;
+}
+.footer-content h3 {
+  font-weight: normal;
+  font-size: 14px;
+}
+.footer-content p {
+  font-weight: normal;
+  font-size: 12px;
+  width: 75%;
+}
+.footer-content p:last-child {
+  margin-top: 5px;
+}
+.place_item-delete-btn {
+  position: absolute;
+  bottom: 40px;
+  right: 25px;
+  width: 28px;
+  height: 28px;
+  font-size: 0.8rem;
+  border-radius: 100%;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--color_disabled);
+  background-color: var(--bg_primary);
+  transition: all 0.2s;
+  opacity: 0.3;
+}
+.place_item-delete-btn:hover {
+  background-color: var(--color_danger);
+  opacity: 1;
+}
+.place_item-delete-btn svg {
+  pointer-events: none;
+}
+
+/*Delete Modal*/
+.place_delete-wrapper {
+  width: 85%;
+  margin: 0 auto;
+  margin-top: 30px;
+  box-shadow: var(--box-shadow);
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+.place_delete-wrapper h3 {
+  font-family: var(--font_family_primary);
+  color: var(--bg_primary);
+  margin-bottom: 1rem;
+}
+.place_delete-btns {
+  width: 75%;
+  display: flex;
+  justify-content: space-around;
+}
 .place_delete-wrapper button {
   width: 35%;
   padding: 10px 0;
@@ -34,3 +190,4 @@
   height: 100px;
   object-fit: cover;
 }
+

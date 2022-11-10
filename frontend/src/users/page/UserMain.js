@@ -31,7 +31,7 @@ const UserMain = () => {
         },
       })
       .then((res) => {
-       // console.log(res.data);
+        // console.log(res.data);
         setPlaces(res.data.places);
         setLoading(false);
       });
@@ -68,28 +68,28 @@ const UserMain = () => {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="usermain-container">
-      {loading && (
+      {loading ? (
         <div className="loading-wrapper">
           <i className="fa fa-circle-o-notch fa-spin"></i>
         </div>
+      ) : (
+        <PlaceList
+          loading={loading}
+          update={show}
+          places={places}
+          confirmDelete={confirmDelete}
+          onDelete={(e) => {
+            setIdOfDeleteItem(e.target.parentNode.id);
+            setConfirmDelete(true);
+          }}
+          close={() => setConfirmDelete(false)}
+          setConfirmDelete={() => setConfirmDelete(false)}
+          setIdOfDeleteItem={() => confirmDeleteHandler(idOfDeleteItem)}
+        />
       )}
-      <PlaceList
-        loading={loading}
-        update={show}
-        places={places}
-        confirmDelete={confirmDelete}
-        onDelete={(e) => {
-          setIdOfDeleteItem(e.target.parentNode.id);
-          setConfirmDelete(true);
-        }}
-        close={() => setConfirmDelete(false)}
-        setConfirmDelete={() => setConfirmDelete(false)}
-        setIdOfDeleteItem={() => confirmDeleteHandler(idOfDeleteItem)}
-      />
     </div>
   );
 };
