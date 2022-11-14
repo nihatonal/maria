@@ -53,7 +53,7 @@ function App() {
 
         <Route exact path="/:userId/cards" element={<FlashCards />} />
         <Route exact path="/:userId/friends" element={<UserFriends />} />
-        <Route exact path="/:userId/mywords" element={<MyWords />} />
+        <Route exact path="/english/:userId/mywords" element={<MyWords />} />
         <Route exact path="/:userId/hangman" element={<Hangman />} />
         <Route exact path="/:userId/addword" element={<AddWord />} />
         <Route exact path="/:userId/addfriend" element={<AddFriend />} />

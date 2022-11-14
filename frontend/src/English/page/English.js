@@ -11,7 +11,7 @@ const English = () => {
       <div className="english-navbar">
         <NavLink
           className={"english-navbar-item"}
-          to={`/${auth.userId}/mywords`}
+          to={`/english/${auth.userId}/mywords`}
         >
           Мой словарь
         </NavLink>

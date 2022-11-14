@@ -6,6 +6,7 @@ import { GiThreeFriends } from "react-icons/gi";
 import { ImProfile } from "react-icons/im";
 import { MdOutlineHome } from "react-icons/md";
 import { MdPersonSearch } from "react-icons/md";
+import { MdOutlineMenuBook } from "react-icons/md";
 
 import "./NavBar.css";
 const NavBar = (props) => {
@@ -15,32 +16,27 @@ const NavBar = (props) => {
       className="navbar"
       style={
         props.auth
-          ? { gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr" }
-          : { gridTemplateColumns: "1fr 1fr 1fr" }
+          ? { gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr" }
+          : { gridTemplateColumns: "1fr 1fr 1fr 1fr" }
       }
     >
       <NavLink
         className={({ isActive }) =>
           isActive ? "nav active-nav-item" : "nav homepage"
         }
-        to="/users"
-      >
-        <MdPersonSearch />
-      </NavLink>
-      <NavLink
-        className={({ isActive }) =>
-          isActive ? "nav active-nav-item" : "nav homepage"
-        }
         to="/main"
+        onClick={props.closeSideDrawer}
       >
         <MdOutlineHome />
       </NavLink>
+
       {props.auth && (
         <NavLink
           className={({ isActive }) =>
             isActive ? "nav active-nav-item" : "nav homepage"
           }
           to={`/user/${userId}`}
+          onClick={props.closeSideDrawer}
         >
           <ImProfile />
         </NavLink>
@@ -51,10 +47,29 @@ const NavBar = (props) => {
             isActive ? "nav active-nav-item" : "nav homepage"
           }
           to={`/${userId}/friends`}
+          onClick={props.closeSideDrawer}
         >
           <GiThreeFriends />
         </NavLink>
       )}
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? "nav active-nav-item" : "nav homepage"
+        }
+        to="/english"
+        onClick={props.closeSideDrawer}
+      >
+        <MdOutlineMenuBook />
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? "nav active-nav-item" : "nav homepage"
+        }
+        to="/users"
+        onClick={props.closeSideDrawer}
+      >
+        <MdPersonSearch />
+      </NavLink>
       <Hamburger
         show={props.drawerIsOpen}
         onClick={props.openDrawerHandler}

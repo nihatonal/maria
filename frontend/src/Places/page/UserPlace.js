@@ -85,57 +85,53 @@ const UserPlace = () => {
           }}
         />
       </ModalPlace>
-      {loading ? (
-        <div className="loading-wrapper">
-          <i className="fa fa-circle-o-notch fa-spin"></i>
+
+      <div className="userplaces-left-side">
+        <UserCard />
+        <div className="btns-add-place-wrapper">
+          <AiOutlinePlusCircle
+            className="btn-place add-place"
+            onClick={() => setShow(true)}
+            style={userId !== auth.userId ? { display: "none" } : null}
+          />
+          <AiOutlineTable
+            onClick={() => setGridview(!gridview)}
+            className="btn-place change-view"
+          />
         </div>
-      ) : (
-        <div className="userplaces-left-side">
-          <UserCard />
-          <div className="btns-add-place-wrapper">
-            <AiOutlinePlusCircle
-              className="btn-place add-place"
-              onClick={() => setShow(true)}
-              style={userId !== auth.userId ? { display: "none" } : null}
-            />
-            <AiOutlineTable
-              onClick={() => setGridview(!gridview)}
-              className="btn-place change-view"
-            />
+        {!gridview ? (
+          <div className="photo_grid_view">
+            {places.map((place, i) => (
+              <NavLink
+                to={`/${userId}/${place.id}`}
+                key={place.id}
+                className="photo_grid_view-item"
+              >
+                <img
+                  src={process.env.REACT_APP_ASSETS_URL + place.image}
+                  alt="place_image"
+                />
+              </NavLink>
+            ))}
           </div>
-          {!gridview ? (
-            <div className="photo_grid_view">
-              {places.map((place, i) => (
-                <NavLink
-                  to={`/${userId}/${place.id}`}
-                  key={place.id}
-                  className="photo_grid_view-item"
-                >
-                  <img
-                    src={process.env.REACT_APP_ASSETS_URL + place.image}
-                    alt="place_image"
-                  />
-                </NavLink>
-              ))}
-            </div>
-          ) : (
-            <PlaceList
-              loading={loading}
-              update={show}
-              places={places}
-              confirmDelete={confirmDelete}
-              onDelete={(e) => {
-                setIdOfDeleteItem(e.target.parentNode.id);
-                setConfirmDelete(true);
-              }}
-              close={() => setConfirmDelete(false)}
-              setConfirmDelete={() => setConfirmDelete(false)}
-              setIdOfDeleteItem={() => confirmDeleteHandler(idOfDeleteItem)}
-              gridview={gridview}
-            />
-          )}
-        </div>
-      )}
+        ) : (
+          <PlaceList
+            loading={loading}
+            update={show}
+            places={places}
+            confirmDelete={confirmDelete}
+            onDelete={(e) => {
+              setIdOfDeleteItem(e.target.parentNode.id);
+              setConfirmDelete(true);
+            }}
+            close={() => setConfirmDelete(false)}
+            setConfirmDelete={() => setConfirmDelete(false)}
+            setIdOfDeleteItem={() => confirmDeleteHandler(idOfDeleteItem)}
+            gridview={gridview}
+          />
+        )}
+      </div>
+
       {/* {!loading && (
         <div className="userplaces-right-side">
           <Game token={auth.token} userId={userId} />

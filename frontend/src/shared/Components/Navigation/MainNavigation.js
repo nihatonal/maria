@@ -16,7 +16,6 @@ import RenewPassword from "../../../users/components/RenewPassword";
 import { AuthContext } from "../../context/auth-context";
 import { useHttpClient } from "../../hooks/http-hook";
 
-
 import "./MainNavigation.css";
 
 const MainNavigation = () => {
@@ -193,12 +192,12 @@ const MainNavigation = () => {
 
       <MainHeader>
         <div className="header__wrapper">
-   
           <NavBar
             userId={auth.userId}
             drawerIsOpen={drawerIsOpen}
             openDrawerHandler={openDrawerHandler}
             auth={auth.isLoggedIn}
+            closeSideDrawer={() => setDrawerIsOpen(false)}
           />
           {!auth.isLoggedIn ? (
             <div className="header-button-wrapper">

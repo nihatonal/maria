@@ -18,6 +18,7 @@ const UserCard = (props) => {
   const { sendRequest } = useHttpClient();
   const [loadedUser, setLoadedUser] = useState([]);
   const [loadedUsers, setLoadedUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
   const userId = useParams().userId;
   const [friends, setFriends] = useState([]);
   const [check, setCheck] = useState(false);
@@ -26,6 +27,7 @@ const UserCard = (props) => {
   const [motto, setMotto] = useState("");
 
   useEffect(() => {
+    setLoading(true);
     const fetchCars = async () => {
       try {
         const responseData = await sendRequest(
@@ -33,12 +35,14 @@ const UserCard = (props) => {
         );
         setLoadedUser(responseData.user);
         setMotto(responseData.user.motto);
+        setLoading(false);
       } catch (err) {}
     };
     fetchCars();
   }, [sendRequest, userId]);
 
   useEffect(() => {
+    setLoading(true);
     const fetchCars = async () => {
       try {
         const responseData = await sendRequest(
@@ -54,6 +58,7 @@ const UserCard = (props) => {
         setLoadedUsers(responseData.users);
         setFilteredList(friendArr);
         setFriendList(responseData.users);
+        setLoading(false);
       } catch (err) {}
     };
     fetchCars();
@@ -98,53 +103,61 @@ const UserCard = (props) => {
   // Motto Section end
   return (
     <div className="usercard-wrapper">
-      <div className="user-header">
-        <div className="user-header-image">
-          <img src={process.env.REACT_APP_ASSETS_URL + `${loadedUser.image}`} />
-          <h4>{loadedUser.username}</h4>
+      {loading ? (
+        <div className="loading-wrapper">
+          <i className="fa fa-circle-o-notch fa-spin"></i>
         </div>
-        <div className="user-header_info">
-          <p className="user-header_friend-btn">
-            {loadedUser.places && loadedUser.places.length}
-            <br></br>
-            <span>Посты</span>
-          </p>
-          <NavLink to={`/${userId}/friends`}>
-            {filteredList && filteredList.length}
-            <br></br>
-            <span>Друзья</span>
-          </NavLink>
-          <p>
-            <NavLink to={`/${userId}/mywords`}>
-              {loadedUser.cars && loadedUser.cars.length}
-              <br></br>
-              <span>Слова</span>
-            </NavLink>
-          </p>
-        </div>
-        <forum onSubmit={mottoHandler} className="motto_wrapper">
-          {auth.isLoggedIn && (
-            <input
-              onChange={(e) => {
-                setMotto(e.target.value);
-              }}
-              placeholder="write your motto"
-              onFocus={() => setMotto("")}
-              onBlur={() => {
-                if (motto === "") {
-                  setMotto("Your Motto");
-                } else {
-                  setMotto(motto);
-                }
-                mottoHandler();
-              }}
-              value={motto}
-              className="motto_input"
+      ) : (
+        <div className="user-header">
+          <div className="user-header-image">
+            <img
+              src={process.env.REACT_APP_ASSETS_URL + `${loadedUser.image}`}
             />
-          )}
-          <p>"{motto}"</p>
-        </forum>
-      </div>
+            <h4>{loadedUser.username}</h4>
+          </div>
+          <div className="user-header_info">
+            <p className="user-header_friend-btn">
+              {loadedUser.places && loadedUser.places.length}
+              <br></br>
+              <span>Посты</span>
+            </p>
+            <NavLink to={`/${userId}/friends`}>
+              {filteredList && filteredList.length}
+              <br></br>
+              <span>Друзья</span>
+            </NavLink>
+            <p>
+              <NavLink to={`/${userId}/mywords`}>
+                {loadedUser.cars && loadedUser.cars.length}
+                <br></br>
+                <span>Слова</span>
+              </NavLink>
+            </p>
+          </div>
+          <forum onSubmit={mottoHandler} className="motto_wrapper">
+            {auth.isLoggedIn && (
+              <input
+                onChange={(e) => {
+                  setMotto(e.target.value);
+                }}
+                placeholder="write your motto"
+                onFocus={() => setMotto("")}
+                onBlur={() => {
+                  if (motto === "") {
+                    setMotto("Your Motto");
+                  } else {
+                    setMotto(motto);
+                  }
+                  mottoHandler();
+                }}
+                value={motto}
+                className="motto_input"
+              />
+            )}
+            <p>"{motto}"</p>
+          </forum>
+        </div>
+      )}
       {auth.isLoggedIn && <SendRequest triggerHandler={updateFriendList} />}
     </div>
   );
