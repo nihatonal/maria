@@ -19,19 +19,39 @@ const NavBar = (props) => {
           : { gridTemplateColumns: "1fr 1fr 1fr" }
       }
     >
-      <NavLink className="nav homepage" to="/users">
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? "nav active-nav-item" : "nav homepage"
+        }
+        to="/users"
+      >
         <MdPersonSearch />
       </NavLink>
-      <NavLink className="nav homepage" to="/main">
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? "nav active-nav-item" : "nav homepage"
+        }
+        to="/main"
+      >
         <MdOutlineHome />
       </NavLink>
       {props.auth && (
-        <NavLink className="nav user-wall" to={`/user/${userId}`}>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "nav active-nav-item" : "nav homepage"
+          }
+          to={`/user/${userId}`}
+        >
           <ImProfile />
         </NavLink>
       )}
       {props.auth && (
-        <NavLink className="nav user-friends" to={`/${userId}/friends`}>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "nav active-nav-item" : "nav homepage"
+          }
+          to={`/${userId}/friends`}
+        >
           <GiThreeFriends />
         </NavLink>
       )}

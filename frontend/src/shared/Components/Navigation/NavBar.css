@@ -13,3 +13,7 @@
 .nav:hover {
   opacity: 1;
 }
+
+.active-nav-item {
+  color: var(--color_lightblue);
+}
