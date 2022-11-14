@@ -126,7 +126,7 @@ const Hangman = () => {
   return (
     <div className="Hangman">
       <div className="content-wrapper">
-        <NavLink className={"back-btn"} to={`/english`}>
+        <NavLink className={"back-btn"} to={`/english/${userId}`}>
           <GiReturnArrow />
         </NavLink>
       </div>

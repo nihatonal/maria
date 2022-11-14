@@ -60,9 +60,11 @@ const MyWords = (props) => {
     <React.Fragment>
       <div className="words-container">
         <div className="content-wrapper">
-          <NavLink className={"back-btn"} to={`/english`}>
-            <GiReturnArrow />
-          </NavLink>
+          {userId === userID && (
+            <NavLink className={"back-btn"} to={`/english/${userId}`}>
+              <GiReturnArrow />
+            </NavLink>
+          )}
 
           {/* <h2 className={"page-title"}>Мои слова</h2> */}
           <ul className="page-title">
@@ -95,7 +97,7 @@ const MyWords = (props) => {
         {/* <div className="btn-add_word">
           <NavLink to={`/${auth.userId}/addword`}>Добавить Cловo</NavLink>
         </div> */}
-        {<AddWord />}
+        {userId === userID && <AddWord />}
       </div>
     </React.Fragment>
   );

@@ -127,7 +127,7 @@ const UserCard = (props) => {
               <span>Друзья</span>
             </NavLink>
             <p>
-              <NavLink to={`/${userId}/mywords`}>
+              <NavLink to={`/english/${userId}/mywords`}>
                 {loadedUser.cars && loadedUser.cars.length}
                 <br></br>
                 <span>Слова</span>

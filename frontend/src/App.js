@@ -49,8 +49,7 @@ function App() {
     routes = (
       <React.Fragment>
         <Route exact path="/main" element={<UserMain />} />
-        <Route exact path="/english" element={<English />} />
-
+        <Route exact path="/english/:userId" element={<English />} />
         <Route exact path="/:userId/cards" element={<FlashCards />} />
         <Route exact path="/:userId/friends" element={<UserFriends />} />
         <Route exact path="/english/:userId/mywords" element={<MyWords />} />

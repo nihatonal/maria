@@ -11,6 +11,7 @@ import "./FlashCards.css";
 
 const FlashCards = (props) => {
   const auth = useContext(AuthContext);
+  const userId = auth.userId;
   const userID = useParams().userId;
   const [loadedCars, setLoadedCars] = useState();
   const [loading, setLoading] = useState(false);
@@ -89,7 +90,7 @@ const FlashCards = (props) => {
     <React.Fragment>
       <div className="flashcards-container">
         <div className="content-wrapper">
-          <NavLink className={"back-btn"} to={`/english`}>
+          <NavLink className={"back-btn"} to={`/english/${userId}`}>
             <GiReturnArrow />
           </NavLink>
 

@@ -56,7 +56,7 @@ const NavBar = (props) => {
         className={({ isActive }) =>
           isActive ? "nav active-nav-item" : "nav homepage"
         }
-        to="/english"
+        to={`/english/${userId}`}
         onClick={props.closeSideDrawer}
       >
         <MdOutlineMenuBook />
