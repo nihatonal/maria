@@ -31,11 +31,13 @@ const UserMain = () => {
         },
       })
       .then((res) => {
-        // console.log(res.data);
         setPlaces(res.data.places);
         setLoading(false);
       });
-  }, [auth.token]);
+      return () => {
+        setPlaces([]);
+      }
+  }, []);
 
   useEffect(() => {
     const fetchCars = async () => {

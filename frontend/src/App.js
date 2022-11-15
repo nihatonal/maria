@@ -76,6 +76,7 @@ function App() {
         {/* <Route exact path="/userdocs" element={<UserDocs />} /> */}
         <Route exact path="/signup/success" element={<SignUpSuccess />} />
         <Route exact path="/users" element={<UserList />} />
+        <Route exact path="/:userId/:pid" element={<PlaceItem />} />
         <Route path="*" element={<UserMain />} />
       </React.Fragment>
     );

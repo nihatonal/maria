@@ -1,20 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { useHttpClient } from "../../shared/hooks/http-hook";
-import { ShareContext } from "../../shared/context/share-contex";
 import { AuthContext } from "../../shared/context/auth-context";
 
 import "./UsersList.css";
 
 const UsersList = () => {
   const auth = useContext(AuthContext);
-  const share = useContext(ShareContext);
   const { sendRequest } = useHttpClient();
   const [loading, setLoading] = useState(false);
   const [filteredUsers, setFilteredUsers] = useState();
   const [user, setUser] = useState("");
-
-  const [loadedUsers, setLoadedUsers] = useState();
 
   useEffect(() => {
     setLoading(true);
@@ -24,14 +20,14 @@ const UsersList = () => {
           process.env.REACT_APP_BACKEND_URL + "/users/"
         );
         setFilteredUsers(responseData.users);
-        setLoadedUsers(responseData.users);
+
         setLoading(false);
       } catch (err) {}
     };
     fetchCars();
   }, [auth.token]);
   return (
-    <div className='userlist_container'>
+    <div className="userlist_container">
       {loading ? (
         <div className="loading-wrapper">
           <i className="fa fa-circle-o-notch fa-spin"></i>

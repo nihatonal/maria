@@ -17,18 +17,6 @@ const PlaceList = (props) => {
   const [loadedUsers, setLoadedUsers] = useState();
   const userId = useParams().userId;
 
-  useEffect(() => {
-    const fetchCars = async () => {
-      try {
-        const responseData = await sendRequest(
-          process.env.REACT_APP_BACKEND_URL + "/users/"
-        );
-        setLoadedUsers(responseData.users);
-      } catch (err) {}
-    };
-    fetchCars();
-  }, [sendRequest]);
-
   const getUser = (x) => {
     if (loadedUsers) {
       return loadedUsers.find((user) => user.id === x);

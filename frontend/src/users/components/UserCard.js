@@ -15,11 +15,12 @@ import "./UserCard.css";
 const UserCard = (props) => {
   const auth = useContext(AuthContext);
   const share = useContext(ShareContext);
+  const userId = useParams().userId;
   const { sendRequest } = useHttpClient();
   const [loadedUser, setLoadedUser] = useState([]);
   const [loadedUsers, setLoadedUsers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const userId = useParams().userId;
+
   const [friends, setFriends] = useState([]);
   const [check, setCheck] = useState(false);
   const [friendList, setFriendList] = useState([]);
