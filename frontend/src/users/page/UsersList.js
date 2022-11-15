@@ -17,11 +17,6 @@ const UsersList = () => {
   const [loadedUsers, setLoadedUsers] = useState();
 
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("searchUser"));
-    console.log(storedData);
-  }, [localStorage]);
-
-  useEffect(() => {
     setLoading(true);
     const fetchCars = async () => {
       try {

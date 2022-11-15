@@ -40,7 +40,7 @@ const MyWords = (props) => {
         });
     };
     fetchWords();
-  }, [userId, loadedCars]);
+  }, [userId, userID]);
 
   const confirmDeleteHandler = async (e) => {
     try {
@@ -91,6 +91,7 @@ const MyWords = (props) => {
               itemsPerPage={10}
               data={loadedCars}
               deleteHandler={confirmDeleteHandler}
+              disabled={userId === userID}
             />
           )}
         </div>

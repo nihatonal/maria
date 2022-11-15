@@ -23,7 +23,6 @@ const English = () => {
           },
         })
         .then((res) => {
-          console.log(res.data.cars.reverse());
           setLoadedCars(res.data.cars.reverse());
           setLoading(false);
         })
@@ -32,7 +31,7 @@ const English = () => {
         });
     };
     fetchWords();
-  }, [userID,auth.userId]);
+  }, [userID, auth.userId]);
   return (
     <div className="english-container">
       <div className="english-navbar">

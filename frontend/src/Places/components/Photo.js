@@ -7,9 +7,9 @@ import { useForm } from "../../shared/hooks/SignUpFrom-hook";
 import ImageUpload from "../../shared/Components/FormElements/ImageUpload";
 import { ShareContext } from "../../shared/context/share-contex";
 import camera from "../../assets/icons/camera.svg";
-import "./FriendPhoto.css";
+import "./Photo.css";
 
-const FriendPhoto = (path) => {
+const Photo = (path) => {
   const SignUp = useContext(SignUpContext);
   const share = useContext(ShareContext);
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const FriendPhoto = (path) => {
         );
         setimageFile(responseData.data.path);
         setDelete(true);
-        share.friendImage = responseData.data.path;
+        share.placeImage = responseData.data.path;
       } catch (err) {
         if (formState.inputs.image.value !== null) {
           setShowRenew(true);
@@ -103,22 +103,9 @@ const FriendPhoto = (path) => {
           renewHandler={renewHandler}
         />
       </div>
-      {/* <div className={"button-container"}>
-          <Button
-            type="submit"
-            onClick={sendPhoto}
-            disabled={!showDelete}
-            inverse
-          >
-            {!loading ? (
-              "Продолжить"
-            ) : (
-              <i className="fa fa-circle-o-notch fa-spin"></i>
-            )}
-          </Button>
-        </div> */}
+
     </React.Fragment>
   );
 };
 
-export default FriendPhoto;
+export default Photo;

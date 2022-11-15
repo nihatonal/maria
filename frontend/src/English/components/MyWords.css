@@ -50,6 +50,7 @@ tr > td:nth-last-child(1):hover {
   background-color: var(--color_danger);
   color: var(--color_white);
 }
+
 /*Pagination*/
 .word-list-container ul {
   display: flex;

@@ -24,7 +24,6 @@ const UserMain = React.lazy(() => import("./users/page/UserMain.js"));
 const FlashCards = React.lazy(() => import("./English/components/FlashCards"));
 const MyWords = React.lazy(() => import("./English/components/MyWords"));
 const Hangman = React.lazy(() => import("./English/components/Hangman"));
-const AddFriend = React.lazy(() => import("./Friends/components/AddFriend"));
 const UserFriends = React.lazy(() => import("./Friends/page/Friends.js"));
 const AddWord = React.lazy(() => import("./English/components/AddWord"));
 const UserPlace = React.lazy(() => import("./Places/page/UserPlace.js"));
@@ -55,7 +54,6 @@ function App() {
         <Route exact path="/english/:userId/mywords" element={<MyWords />} />
         <Route exact path="/:userId/hangman" element={<Hangman />} />
         <Route exact path="/:userId/addword" element={<AddWord />} />
-        <Route exact path="/:userId/addfriend" element={<AddFriend />} />
         <Route exact path="/user/:userId/" element={<UserPlace />} />
         <Route exact path="/:userId/:pid" element={<PlaceItem />} />
         <Route exact path="/users" element={<UserList />} />

@@ -17,7 +17,7 @@ const NavBar = (props) => {
       style={
         props.auth
           ? { gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr" }
-          : { gridTemplateColumns: "1fr 1fr 1fr 1fr" }
+          : { gridTemplateColumns: "1fr 1fr 1fr" }
       }
     >
       <NavLink
@@ -52,15 +52,17 @@ const NavBar = (props) => {
           <GiThreeFriends />
         </NavLink>
       )}
-      <NavLink
-        className={({ isActive }) =>
-          isActive ? "nav active-nav-item" : "nav homepage"
-        }
-        to={`/english/${userId}`}
-        onClick={props.closeSideDrawer}
-      >
-        <MdOutlineMenuBook />
-      </NavLink>
+      {props.auth && (
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "nav active-nav-item" : "nav homepage"
+          }
+          to={`/english/${userId}`}
+          onClick={props.closeSideDrawer}
+        >
+          <MdOutlineMenuBook />
+        </NavLink>
+      )}
       <NavLink
         className={({ isActive }) =>
           isActive ? "nav active-nav-item" : "nav homepage"

@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "../../shared/hooks/SignUpFrom-hook";
 
 import ModalPlace from "../../shared/Components/UIElements/ModalPlace";
-import FriendPhoto from "../../Friends/components/FriendPhoto";
+import Photo from "./Photo";
 
 import "./AppPlace.css";
 
@@ -21,7 +21,6 @@ const AddPlace = (props) => {
   const auth = useContext(AuthContext);
   const share = useContext(ShareContext);
   const { isLoading, sendRequest } = useHttpClient();
-  const navigate = useNavigate();
   const [error, SetError] = useState(false);
 
   const [formState, inputHandler, setFormData] = useForm(
@@ -69,7 +68,7 @@ const AddPlace = (props) => {
           title: formState.inputs.title.value,
           description: formState.inputs.description.value,
           address: formState.inputs.address.value,
-          image: share.friendImage,
+          image: share.placeImage,
           likes: [],
           dislikes: [],
           owner: auth.userId,
@@ -96,7 +95,7 @@ const AddPlace = (props) => {
           onSubmit={signupFormHandler}
         >
           <div className="form-content">
-            <FriendPhoto />
+            <Photo />
             <Input
               id="title"
               element="input"

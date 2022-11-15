@@ -97,7 +97,7 @@ export default function Game(props) {
           }
           const gameDB = [];
           arr.map((word) => gameDB.push(res.data.cars[word]));
-          console.log(gameDB);
+          // console.log(gameDB);
 
           const newList = gameDB.map((item) => {
             return {
@@ -122,21 +122,21 @@ export default function Game(props) {
                 return 0.5 - Math.random();
               })
           );
-          console.log(
-            newList
-              .concat(
-                newList.map((item) => {
-                  return {
-                    ...item,
-                    en: item.ru,
-                    id: item.id + "1",
-                  };
-                })
-              )
-              .sort(() => {
-                return 0.5 - Math.random();
-              })
-          );
+          // console.log(
+          //   newList
+          //     .concat(
+          //       newList.map((item) => {
+          //         return {
+          //           ...item,
+          //           en: item.ru,
+          //           id: item.id + "1",
+          //         };
+          //       })
+          //     )
+          //     .sort(() => {
+          //       return 0.5 - Math.random();
+          //     })
+          // );
         })
         .catch((error) => {});
     };

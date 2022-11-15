@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import Button from "../../shared/Components/FormElements/Button";
 import { AuthContext } from "../../shared/context/auth-context";
-import FriendList from "../components/FriendList";
 import { IoIosRemoveCircle } from "react-icons/io";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import "./Friends.css";
@@ -11,7 +9,6 @@ const Friends = (props) => {
   const auth = useContext(AuthContext);
   const userId = useParams().userId;
   const { sendRequest } = useHttpClient();
-  // const userId = auth.userId;
   const [filteredList, setFilteredList] = useState([]);
   const [loadedUsers, setLoadedUsers] = useState([]);
   const [friends, setFriends] = useState([]);
