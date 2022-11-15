@@ -9,8 +9,7 @@ import AddPlace from "../components/AddPlace";
 import PlaceList from "../components/PlaceList";
 import ModalPlace from "../../shared/Components/UIElements/ModalPlace";
 import UserCard from "../../users/components/UserCard";
-import Game from "../../MemoryGame/Game";
-import FlashCards from "../../English/components/FlashCards";
+
 import { AiOutlineTable } from "react-icons/ai";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import "./UserPlace.css";
@@ -132,11 +131,6 @@ const UserPlace = () => {
         )}
       </div>
 
-      {/* {!loading && (
-        <div className="userplaces-right-side">
-          <Game token={auth.token} userId={userId} />
-        </div>
-      )} */}
     </div>
   );
 };

@@ -31,6 +31,9 @@ const English = () => {
         });
     };
     fetchWords();
+    return () => {
+      setLoadedCars([]);
+    }
   }, [userID, auth.userId]);
   return (
     <div className="english-container">

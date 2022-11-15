@@ -45,6 +45,10 @@ const Quiz = () => {
         .catch((err) => {});
     };
     fetchWords();
+    return () => {
+      setQuestionDB([]);
+          setFilteredDB([]);
+    }
   }, [auth.token]);
 
   // Create selections answers.

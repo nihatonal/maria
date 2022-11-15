@@ -39,7 +39,6 @@ const SendRequest = (props) => {
         const friendArr = responseData.users.filter((user) =>
           filterList.includes(user.id)
         );
-        // console.log(filterList);
 
         setFriends(filterList);
         setLoadedUsers(responseData.users);
@@ -55,7 +54,7 @@ const SendRequest = (props) => {
         const responseData = await sendRequest(
           process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
         );
-        // console.log(responseData.user);
+       
         list = responseData.user.friendRecievedRequest;
         setRequestFrom(responseData.user.friendRecievedRequest);
 
@@ -75,26 +74,26 @@ const SendRequest = (props) => {
     userId,
   ]);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      let list;
-      try {
-        const responseData = await sendRequest(
-          process.env.REACT_APP_BACKEND_URL + `/users/${selectedUser}`
-        );
-        list = responseData.user.friendSendRequest;
-        setRequestTo(list);
-        // console.log(list);
-      } catch (err) {}
-    };
-    fetchUser();
-  }, [
-    sendRequest,
-    setFriend,
-    sendRequestHandler,
-    deleteRequestHandler,
-    selectedUser,
-  ]);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     let list;
+  //     try {
+  //       const responseData = await sendRequest(
+  //         process.env.REACT_APP_BACKEND_URL + `/users/${selectedUser}`
+  //       );
+  //       list = responseData.user.friendSendRequest;
+  //       setRequestTo(list);
+  //       console.log(list);
+  //     } catch (err) {}
+  //   };
+  //   fetchUser();
+  // }, [
+  //   sendRequest,
+  //   setFriend,
+  //   sendRequestHandler,
+  //   deleteRequestHandler,
+  //   selectedUser,
+  // ]);
 
   // Send Request
   const sendRequestHandler = async () => {
