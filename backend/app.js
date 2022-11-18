@@ -9,6 +9,8 @@ const carsRoutes = require("./routes/cars-routes");
 const friendsRoutes = require("./routes/friends-routes");
 const placesRoutes = require("./routes/places-routes");
 const usersRoutes = require("./routes/users-routes");
+const conversationRoutes = require("./routes/conversation-routes");
+const messageRoutes = require("./routes/message-routes");
 const HttpError = require("./models/http-error");
 
 const app = express();
@@ -44,6 +46,8 @@ app.use("/api/cars", carsRoutes);
 app.use("/api/friends", friendsRoutes);
 app.use("/api/places", placesRoutes);
 app.use("/api/users", usersRoutes);
+app.use("/api/conversation", conversationRoutes);
+app.use("/api/message", messageRoutes);
 
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route.", 404);

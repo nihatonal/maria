@@ -29,7 +29,7 @@ const AddWord = React.lazy(() => import("./English/components/AddWord"));
 const UserPlace = React.lazy(() => import("./Places/page/UserPlace.js"));
 const PlaceItem = React.lazy(() => import("./Places/page/PlaceItem.js"));
 const UserList = React.lazy(() => import("./users/page/UsersList.js"));
-
+const Messenger = React.lazy(() => import("./ChatBox/page/Messenger.js"));
 function App() {
   const { token, login, logout, userId } = useAuth();
 
@@ -57,6 +57,7 @@ function App() {
         <Route exact path="/user/:userId/" element={<UserPlace />} />
         <Route exact path="/:userId/:pid" element={<PlaceItem />} />
         <Route exact path="/users" element={<UserList />} />
+        <Route exact path="/messenger" element={<Messenger />} />
 
         <Route exact path="*" element={<MainPage />} />
       </React.Fragment>
