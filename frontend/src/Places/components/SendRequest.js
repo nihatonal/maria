@@ -8,6 +8,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
 import { CiCircleRemove } from "react-icons/ci";
 import ModalPlace from "../../shared/Components/UIElements/ModalPlace";
+import ButtonUserCard from "../../shared/Components/UIElements/ButtonUserCard";
 import "../../users/components/UserCard.css";
 import "./SendRequest.css";
 
@@ -54,7 +55,7 @@ const SendRequest = (props) => {
         const responseData = await sendRequest(
           process.env.REACT_APP_BACKEND_URL + `/users/${userId}`
         );
-       
+
         list = responseData.user.friendRecievedRequest;
         setRequestFrom(responseData.user.friendRecievedRequest);
 
@@ -73,27 +74,6 @@ const SendRequest = (props) => {
     deleteRequestHandler,
     userId,
   ]);
-
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     let list;
-  //     try {
-  //       const responseData = await sendRequest(
-  //         process.env.REACT_APP_BACKEND_URL + `/users/${selectedUser}`
-  //       );
-  //       list = responseData.user.friendSendRequest;
-  //       setRequestTo(list);
-  //       console.log(list);
-  //     } catch (err) {}
-  //   };
-  //   fetchUser();
-  // }, [
-  //   sendRequest,
-  //   setFriend,
-  //   sendRequestHandler,
-  //   deleteRequestHandler,
-  //   selectedUser,
-  // ]);
 
   // Send Request
   const sendRequestHandler = async () => {
@@ -257,38 +237,22 @@ const SendRequest = (props) => {
   };
 
   return (
-    <div className="usercard-wrapper">
+    <div className="">
       {userId !== auth.userId ? (
         friends.includes(auth.userId) ? (
-          <p
-            className="usercard_friends_status"
-            // onClick={() => deleteFriendHandler(userId)}
-          >
+          <ButtonUserCard>
             <FaCheckCircle style={{ color: "var(--color_green)" }} /> Bы друзья.{" "}
-            <span className="usercard_friends_status-question">
-              <IoIosRemoveCircle style={{ color: "var(--color_danger)" }} />
-              Удалить?
-            </span>
-          </p>
+          </ButtonUserCard>
         ) : !check ? (
-          <p className="usercard_friends_status" onClick={send_Request}>
+          <ButtonUserCard onClick={send_Request}>
             <CiCircleRemove style={{ color: "var(--color_danger)" }} />
             Bы не друзья...{" "}
-            <span className="usercard_friends_status-question">
-              {" "}
-              <IoIosAddCircle style={{ color: "var(--color_green)" }} />
-              Отправить запрос?
-            </span>
-          </p>
+          </ButtonUserCard>
         ) : (
-          <p className="usercard_friends_status" onClick={deleteRequest}>
+          <ButtonUserCard onClick={deleteRequest}>
             <FaCheckCircle style={{ color: "var(--color_green)" }} />
-            Вы отправили запрос..
-            <span className="usercard_friends_status-question">
-              <IoIosRemoveCircle style={{ color: "var(--color_danger)" }} />
-              Удалить запрос?
-            </span>
-          </p>
+            Запрос отправлен
+          </ButtonUserCard>
         )
       ) : requestFrom.length > 0 ? (
         <p

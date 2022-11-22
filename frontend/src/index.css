@@ -1,5 +1,6 @@
 :root {
   --bg_primary: #252d4a;
+  --bg_primary_hover: #3d445f;
   --bg_secondary: #ffb01e;
   --color_white: #fff;
   --color_danger: #fd0202;
@@ -12,6 +13,8 @@
   --color_light_grey: #8b8b8b;
   --color_grey: #5f5f5f;
   --color_wall: #856b45;
+  --btn_bg_color: rgba(5, 5, 212, 0.8);
+  --btn_bg_color_hover: rgba(5, 5, 212, 1);
 
   --font_family_primary: "Roboto", sans-serif;
 

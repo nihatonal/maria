@@ -31,7 +31,7 @@ const PlaceItem = React.lazy(() => import("./Places/page/PlaceItem.js"));
 const UserList = React.lazy(() => import("./users/page/UsersList.js"));
 const Messenger = React.lazy(() => import("./ChatBox/page/Messenger.js"));
 function App() {
-  const { token, login, logout, userId } = useAuth();
+  const { token, login, logout, userId, user } = useAuth();
 
   const Wrapper = ({ children }) => {
     const location = useLocation();
@@ -91,6 +91,7 @@ function App() {
         userId: userId,
         login: login,
         logout: logout,
+        user: user,
       }}
     >
       <BrowserRouter>

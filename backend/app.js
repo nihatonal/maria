@@ -46,7 +46,7 @@ app.use("/api/cars", carsRoutes);
 app.use("/api/friends", friendsRoutes);
 app.use("/api/places", placesRoutes);
 app.use("/api/users", usersRoutes);
-app.use("/api/conversation", conversationRoutes);
+app.use("/api/conversations", conversationRoutes);
 app.use("/api/message", messageRoutes);
 
 app.use((req, res, next) => {

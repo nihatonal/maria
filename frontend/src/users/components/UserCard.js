@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate  } from "react-router-dom";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../shared/context/auth-context";
@@ -8,14 +8,19 @@ import { FaCheckCircle } from "react-icons/fa";
 import { IoIosAddCircle } from "react-icons/io";
 import { IoIosRemoveCircle } from "react-icons/io";
 import { CiCircleRemove } from "react-icons/ci";
+import { SiGooglemessages } from "react-icons/si";
 import ModalPlace from "../../shared/Components/UIElements/ModalPlace";
 import SendRequest from "../../Places/components/SendRequest";
+import ButtonUserCard from "../../shared/Components/UIElements/ButtonUserCard";
+
+import axios from "axios";
 
 import "./UserCard.css";
 const UserCard = (props) => {
   const auth = useContext(AuthContext);
   const share = useContext(ShareContext);
   const userId = useParams().userId;
+  const navigate = useNavigate();
   const { sendRequest } = useHttpClient();
   const [loadedUser, setLoadedUser] = useState([]);
   const [loadedUsers, setLoadedUsers] = useState([]);
@@ -26,6 +31,7 @@ const UserCard = (props) => {
   const [friendList, setFriendList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [motto, setMotto] = useState("");
+  const [conversation, setConversation] = useState([]);
 
   useEffect(() => {
     setLoading(true);
@@ -55,7 +61,6 @@ const UserCard = (props) => {
         const friendArr = responseData.users.filter((user) =>
           filterList.includes(user.id)
         );
-        console.log(responseData.users);
         setLoadedUsers(responseData.users);
         setFilteredList(friendArr);
         setFriendList(responseData.users);
@@ -102,6 +107,50 @@ const UserCard = (props) => {
     } catch (err) {}
   };
   // Motto Section end
+
+  useEffect(() => {
+    const getConversations = async () => {
+      try {
+        const res = await axios.get(
+          process.env.REACT_APP_BACKEND_URL + "/conversations/" + userId
+        );
+        setConversation(res.data);
+        console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getConversations();
+  }, [userId]);
+
+  const conversationHandler = async () => {
+    console.log("senderId: " + auth.userId);
+    console.log("receiverId: " + userId);
+
+    if (conversation) {
+      console.log("sohbet yes");
+      navigate("/messenger");
+    } else {
+      try {
+        const responseData = await sendRequest(
+          process.env.REACT_APP_BACKEND_URL + "/conversations",
+          "POST",
+          JSON.stringify({
+            senderId: auth.userId,
+            receiverId: userId,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        console.log(responseData);
+        navigate("/messenger");
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   return (
     <div className="usercard-wrapper">
       {loading ? (
@@ -159,7 +208,16 @@ const UserCard = (props) => {
           </forum>
         </div>
       )}
-      {auth.isLoggedIn && <SendRequest triggerHandler={updateFriendList} />}
+      {auth.isLoggedIn && (
+        <div className="usercard-btns-wrapper">
+          {" "}
+          <SendRequest triggerHandler={updateFriendList} />
+          <ButtonUserCard onClick={conversationHandler}>
+            <SiGooglemessages />
+            Cообщение
+          </ButtonUserCard>
+        </div>
+      )}
     </div>
   );
 };

@@ -248,6 +248,8 @@ const updatePassword = async (req, res, next) => {
   }
 };
 
+// Login 
+
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -306,6 +308,7 @@ const login = async (req, res, next) => {
   }
 
   res.json({
+    user:existingUser,
     userId: existingUser.id,
     email: existingUser.email,
     token: token,

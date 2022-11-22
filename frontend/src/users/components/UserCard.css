@@ -9,6 +9,7 @@
   font-weight: normal;
 }
 .user-header {
+  width: 100%;
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto auto;
@@ -52,16 +53,28 @@
 }
 
 .usercard_friends_status {
+  padding: 5px;
+  border-radius: 10px;
   text-align: left;
   margin-top: 4px;
   font-size: 10px;
-  color: var(--color_light_grey);
+  color: var(--color_white);
   cursor: pointer;
   display: flex;
   align-items: center;
 }
-.usercard_friends_status:hover > span {
-  color: var(--color_grey);
+.usercard_friends_status:hover {
+  background-color: var(--btn_bg_color_hover);
+}
+.friend {
+  background-color: var(--btn_bg_color);
+}
+.not-friend {
+  border: 1px solid var(--btn_bg_color);
+  color: var(--bg_primary);
+}
+.not-friend:hover {
+  color: #fff;
 }
 
 .usercard_friends_status-question {
@@ -167,3 +180,10 @@
 /* .motto_input:focus + p {
   border: 1px dotted var(--bg_primary);
 } */
+
+.usercard-btns-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}

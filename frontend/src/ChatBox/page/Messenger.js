@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import Conversation from "../component/Conversation";
 import Message from "../component/Message";
 import ChatOnline from "../component/ChatOnline";
+
+import { AuthContext } from "../../shared/context/auth-context";
+
+import axios from "axios";
 import "./Messenger.css";
 
 export default function Messenger() {
+  const { user, userId } = useContext(AuthContext);
+  const [conversations, setConversations] = useState([]);
+
+  useEffect(() => {
+    const getConversations = async () => {
+      try {
+        const res = await axios.get(
+          process.env.REACT_APP_BACKEND_URL + "/conversations/" + userId
+        );
+        setConversations(res.data);
+        console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getConversations();
+  }, [userId]);
   return (
     <>
       <div className="messenger">

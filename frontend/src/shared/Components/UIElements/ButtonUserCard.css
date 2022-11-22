@@ -1,0 +1,14 @@
+.btn-usercard-wrapper {
+  background-color: var(--btn_bg_color);
+  border: none;
+  color: #fff;
+  height: 32px;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn-usercard-wrapper:hover {
+  background-color: var(--btn_bg_color_hover);
+}

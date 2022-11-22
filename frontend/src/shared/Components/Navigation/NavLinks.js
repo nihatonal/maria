@@ -29,6 +29,16 @@ const NavLinks = (props) => {
           Английский
         </NavLink>
       )}
+      {auth.isLoggedIn && (
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "header__nav-item is-active" : "header__nav-item"
+          }
+          to="/messenger"
+        >
+          Messenger
+        </NavLink>
+      )}
     </>
   );
 };

@@ -49,7 +49,8 @@ const SignInModal = (props) => {
           "Content-Type": "application/json",
         }
       );
-      auth.login(responseData.userId, responseData.token);
+
+      auth.login(responseData.user, responseData.userId, responseData.token );
       //setClose(true);
       navigate("/main");
     } catch (err) {}
@@ -101,7 +102,7 @@ const SignInModal = (props) => {
           labelclassName="labelclass"
         />
       </div>
-      <div className='sign-in-btns-wrapper'>
+      <div className="sign-in-btns-wrapper">
         <Button
           className="header__btn-auth"
           type="submit"
