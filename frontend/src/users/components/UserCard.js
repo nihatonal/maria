@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams, useNavigate  } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../shared/context/auth-context";
@@ -127,7 +127,7 @@ const UserCard = (props) => {
     console.log("senderId: " + auth.userId);
     console.log("receiverId: " + userId);
 
-    if (conversation) {
+    if (conversation.length > 0) {
       console.log("sohbet yes");
       navigate("/messenger");
     } else {
