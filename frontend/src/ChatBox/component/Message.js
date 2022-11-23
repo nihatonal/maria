@@ -16,9 +16,11 @@ const Message = ({ message, own, owner, friend }) => {
           alt={own ? owner : friend}
           className="messageImg"
         />
-        <p className="messageText">{message.text}</p>
+        <p className="messageText">{message && message.text}</p>
       </div>
-      <div className="messageBottom">{format(message.createdAt)}</div>
+      <div className="messageBottom">
+        {message && format(message.createdAt)}
+      </div>
     </div>
   );
 };

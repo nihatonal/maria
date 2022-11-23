@@ -31,7 +31,7 @@ const UserCard = (props) => {
   const [friendList, setFriendList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
   const [motto, setMotto] = useState("");
-  const [conversation, setConversation] = useState([]);
+  const [conversation, setConversation] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -114,8 +114,8 @@ const UserCard = (props) => {
         const res = await axios.get(
           process.env.REACT_APP_BACKEND_URL + "/conversations/" + userId
         );
-        setConversation(res.data);
-        console.log(res.data);
+        setConversation(res.data[0]._id);
+        
       } catch (err) {
         console.log(err);
       }
@@ -124,12 +124,8 @@ const UserCard = (props) => {
   }, [userId]);
 
   const conversationHandler = async () => {
-    console.log("senderId: " + auth.userId);
-    console.log("receiverId: " + userId);
-
-    if (conversation.length > 0) {
-      console.log("sohbet yes");
-      navigate("/messenger");
+    if (conversation) {
+      navigate("/messenger",{state:{id:conversation,friendId:userId}});
     } else {
       try {
         const responseData = await sendRequest(
@@ -212,10 +208,12 @@ const UserCard = (props) => {
         <div className="usercard-btns-wrapper">
           {" "}
           <SendRequest triggerHandler={updateFriendList} />
-          <ButtonUserCard onClick={conversationHandler}>
-            <SiGooglemessages />
-            Cообщение
-          </ButtonUserCard>
+          {userId !== auth.userId && (
+            <ButtonUserCard onClick={conversationHandler}>
+              <SiGooglemessages />
+              Cообщение
+            </ButtonUserCard>
+          )}
         </div>
       )}
     </div>

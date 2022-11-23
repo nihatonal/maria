@@ -237,7 +237,7 @@ const SendRequest = (props) => {
   };
 
   return (
-    <div className="">
+    <>
       {userId !== auth.userId ? (
         friends.includes(auth.userId) ? (
           <ButtonUserCard>
@@ -296,7 +296,7 @@ const SendRequest = (props) => {
           ))}
         </div>
       </ModalPlace>
-    </div>
+    </>
   );
 };
 

@@ -182,8 +182,9 @@
 } */
 
 .usercard-btns-wrapper {
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto auto;
   gap: 10px;
   margin-top: 10px;
 }

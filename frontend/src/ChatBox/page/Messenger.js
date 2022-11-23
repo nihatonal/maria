@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import { useHttpClient } from "../../shared/hooks/http-hook";
+import { useLocation } from "react-router-dom";
 import Conversation from "../component/Conversation";
 import Message from "../component/Message";
 import ChatOnline from "../component/ChatOnline";
@@ -18,6 +19,29 @@ export default function Messenger() {
   const [newMessage, setNewMessage] = useState("");
   const [friendPhoto, setFriendPhoto] = useState(null);
   const scrollRef = useRef();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state) {
+      setCurrentChat(location.state.id);
+
+      const getUser = async () => {
+        try {
+          const res = await axios(
+            process.env.REACT_APP_BACKEND_URL +
+              "/users/" +
+              location.state.friendId
+          );
+
+          setFriendPhoto(res.data.user.image);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      getUser();
+    }
+   
+  }, [location.state]);
 
   useEffect(() => {
     const getConversations = async () => {
@@ -26,7 +50,6 @@ export default function Messenger() {
           process.env.REACT_APP_BACKEND_URL + "/conversations/" + userId
         );
         setConversations(res.data);
-        console.log(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -41,7 +64,6 @@ export default function Messenger() {
           process.env.REACT_APP_BACKEND_URL + "/message/" + currentChat
         );
         setMessages(res.data);
-        console.log(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -61,8 +83,7 @@ export default function Messenger() {
         const res = await axios(
           process.env.REACT_APP_BACKEND_URL + "/users/" + friendId
         );
-        // setUser(res.data.user);
-        console.log(res.data.user);
+
         setFriendPhoto(res.data.user.image);
       } catch (err) {
         console.log(err);
@@ -71,7 +92,6 @@ export default function Messenger() {
     getUser();
   }, [currentChat]);
 
-  // console.log(messages);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
@@ -102,18 +122,16 @@ export default function Messenger() {
       );
       setMessages([...messages, responseData.data]);
       setNewMessage("");
-      console.log(responseData);
     } catch (err) {
       console.log(err);
     }
-    // try {
-    //   const res = await axios.post("/messages", message);
-    //   setMessages([...messages, res.data]);
-    //   setNewMessage("");
-    // } catch (err) {
-    //   console.log(err);
-    // }
   };
+
+  useEffect(() => {
+    if (messages && scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
   return (
     <>
       <div className="messenger">
@@ -136,17 +154,18 @@ export default function Messenger() {
             {currentChat ? (
               <>
                 <div className="chatBoxTop">
-                  {messages.length > 0 &&
-                    messages.map((m) => (
-                      <div ref={scrollRef} key={m._id}>
+                  {messages.map((m) => (
+                    <div ref={scrollRef}>
+                      {m && (
                         <Message
                           message={m}
-                          own={m.sender === userId}
+                          own={m.sender === user._id}
                           owner={user && user.image}
                           friend={friendPhoto && friendPhoto}
                         />
-                      </div>
-                    ))}
+                      )}
+                    </div>
+                  ))}
                 </div>
                 <div className="chatBoxBottom">
                   <textarea
