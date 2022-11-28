@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import Conversation from "../component/Conversation";
 import Message from "../component/Message";
 import ChatOnline from "../component/ChatOnline";
-
+import { io } from "socket.io-client";
 import { AuthContext } from "../../shared/context/auth-context";
 
 import axios from "axios";
@@ -15,11 +15,26 @@ export default function Messenger() {
   const { sendRequest } = useHttpClient();
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
+  const [currentChatData, setCurrentChatData] = useState(null);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState([]);
   const [friendPhoto, setFriendPhoto] = useState(null);
   const scrollRef = useRef();
   const location = useLocation();
+  const socket = useRef();
+
+  useEffect(() => {
+    socket.current = io("ws://localhost:8900");
+    socket.current.on("getMessage", (data) => {
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
+  }, []);
 
   useEffect(() => {
     if (location.state) {
@@ -40,8 +55,24 @@ export default function Messenger() {
       };
       getUser();
     }
-   
   }, [location.state]);
+
+  useEffect(() => {
+    arrivalMessage &&
+      currentChatData &&
+      currentChatData.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, currentChat]);
+
+  useEffect(() => {
+    socket.current.emit("addUser", userId);
+    socket.current.on("getUsers", (users) => {
+      console.log(users);
+      // setOnlineUsers(
+      //   user.followings.filter((f) => users.some((u) => u.userId === f))
+      // );
+    });
+  }, [user]);
 
   useEffect(() => {
     const getConversations = async () => {
@@ -51,7 +82,7 @@ export default function Messenger() {
         );
         setConversations(res.data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     getConversations();
@@ -65,7 +96,7 @@ export default function Messenger() {
         );
         setMessages(res.data);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     getMessages();
@@ -75,7 +106,7 @@ export default function Messenger() {
     const filterChat = conversations.filter(
       (conversation) => conversation._id === currentChat
     )[0];
-
+    setCurrentChatData(filterChat);
     const friendId = filterChat && filterChat.members.find((m) => m !== userId);
 
     const getUser = async () => {
@@ -86,7 +117,7 @@ export default function Messenger() {
 
         setFriendPhoto(res.data.user.image);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     getUser();
@@ -100,15 +131,16 @@ export default function Messenger() {
       conversationId: currentChat,
     };
 
-    // const receiverId = currentChat.members.find(
-    //   (member) => member !== userId
-    // );
+    const receiverId =
+      currentChatData &&
+      currentChatData.members.find((member) => member !== userId);
 
-    // socket.current.emit("sendMessage", {
-    //   senderId: user._id,
-    //   receiverId,
-    //   text: newMessage,
-    // });
+    socket.current.emit("sendMessage", {
+      senderId: userId,
+      receiverId,
+      text: newMessage,
+    });
+    
     try {
       const responseData = await sendRequest(
         process.env.REACT_APP_BACKEND_URL + "/message",
@@ -143,7 +175,7 @@ export default function Messenger() {
               className="chatMenuInput"
             />
             {conversations.map((c) => (
-              <div onClick={() => setCurrentChat(c._id)}>
+              <div onClick={() => setCurrentChat(c._id)} key={c._id}>
                 <Conversation conversation={c} currentUser={user} />
               </div>
             ))}
@@ -151,7 +183,7 @@ export default function Messenger() {
         </div>
         <div className="chatBox">
           <div className="chatBoxWrapper">
-            {currentChat ? (
+            {currentChatData ? (
               <>
                 <div className="chatBoxTop">
                   {messages.map((m) => (
