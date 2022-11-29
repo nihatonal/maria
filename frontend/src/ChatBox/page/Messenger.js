@@ -65,16 +65,6 @@ export default function Messenger() {
   }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
-    socket.current.emit("addUser", userId);
-    socket.current.on("getUsers", (users) => {
-      console.log(users);
-      // setOnlineUsers(
-      //   user.followings.filter((f) => users.some((u) => u.userId === f))
-      // );
-    });
-  }, [user]);
-
-  useEffect(() => {
     const getConversations = async () => {
       try {
         const res = await axios.get(
@@ -87,6 +77,17 @@ export default function Messenger() {
     };
     getConversations();
   }, [userId]);
+
+  useEffect(() => {
+    socket.current.emit("addUser", userId);
+    socket.current.on("getUsers", (users) => {
+      let usersArr = [];
+      users.map((user) => {
+        usersArr.push(user.userId);
+      });
+      setOnlineUsers(usersArr);
+    });
+  }, [user, conversations]);
 
   useEffect(() => {
     const getMessages = async () => {
@@ -179,7 +180,7 @@ export default function Messenger() {
                 <Conversation
                   conversation={c}
                   currentUser={user}
-                  online={false}
+                  online={onlineUsers.includes(c.members[1])}
                 />
               </div>
             ))}
