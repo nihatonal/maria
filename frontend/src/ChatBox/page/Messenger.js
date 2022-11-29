@@ -152,7 +152,7 @@ export default function Messenger() {
           "Content-Type": "application/json",
         }
       );
-      setMessages([...messages, responseData.data]);
+      setMessages([...messages, responseData]);
       setNewMessage("");
     } catch (err) {
       console.log(err);
