@@ -3,7 +3,7 @@ import axios from "axios";
 import test from "../../assets/images/denis.png";
 import "./Conversation.css";
 
-const Conversions = ({ conversation, currentUser }) => {
+const Conversions = ({ conversation, currentUser,online }) => {
   const [user, setUser] = useState(null);
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== currentUser._id);
@@ -21,11 +21,14 @@ const Conversions = ({ conversation, currentUser }) => {
   }, [currentUser, conversation]);
   return (
     <div className="conversation">
-      <img
-        src={process.env.REACT_APP_ASSETS_URL + `${user && user.image}`}
-        alt="test"
-        className="conversationImg"
-      />
+      <div className="chatOnlineImgContainer">
+        <img
+          src={process.env.REACT_APP_ASSETS_URL + `${user && user.image}`}
+          alt="test"
+          className="conversationImg"
+        />
+        {online && <div className="chatOnlineBadge"></div>}
+      </div>
       <span className="conversationName">{user && user.username}</span>
     </div>
   );

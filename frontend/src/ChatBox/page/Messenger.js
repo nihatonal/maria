@@ -140,7 +140,7 @@ export default function Messenger() {
       receiverId,
       text: newMessage,
     });
-    
+
     try {
       const responseData = await sendRequest(
         process.env.REACT_APP_BACKEND_URL + "/message",
@@ -176,7 +176,11 @@ export default function Messenger() {
             />
             {conversations.map((c) => (
               <div onClick={() => setCurrentChat(c._id)} key={c._id}>
-                <Conversation conversation={c} currentUser={user} />
+                <Conversation
+                  conversation={c}
+                  currentUser={user}
+                  online={false}
+                />
               </div>
             ))}
           </div>
@@ -218,11 +222,11 @@ export default function Messenger() {
             )}
           </div>
         </div>
-        <div className="chatOnline">
+        {/* <div className="chatOnline">
           <div className="chatOnlineWrapper">
             <ChatOnline />
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
