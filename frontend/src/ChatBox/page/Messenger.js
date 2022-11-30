@@ -6,8 +6,11 @@ import Message from "../component/Message";
 import ChatOnline from "../component/ChatOnline";
 import { io } from "socket.io-client";
 import { AuthContext } from "../../shared/context/auth-context";
-
+import Picker from "react-emojipicker";
 import axios from "axios";
+
+import { FiSend } from "react-icons/fi";
+import { BsEmojiSmileFill } from "react-icons/bs";
 import "./Messenger.css";
 
 export default function Messenger() {
@@ -85,7 +88,10 @@ export default function Messenger() {
       users.map((user) => {
         usersArr.push(user.userId);
       });
-      setOnlineUsers(usersArr);
+      console.log(usersArr.filter((e) => e !== userId));
+      setOnlineUsers(
+        usersArr.length < 2 ? usersArr.filter((e) => e !== userId) : usersArr
+      );
     });
   }, [user, conversations]);
 
@@ -124,6 +130,17 @@ export default function Messenger() {
     getUser();
   }, [currentChat]);
 
+  const [showEmojiPicker, setEmojiPicker] = useState(false);
+  const handleEmojiPickerHideShow = () => {
+    setEmojiPicker(!showEmojiPicker);
+  };
+  const emojiHandler = (emoji) => {
+    console.log(emoji);
+    let message = newMessage;
+    message += emoji.unicode;
+    setNewMessage(message);
+    setEmojiPicker(!showEmojiPicker);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
@@ -204,7 +221,10 @@ export default function Messenger() {
                     </div>
                   ))}
                 </div>
+
                 <div className="chatBoxBottom">
+                  <BsEmojiSmileFill onClick={handleEmojiPickerHideShow} className='emojiButton'/>
+                  {showEmojiPicker && <Picker onEmojiSelected={emojiHandler} />}
                   <textarea
                     className="chatMessageInput"
                     placeholder="write something..."
@@ -212,7 +232,7 @@ export default function Messenger() {
                     value={newMessage}
                   ></textarea>
                   <button className="chatSubmitButton" onClick={handleSubmit}>
-                    Send
+                    <FiSend />
                   </button>
                 </div>
               </>
