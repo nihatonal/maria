@@ -3,7 +3,6 @@ import { useHttpClient } from "../../shared/hooks/http-hook";
 import { useLocation } from "react-router-dom";
 import Conversation from "../component/Conversation";
 import Message from "../component/Message";
-import ChatOnline from "../component/ChatOnline";
 import { io } from "socket.io-client";
 import { AuthContext } from "../../shared/context/auth-context";
 import Picker from "react-emojipicker";
@@ -27,9 +26,11 @@ export default function Messenger() {
   const scrollRef = useRef();
   const location = useLocation();
   const socket = useRef();
+  var crypto = require("crypto");
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("ws://localhost:8900"
+    );
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
@@ -88,7 +89,7 @@ export default function Messenger() {
       users.map((user) => {
         usersArr.push(user.userId);
       });
-      console.log(usersArr.filter((e) => e !== userId));
+      // console.log(usersArr.filter((e) => e !== userId));
       setOnlineUsers(
         usersArr.length < 2 ? usersArr.filter((e) => e !== userId) : usersArr
       );
@@ -135,17 +136,25 @@ export default function Messenger() {
     setEmojiPicker(!showEmojiPicker);
   };
   const emojiHandler = (emoji) => {
-    console.log(emoji);
     let message = newMessage;
     message += emoji.unicode;
     setNewMessage(message);
     setEmojiPicker(!showEmojiPicker);
   };
+  var cypherKey = "mySecretKey";
+  function encrypt(text) {
+    var cipher = crypto.createCipher("aes-256-cbc", cypherKey);
+    var crypted = cipher.update(text, "utf8", "hex");
+    crypted += cipher.final("hex");
+    return crypted; //94grt976c099df25794bf9ccb85bea72
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const message = {
       sender: userId,
-      text: newMessage,
+      text: encrypt(newMessage),
       conversationId: currentChat,
     };
 
@@ -156,7 +165,7 @@ export default function Messenger() {
     socket.current.emit("sendMessage", {
       senderId: userId,
       receiverId,
-      text: newMessage,
+      text: encrypt(newMessage),
     });
 
     try {
@@ -170,6 +179,7 @@ export default function Messenger() {
           "Content-Type": "application/json",
         }
       );
+
       setMessages([...messages, responseData]);
       setNewMessage("");
     } catch (err) {
@@ -223,7 +233,10 @@ export default function Messenger() {
                 </div>
 
                 <div className="chatBoxBottom">
-                  <BsEmojiSmileFill onClick={handleEmojiPickerHideShow} className='emojiButton'/>
+                  <BsEmojiSmileFill
+                    onClick={handleEmojiPickerHideShow}
+                    className="emojiButton"
+                  />
                   {showEmojiPicker && <Picker onEmojiSelected={emojiHandler} />}
                   <textarea
                     className="chatMessageInput"
