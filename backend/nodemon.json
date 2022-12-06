@@ -6,6 +6,6 @@
         "JWT_KEY": "supersecret",
         "EMAIL_ADDRESS": "onalnihat@outlook.com",
         "EMAIL_PASSWORD": "nihat2575",
-        "RESET_EMAIL": "https://maria2404.herokuapp.com/api"
+        "RESET_EMAIL": "https://maria-server.onrender.com/api"
     }
 }

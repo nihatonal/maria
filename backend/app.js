@@ -12,16 +12,9 @@ const usersRoutes = require("./routes/users-routes");
 const conversationRoutes = require("./routes/conversation-routes");
 const messageRoutes = require("./routes/message-routes");
 const HttpError = require("./models/http-error");
-const { Server } = require("socket.io");
-const app = express();
-const server = require('http').createServer(app);
-//const io = require('socket.io')(8900);
 
-const io = require("socket.io")(process.env.PORT || 8900, {
-  cors: {
-    origin:"http://localhost:3000",
-  },
-});
+const app = express();
+
 app.use(bodyParser.json());
 
 const cors = require("cors");
@@ -36,6 +29,14 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
+
+const server = app.listen(8400)
+const io = require("socket.io")(server || process.env.PORT, {
+  cors: {
+    origin: ["http://localhost:3000", "https://maria-ebaf9.web.app/"],
+  },
+});
+
 app.use("/uploads/images", express.static(path.join("uploads", "images")));
 
 app.use((req, res, next) => {
@@ -68,12 +69,6 @@ app.use((error, req, res, next) => {
   res.status(error.code || 500);
   res.json({ message: error.message || "An unknown error occurred!" });
 });
-
-// const io = require("socket.io")(8900, {
-//   cors: {
-//     origin: "http://localhost:3000",
-//   },
-// });
 
 let users = [];
 
