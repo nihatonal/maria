@@ -4,7 +4,7 @@ const multer = require("multer");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const nodeoutlook = require("nodejs-nodemailer-outlook");
-const uuid = require("uuid/v1");
+const { v4: uuidv4 } = require('uuid');
 const crypto = require("crypto-js");
 const Str = require("@supercharge/strings");
 require("dotenv").config();
@@ -599,7 +599,7 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const ext = MIME_TYPE_MAP[file.mimetype];
-    cb(null, uuid() + "." + ext);
+    cb(null, uuidv4() + "." + ext);
   },
 });
 

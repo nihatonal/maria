@@ -27,18 +27,35 @@ export default function Messenger() {
   const location = useLocation();
   const socket = useRef();
   var crypto = require("crypto");
-
+  const IS_PROD = process.env.NODE_ENV === "production";
+  const URL = IS_PROD
+    ? "https://maria-server.onrender.com"
+    : `http://localhost:5000`;
   useEffect(() => {
-    socket.current = io("ws://localhost:8900"
-    );
+    socket.current = io.connect(URL, { extraHeaders: { 'Access-Control-Allow-Credentials': true }, allowEIO3: true });
+    console.log(socket.current)
+    socket.current.on("connect", () => {
+      console.log(socket.current.id);
+    });
     socket.current.on("getMessage", (data) => {
+      console.log(socket.current)
       setArrivalMessage({
         sender: data.senderId,
         text: data.text,
         createdAt: Date.now(),
       });
     });
+    socket.current.on("connect_error", (err) => {
+      console.log(`connect_error due to ${err.message}`);
+    });
   }, []);
+
+  // useEffect(() => {
+  //   if (location.pathname !== "/messenger") {
+  //     user = null;
+  //     userId = null;
+  //   }
+  // }, [location.pathname]);
 
   useEffect(() => {
     if (location.state) {
@@ -48,8 +65,8 @@ export default function Messenger() {
         try {
           const res = await axios(
             process.env.REACT_APP_BACKEND_URL +
-              "/users/" +
-              location.state.friendId
+            "/users/" +
+            location.state.friendId
           );
 
           setFriendPhoto(res.data.user.image);
@@ -69,17 +86,19 @@ export default function Messenger() {
   }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
-    const getConversations = async () => {
-      try {
-        const res = await axios.get(
-          process.env.REACT_APP_BACKEND_URL + "/conversations/" + userId
-        );
-        setConversations(res.data);
-      } catch (err) {
-        // console.log(err);
-      }
-    };
-    getConversations();
+    if (userId) {
+      const getConversations = async () => {
+        try {
+          const res = await axios.get(
+            process.env.REACT_APP_BACKEND_URL + "/conversations/" + userId
+          );
+          setConversations(res.data);
+        } catch (err) {
+          // console.log(err);
+        }
+      };
+      getConversations();
+    }
   }, [userId]);
 
   useEffect(() => {
@@ -90,24 +109,28 @@ export default function Messenger() {
         usersArr.push(user.userId);
       });
       // console.log(usersArr.filter((e) => e !== userId));
-      setOnlineUsers(
-        usersArr.length < 2 ? usersArr.filter((e) => e !== userId) : usersArr
-      );
+      try {
+        setOnlineUsers(
+          usersArr.length < 2 ? usersArr.filter((e) => e !== userId) : usersArr
+        );
+      } catch { }
     });
-  }, [user, conversations]);
+  }, [userId, conversations]);
 
   useEffect(() => {
-    const getMessages = async () => {
-      try {
-        const res = await axios.get(
-          process.env.REACT_APP_BACKEND_URL + "/message/" + currentChat
-        );
-        setMessages(res.data);
-      } catch (err) {
-        // console.log(err);
-      }
-    };
-    getMessages();
+    if (currentChat) {
+      const getMessages = async () => {
+        try {
+          const res = await axios.get(
+            process.env.REACT_APP_BACKEND_URL + "/message/" + currentChat
+          );
+          setMessages(res.data);
+        } catch (err) {
+          // console.log(err);
+        }
+      };
+      getMessages();
+    }
   }, [currentChat]);
 
   useEffect(() => {
@@ -115,20 +138,25 @@ export default function Messenger() {
       (conversation) => conversation._id === currentChat
     )[0];
     setCurrentChatData(filterChat);
-    const friendId = filterChat && filterChat.members.find((m) => m !== userId);
-
-    const getUser = async () => {
-      try {
-        const res = await axios(
-          process.env.REACT_APP_BACKEND_URL + "/users/" + friendId
-        );
-
-        setFriendPhoto(res.data.user.image);
-      } catch (err) {
-        // console.log(err);
-      }
-    };
-    getUser();
+    let friendId;
+    try {
+      friendId = filterChat && filterChat.members.find((m) => m !== userId);
+    } catch (err) {
+      // console.log(err);
+    }
+    if (friendId) {
+      const getUser = async () => {
+        try {
+          const res = await axios(
+            process.env.REACT_APP_BACKEND_URL + "/users/" + friendId
+          );
+          setFriendPhoto(res.data.user.image);
+        } catch (err) {
+          // console.log(err);
+        }
+      };
+      getUser();
+    }
   }, [currentChat]);
 
   const [showEmojiPicker, setEmojiPicker] = useState(false);
@@ -219,7 +247,7 @@ export default function Messenger() {
               <>
                 <div className="chatBoxTop">
                   {messages.map((m) => (
-                    <div ref={scrollRef}>
+                    <div ref={scrollRef} key={m._id}>
                       {m && (
                         <Message
                           message={m}

@@ -2,9 +2,11 @@ const fs = require("fs");
 const path = require("path");
 
 const express = require("express");
+const http = require('http')
 const bodyParser = require("body-parser");
+const cors = require("cors");
 const mongoose = require("mongoose");
-
+const {Server} = require("socket.io")
 const carsRoutes = require("./routes/cars-routes");
 const friendsRoutes = require("./routes/friends-routes");
 const placesRoutes = require("./routes/places-routes");
@@ -13,29 +15,27 @@ const conversationRoutes = require("./routes/conversation-routes");
 const messageRoutes = require("./routes/message-routes");
 const HttpError = require("./models/http-error");
 
+
 const app = express();
 
 app.use(bodyParser.json());
 
-const cors = require("cors");
-
-const corsOptions = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "DELETE, GET, OPTIONS, PATCH, POST, PUT",
-  "Access-Control-Allow-Headers":
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-  origin: "*",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
-
-const server = app.listen(8400)
-const io = require("socket.io")(server || process.env.PORT, {
-  cors: {
-    origin: ["http://localhost:3000", "https://maria-ebaf9.web.app/"],
-  },
+// const corsOptions = {
+//   "Access-Control-Allow-Origin": "*",
+//   "Access-Control-Allow-Methods": "DELETE, GET, OPTIONS, PATCH, POST, PUT",
+//   "Access-Control-Allow-Headers":
+//     "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+//   origin: "*",
+//   credentials: true, //access-control-allow-credentials:true
+//   optionSuccessStatus: 200,
+// };
+app.use(cors());
+const PORT = process.env.PORT;
+const server = app.listen(PORT, () => {
+  console.log("Listening on port: " + PORT);
 });
+console.log(process.env.PORT)
+
 
 app.use("/uploads/images", express.static(path.join("uploads", "images")));
 
@@ -70,6 +70,23 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || "An unknown error occurred!" });
 });
 
+mongoose
+  .connect(
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.wu6wj.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
+    , { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => server)
+  .catch((err) => {
+    console.log(err);
+  });
+
+// const io = require("socket.io")(server || process.env.PORT, {
+//   cors: corsOptions,
+// });
+const io = new Server(server || 8400, {
+  cors: {
+    origin: '*',
+  }
+});
 let users = [];
 
 const addUser = (userId, socketId) => {
@@ -114,16 +131,7 @@ io.on("connection", (socket) => {
     io.emit("getUsers", users);
   });
 });
-mongoose
-  .connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.wu6wj.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
-  )
-  .then(() => {
-    app.listen(process.env.PORT || 5000);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+
 
 //   const fs = require("fs");
 // const path = require("path");
