@@ -15,6 +15,8 @@ import SignUpSuccess from "./SignUpPage/pages/SignUpSuccess";
 import Reset from "./users/components/Reset";
 import English from "./English/page/English";
 
+import ScrollButton from './shared/Components/UIElements/ScrollButton'
+
 import { AuthContext } from "./shared/context/auth-context";
 import { useAuth } from "./shared/hooks/auth-hook";
 
@@ -107,6 +109,7 @@ function App() {
             <Routes>{routes}</Routes>
           </Suspense>
         </Wrapper>
+        <ScrollButton />
         {/* <MainFooter /> */}
       </BrowserRouter>
     </AuthContext.Provider>

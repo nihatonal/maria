@@ -1,0 +1,18 @@
+.scrollbutton {
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: right;
+  width: 100%;
+  position: fixed;
+  z-index: 99;
+  bottom: 25px;
+}
+.scrollbutton svg {
+  font-size: 24px;
+  color: var(--bg_primary);
+  opacity: 0.8;
+}
+.scrollbutton:hover svg {
+    opacity: 1;
+}
