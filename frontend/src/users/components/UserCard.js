@@ -24,7 +24,7 @@ const UserCard = (props) => {
   const { sendRequest } = useHttpClient();
   const [loadedUser, setLoadedUser] = useState([]);
   const [loadedUsers, setLoadedUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); 
 
   const [friends, setFriends] = useState([]);
   const [check, setCheck] = useState(false);
@@ -43,7 +43,7 @@ const UserCard = (props) => {
         setLoadedUser(responseData.user);
         setMotto(responseData.user.motto);
         setLoading(false);
-      } catch (err) {}
+      } catch (err) { }
     };
     fetchCars();
   }, [sendRequest, userId]);
@@ -65,7 +65,7 @@ const UserCard = (props) => {
         setFilteredList(friendArr);
         setFriendList(responseData.users);
         setLoading(false);
-      } catch (err) {}
+      } catch (err) { }
     };
     fetchCars();
   }, [sendRequest, userId, auth.userId, check]);
@@ -104,7 +104,7 @@ const UserCard = (props) => {
         }
       );
       console.log(responseData);
-    } catch (err) {}
+    } catch (err) { }
   };
   // Motto Section end
 
@@ -115,7 +115,7 @@ const UserCard = (props) => {
           process.env.REACT_APP_BACKEND_URL + "/conversations/" + userId
         );
         setConversation(res.data[0]._id);
-        
+
       } catch (err) {
         console.log(err);
       }
@@ -125,7 +125,7 @@ const UserCard = (props) => {
 
   const conversationHandler = async () => {
     if (conversation) {
-      navigate("/messenger",{state:{id:conversation,friendId:userId}});
+      navigate("/messenger", { state: { id: conversation, friendId: userId } });
     } else {
       try {
         const responseData = await sendRequest(
@@ -149,61 +149,57 @@ const UserCard = (props) => {
 
   return (
     <div className="usercard-wrapper">
-      {loading ? (
-        <div className="loading-wrapper">
-          <i className="fa fa-circle-o-notch fa-spin"></i>
+
+      <div className="user-header">
+        <div className="user-header-image">
+          <img
+            src={process.env.REACT_APP_ASSETS_URL + `${loadedUser.image}`}
+          />
+          <h4>{loadedUser.username}</h4>
         </div>
-      ) : (
-        <div className="user-header">
-          <div className="user-header-image">
-            <img
-              src={process.env.REACT_APP_ASSETS_URL + `${loadedUser.image}`}
-            />
-            <h4>{loadedUser.username}</h4>
-          </div>
-          <div className="user-header_info">
-            <p className="user-header_friend-btn">
-              {loadedUser.places && loadedUser.places.length}
+        <div className="user-header_info">
+          <p className="user-header_friend-btn">
+            {loadedUser.places && loadedUser.places.length}
+            <br></br>
+            <span>Посты</span>
+          </p>
+          <NavLink to={`/${userId}/friends`}>
+            {filteredList && filteredList.length}
+            <br></br>
+            <span>Друзья</span>
+          </NavLink>
+          <p>
+            <NavLink to={`/english/${userId}/mywords`}>
+              {loadedUser.cars && loadedUser.cars.length}
               <br></br>
-              <span>Посты</span>
-            </p>
-            <NavLink to={`/${userId}/friends`}>
-              {filteredList && filteredList.length}
-              <br></br>
-              <span>Друзья</span>
+              <span>Слова</span>
             </NavLink>
-            <p>
-              <NavLink to={`/english/${userId}/mywords`}>
-                {loadedUser.cars && loadedUser.cars.length}
-                <br></br>
-                <span>Слова</span>
-              </NavLink>
-            </p>
-          </div>
-          <forum onSubmit={mottoHandler} className="motto_wrapper">
-            {auth.isLoggedIn && (
-              <input
-                onChange={(e) => {
-                  setMotto(e.target.value);
-                }}
-                placeholder="write your motto"
-                onFocus={() => setMotto("")}
-                onBlur={() => {
-                  if (motto === "") {
-                    setMotto("Your Motto");
-                  } else {
-                    setMotto(motto);
-                  }
-                  mottoHandler();
-                }}
-                value={motto}
-                className="motto_input"
-              />
-            )}
-            <p>"{motto}"</p>
-          </forum>
+          </p>
         </div>
-      )}
+        <forum onSubmit={mottoHandler} className="motto_wrapper">
+          {auth.isLoggedIn && (
+            <input
+              onChange={(e) => {
+                setMotto(e.target.value);
+              }}
+              placeholder="write your motto"
+              onFocus={() => setMotto("")}
+              onBlur={() => {
+                if (motto === "") {
+                  setMotto("Your Motto");
+                } else {
+                  setMotto(motto);
+                }
+                mottoHandler();
+              }}
+              value={motto}
+              className="motto_input"
+            />
+          )}
+          <p>"{motto}"</p>
+        </forum>
+      </div>
+
       {auth.isLoggedIn && (
         <div className="usercard-btns-wrapper">
           {" "}

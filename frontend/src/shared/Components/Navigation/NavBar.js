@@ -7,7 +7,7 @@ import { ImProfile } from "react-icons/im";
 import { MdOutlineHome } from "react-icons/md";
 import { MdPersonSearch } from "react-icons/md";
 import { MdOutlineMenuBook } from "react-icons/md";
-
+import { MdOutlineMessage } from "react-icons/md";
 import "./NavBar.css";
 const NavBar = (props) => {
   const { userId } = props;
@@ -16,7 +16,7 @@ const NavBar = (props) => {
       className="navbar"
       style={
         props.auth
-          ? { gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr" }
+          ? { gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr 1fr" }
           : { gridTemplateColumns: "1fr 1fr 1fr" }
       }
     >
@@ -72,6 +72,17 @@ const NavBar = (props) => {
       >
         <MdPersonSearch />
       </NavLink>
+      {props.auth && (
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "nav active-nav-item" : "nav homepage"
+          }
+          to={`/messenger`}
+          onClick={props.closeSideDrawer}
+        >
+          <MdOutlineMessage />
+        </NavLink>
+      )}
       <Hamburger
         show={props.drawerIsOpen}
         onClick={props.openDrawerHandler}

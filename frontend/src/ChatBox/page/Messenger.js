@@ -217,7 +217,7 @@ export default function Messenger() {
 
   useEffect(() => {
     if (messages && scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+      scrollRef.current.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
     }
   }, [messages]);
   return (

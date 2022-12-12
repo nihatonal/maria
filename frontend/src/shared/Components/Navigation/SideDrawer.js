@@ -12,13 +12,14 @@ const SideDrawer = (props) => {
       className={!props.show ? `side-drawer` : `side-drawer show-side-drawer`}
       onClick={props.onClick}
     >
-      <nav
+
+      {/* <nav
         className="main-navigation__drawer-nav"
         // style={auth.isLoggedIn ? { order: "3" } : null}
         style={props.style}
       >
         <NavLinks friendsBtn={props.friendsBtn}/>
-      </nav>
+      </nav> */}
 
       {props.auth ? (
         <div className={"side-drawer__btn"}>
@@ -30,12 +31,17 @@ const SideDrawer = (props) => {
           </Link>
         </div>
       ) : (
-        <Avatar
-          className={"mobile-avatar"}
-          image={props.image}
-          alt={"avatar"}
-          onClick={props.logOutHandler}
-        />
+        <div className={"side-drawer__btn"}>
+
+          <button className="btn btn-sign_in" onClick={props.logOutHandler}>
+            Выйти
+          </button>
+          <Avatar
+            className={"mobile-avatar"}
+            image={props.image}
+            alt={"avatar"}
+          />
+        </div>
       )}
     </aside>
   );

@@ -48,7 +48,7 @@ const MainNavigation = () => {
 
           setLoadedUser(responseData.user.image);
           setUserName(responseData.user.name);
-        } catch (err) {}
+        } catch (err) { }
       };
 
       fetchPlaces();
@@ -69,7 +69,7 @@ const MainNavigation = () => {
         );
         setLoadedUsers(responseData.users);
         setFilteredList(friendArr);
-      } catch (err) {}
+      } catch (err) { }
     };
     fetchCars();
   }, [sendRequest, deleteFriendHandler, auth.userId]);
@@ -131,7 +131,7 @@ const MainNavigation = () => {
       }
 
       console.log(userFriend, auth.userId);
-    } catch (err) {}
+    } catch (err) { }
     try {
       const responseData = await sendRequest(
         process.env.REACT_APP_BACKEND_URL + `/users/friendlist/${auth.userId}`,
@@ -152,7 +152,7 @@ const MainNavigation = () => {
       if (responseData.user.friendList.length < 1) {
         setShowFriends(false);
       }
-    } catch (err) {}
+    } catch (err) { }
   };
 
   return (
@@ -208,7 +208,8 @@ const MainNavigation = () => {
                 Регистрация
               </Link>
             </div>
-          ) : null}
+          ) : null
+          }
 
           {/* <Hamburger
             show={drawerIsOpen}
